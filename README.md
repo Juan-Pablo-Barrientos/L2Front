@@ -1,27 +1,25 @@
 # L2Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+Projecto final del curso fullstack de La Segunda
 
-## Development server
+Requisitos mínimos:
+Sitio/Aplicación Web
+que se pueda navegar desde una PC o celular sin perder información
+2 secciones de contenido estático
+1 sección de contenido dinámico consumiendo api propia y externa a elección
+1 sección con un formulario de contacto
+Sección protegida por usuario/clave que permita tener un área privada
+2 ABM con entidades relacionadas entre si
+1 Listado ordeano con algun criterio
+1 Listado con buscador por algun criterio
+API o interfaz para consumir los datos del back end
+Codigo subido a un repo de GIT
+Buenas practicas para ambos ambitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Requisitos opcionales:
+Roles o permisos de usuario según rol
+Listado con filtros de búsqueda u ordenables
+Publicar la web en un hosting online
+Implementación de docker para entorno local de pruebas
