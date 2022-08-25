@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent, RegisterComponent } from './modules/auth/views';
 import { AboutusComponent } from './modules/dashboard/about-us/aboutus.component';
-import { AsocCompaniesComponent } from './modules/dashboard/asoc-companies/asoc-companies.component';
 import { ContactusComponent } from './modules/dashboard/contact-us/contactus.component';
+import { FrequentQuestionsComponent } from './modules/dashboard/frequent-questions/frequent-questions.component';
 import { HomeComponent } from './modules/dashboard/home/home.component';
 
 const routes: Routes = [
@@ -32,8 +32,8 @@ const routes: Routes = [
     component:ContactusComponent
   },
   {
-    path:'asocCompanies',
-    component:AsocCompaniesComponent
+    path:'frequentQuestions',
+    component:FrequentQuestionsComponent
   },
   {
     path: '**',

@@ -1,1 +1,17 @@
-<p>contactus works!</p>
+
+<h1 class="h1 text-center">¡Dejanos un comentario!</h1>
+<hr class="bg-secondary border-2 border-top border-secondary">
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="firstName">Nombre</label>
+    <input formControlName="firstNameControl" name="firstName" id="firstName" type="text" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="comment">Comentario</label
+    ><textarea formControlName="commentControl"  name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button (click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
+  <button type="submit" [disabled]="!contactForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+</form>
+
+
