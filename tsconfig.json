@@ -21,7 +21,20 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      // Shared
+      "@gdp/shared/modules": ["src/app/shared/index.ts"],
+      "@gdp/shared/views": ["src/app/shared/views/index.ts"],
+      "@gdp/shared/services": ["src/app/shared/services/index.ts"],
+      // Dashboard
+      "@gdp/dashboard/views": ["src/app/modules/dashboard/views/index.ts"],
+      "@gdp/dashboard/modules": ["src/app/modules/dashboard/index.ts"],
+      // Auth
+      "@gdp/auth/views": ["src/app/modules/auth/views/index.ts"],
+      "@gdp/auth/modules": ["src/app/modules/auth/index.ts"],
+
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

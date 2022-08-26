@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DashboardModule } from './modules/dashboard/dashboard.module';
+
+//Modulos
+import { DashboardModule } from '@gdp/dashboard/modules';
+import { SharedModule } from '@gdp/shared/modules';
+import { AuthModule } from '@gdp/auth/modules';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     SharedModule,
     DashboardModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

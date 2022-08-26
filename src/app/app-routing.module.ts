@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent, RegisterComponent } from './modules/auth/views';
-import { AboutusComponent } from './modules/dashboard/about-us/aboutus.component';
-import { ContactusComponent } from './modules/dashboard/contact-us/contactus.component';
-import { FrequentQuestionsComponent } from './modules/dashboard/frequent-questions/frequent-questions.component';
-import { HomeComponent } from './modules/dashboard/home/home.component';
+
+//Componentes
+import { LoginComponent, RegisterComponent } from '@gdp/auth/views';
+import { HomeComponent,FrequentQuestionsComponent,ContactusComponent,AboutusComponent } from '@gdp/dashboard/views';
 
 const routes: Routes = [
   {

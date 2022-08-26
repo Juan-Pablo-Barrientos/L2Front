@@ -1,1 +1,57 @@
-<p>register works!</p>
+
+<h1 class="text-center display-1">Registro de usuario</h1>
+<hr class="bg-secondary border-2 border-top border-secondary">
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+  <div class="input-group mb-2">
+    <div class="form-floating">
+      <input type="text" class="form-control" formControlName="usernameControl" name="username" id="username" placeholder="Nombre de usuario">
+      <label for="username">Nombre de usuario</label>
+    </div>
+    <div class="input-group-append m-2">
+      <button class="btn btn-outline-success" (click)="userExists()" type="button">Existe?</button>
+    </div>
+  </div>
+
+  <div class="form-floating mb-2">
+    <input type="text" formControlName="nameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
+    <label for="name">Nombre</label>
+  </div>
+
+  <div class="form-floating mb-2">
+    <input type="text" formControlName="surnameControl" name="surname" id="surname" placeholder="Apellido" class="form-control"/>
+    <label for="surname">Apellido</label>
+  </div>
+
+  <div class="form-floating mb-2">
+    <input type="text"  formControlName="passwordControl" name="password" id="password" placeholder="Contraseña"  type="password"class="form-control"/>
+    <label for="password">Contraseña</label>
+  </div>
+
+  <div class="form-floating mb-2">
+    <input type="text" formControlName="passwordConfirmControl" name="confirmPassword" id="confirmPassword" placeholder="Confirmar contraseña" type="password"class="form-control"/>
+    <label for="confirmPassword">Confirmar contraseña</label>
+  </div>
+
+  <div class="form-floating mb-2">
+    <input type="text"  formControlName="emailControl" name="email" id="email"  type="email" placeholder="Email" class="form-control"/>
+    <label for="email">Email</label>
+  </div>
+
+  <div class="form-floating mb-2">
+    <input type="text"  formControlName="phoneControl" name="phone" id="phone" placeholder="Telefono" type="tel"class="form-control"/>
+    <label for="phone">Telefono</label>
+  </div>
+
+  <div class="form-check mb-2">
+    <label class="form-check-label" for="subscribe">
+      Subscribirse?
+    </label>
+    <input class="form-check-input" formControlName="subscribeControl" type="checkbox" value="" id="subscribe" name="subscribe">
+  </div>
+
+  <button (click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
+  <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+</form>
+
+

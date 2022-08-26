@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+//Componentes
+import { LoginComponent, RegisterComponent } from '@gdp/auth/views';
 
 
 
@@ -11,7 +14,9 @@ import { RegisterComponent } from './views/register/register.component';
     RegisterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    BrowserModule
   ],
   exports:[
     LoginComponent,
