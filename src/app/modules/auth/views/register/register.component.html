@@ -3,15 +3,19 @@
 <hr class="bg-secondary border-2 border-top border-secondary">
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
-  <div class="input-group mb-2">
-    <div class="form-floating">
+    <div class="form-floating mb-2">
       <input type="text" class="form-control" formControlName="usernameControl" name="username" id="username" placeholder="Nombre de usuario">
       <label for="username">Nombre de usuario</label>
     </div>
-    <div class="input-group-append m-2">
-      <button class="btn btn-outline-success" (click)="userExists()" type="button">Existe?</button>
+    <!-- <div *ngIf="getUserNameControl().errors?.['required']&& getUserNameControl().dirty">
+        El campo nombre de usuario es requerido.
     </div>
-  </div>
+    <div *ngIf="getUserNameControl().errors?.['minlength']&& getUserNameControl().dirty">
+        El nombre de usuario debe tener al menos 8 caracteres
+    </div> -->
+    <!-- <div *ngIf="getUserNameControl().value!==''">
+      <div *ngIf="getUserNameControl().invalid && getUserNameControl().dirty"><p class="text-danger">Usuario ya existe</p></div>
+    </div> -->
 
   <div class="form-floating mb-2">
     <input type="text" formControlName="nameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
@@ -32,26 +36,23 @@
     <input type="text" formControlName="passwordConfirmControl" name="confirmPassword" id="confirmPassword" placeholder="Confirmar contraseña" type="password"class="form-control"/>
     <label for="confirmPassword">Confirmar contraseña</label>
   </div>
-
+  <div *ngIf="signUpForm.hasError('notSame')"><p class="text-danger">Contraseñas no coinciden</p></div>
   <div class="form-floating mb-2">
     <input type="text"  formControlName="emailControl" name="email" id="email"  type="email" placeholder="Email" class="form-control"/>
     <label for="email">Email</label>
   </div>
 
   <div class="form-floating mb-2">
-    <input type="text"  formControlName="phoneControl" name="phone" id="phone" placeholder="Telefono" type="tel"class="form-control"/>
+    <input formControlName="phoneControl" name="phone" id="phone" placeholder="Telefono" type="tel"class="form-control"/>
     <label for="phone">Telefono</label>
   </div>
 
-  <div class="form-check mb-2">
-    <label class="form-check-label" for="subscribe">
-      Subscribirse?
-    </label>
-    <input class="form-check-input" formControlName="subscribeControl" type="checkbox" value="" id="subscribe" name="subscribe">
+  <div class="form-floating mb-2">
+    <input formControlName="dniControl" name="dni" id="dni" placeholder="Dni" type="text"class="form-control"/>
+    <label for="phone">DNI</label>
   </div>
-
   <button (click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
   <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+  {{signUpForm.valid}}
 </form>
-
 

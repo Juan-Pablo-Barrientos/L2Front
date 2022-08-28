@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 //Componentes
 import { LoginComponent, RegisterComponent } from '@gdp/auth/views';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -16,7 +17,8 @@ import { LoginComponent, RegisterComponent } from '@gdp/auth/views';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    BrowserModule
+    BrowserModule,
+    FontAwesomeModule
   ],
   exports:[
     LoginComponent,

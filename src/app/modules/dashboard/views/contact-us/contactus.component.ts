@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule,ReactiveFormsModule,FormControlDirective, Validators } from '@angular/forms';
+import { DataService } from '@gdp/shared/services';
 
 @Component({
   selector: 'app-contactus',
@@ -13,9 +14,9 @@ export class ContactusComponent {
     commentControl: new FormControl('',[Validators.required, Validators.maxLength(255)]),
   });
 
-  constructor(){
 
-    this.contactForm.valueChanges.subscribe(value => console.log(value))
+  constructor(private dataService : DataService){
+
 
   }
 
@@ -24,6 +25,13 @@ export class ContactusComponent {
   }
 
   onSubmit(){
+    let request = {
+      firstName : this.contactForm.controls.firstNameControl.value,
+      comment : this.contactForm.controls.commentControl.value,
+    }
+    this.dataService.addUser(request).subscribe(response => {
+      console.log(response);
+    });
   }
 
 }

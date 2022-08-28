@@ -1,5 +1,5 @@
 
-<h1 class="h1 text-center">¡Dejanos un comentario!</h1>
+<h1 class="display-1 text-center">¡Dejanos un comentario!</h1>
 <hr class="bg-secondary border-2 border-top border-secondary">
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
@@ -12,6 +12,7 @@
   </div>
   <button (click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
   <button type="submit" [disabled]="!contactForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+  {{contactForm.valid}}
 </form>
 
 

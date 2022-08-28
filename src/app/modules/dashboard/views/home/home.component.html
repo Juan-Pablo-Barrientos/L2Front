@@ -1,3 +1,40 @@
-<div class="body">
+<div class="text-center mt-3 ">
+ <ngb-carousel *ngIf="images!=null" #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
 
+
+
+  <ng-template *ngFor="let item of images;let i = index" ngbSlide>
+    <a href="#">
+    <div class="picsum-img-wrapper">
+      <img [src]="images[i]" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    </div>
+  </a>
+  </ng-template>
+
+
+
+ </ngb-carousel>
+</div>
+
+<hr class="bg-secondary border-2 border-top border-secondary">
+
+<div class="container mt-3 mb-3">
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div *ngFor="let item of images;let i = index">
+      <div class="col">
+        <div class="card">
+          <img [src]="images[i]" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Pelicula {{i+1}}</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
 </div>
