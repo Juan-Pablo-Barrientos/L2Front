@@ -4,36 +4,52 @@
 
 
   <ng-template *ngFor="let item of images;let i = index" ngbSlide>
-    <a href="#">
     <div class="picsum-img-wrapper">
       <img [src]="images[i]" alt="Random first slide">
     </div>
     <div class="carousel-caption">
-      <h3>First slide label</h3>
+      <a href="#" class="carouselTitle">
+       <h3 class="display-3">Pelicula {{i+1}}</h3>
+      </a>
       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
     </div>
-  </a>
   </ng-template>
-
-
-
  </ngb-carousel>
 </div>
 
 <hr class="bg-secondary border-2 border-top border-secondary">
 
-<div class="container mt-3 mb-3">
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel title="Filtros">
+    <ng-template ngbPanelContent>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="terrorCheckbox" name="terror" (change)="genreFilter($event)" >
+        <label class="form-check-label" for="terrorCheckbox">Terror</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="comediaCheckbox" name="comedia" (change)="genreFilter($event)" >
+        <label class="form-check-label" for="comediaCheckbox">Comedia</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="accionCheckbox" name="accion" (change)="genreFilter($event)" >
+        <label class="form-check-label" for="accionCheckbox">Accion</label>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
 
+<div class="container mt-3 mb-3">
   <div class="row row-cols-1 row-cols-md-3 g-4">
   <div *ngFor="let item of images;let i = index">
       <div class="col">
-        <div class="card">
-          <img [src]="images[i]" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Pelicula {{i+1}}</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <a [routerLink]="['/movieDetails/'+i]">
+          <div class="card">
+            <img [src]="images[i]" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-center">Pelicula {{i+1}}</h5>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
  </div>

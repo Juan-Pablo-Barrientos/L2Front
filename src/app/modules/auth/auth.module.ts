@@ -2,17 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 //Componentes
-import { LoginComponent, RegisterComponent } from '@gdp/auth/views';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent } from '@gdp/auth/views';
+import { UserPanelComponent } from './views/user-panel/user-panel.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserListComponent,
+    MovieListComponent,
+    UserPanelComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,8 @@ import { NgbAccordion, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Componentes
 import { AboutusComponent, ContactusComponent, FrequentQuestionsComponent, HomeComponent } from '@gdp/dashboard/views';
+import { MovieDetailComponent } from './views/movie-detail/movie-detail.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -14,14 +16,16 @@ import { AboutusComponent, ContactusComponent, FrequentQuestionsComponent, HomeC
     HomeComponent,
     AboutusComponent,
     ContactusComponent,
-    FrequentQuestionsComponent
+    FrequentQuestionsComponent,
+    MovieDetailComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
-    NgbModule
+    NgbModule,
+    RouterModule,
   ],
   exports:[
     HomeComponent,

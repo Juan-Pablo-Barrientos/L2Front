@@ -1,21 +1,21 @@
 <body class="text-center">
   <main class="form-signin m-auto">
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <fa-icon [icon]="faArrowRightToBracket" size="4x"></fa-icon>
       <h1 class="display-5">Please sign in</h1>
 
       <div class="form-floating">
-        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+        <input type="email" formControlName="emailControl" class="form-control" name="email" id="email" placeholder="name@example.com">
         <label for="floatingInput">Email address</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+        <input type="password"formControlName="passwordControl" class="form-control" name="password" id="password" placeholder="Password">
         <label for="floatingPassword">Password</label>
       </div>
 
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value=""> Remember me
+          <input type="checkbox" formControlName="rememberControl" value=""> Remember me
         </label>
       </div>
       <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>

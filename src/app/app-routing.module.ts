@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 //Componentes
-import { LoginComponent, RegisterComponent } from '@gdp/auth/views';
+import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent, UserPanelComponent } from '@gdp/auth/views';
 import { HomeComponent,FrequentQuestionsComponent,ContactusComponent,AboutusComponent } from '@gdp/dashboard/views';
 
 const routes: Routes = [
@@ -33,6 +33,22 @@ const routes: Routes = [
   {
     path:'frequentQuestions',
     component:FrequentQuestionsComponent
+  },
+  {
+    path:'userList',
+    component:UserListComponent
+  },
+  {
+    path:'movieList',
+    component:MovieListComponent
+  },
+  {
+    path: 'movieDetails/:id',
+    component: MovieListComponent
+  },
+  {
+    path: 'userPanel',
+    component: UserPanelComponent
   },
   {
     path: '**',

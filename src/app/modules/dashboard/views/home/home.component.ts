@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   showNavigationIndicators = false;
   @ViewChild('carousel', { static: true })
   carousel!: NgbCarousel;
+  genreParams:any={};
 
   togglePaused() {
     if (this.paused) {
@@ -27,9 +29,27 @@ export class HomeComponent implements OnInit {
     this.paused = !this.paused;
   }
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  genreFilter(event:any){
+    {
+      if(event.target.checked){
+        this.genreParams[event.target.name]="true"
+      }else{
+        delete this.genreParams[event.target.name];
+      }
+
+      console.log(this.genreParams)
+      this.router.navigate([],{
+        relativeTo: this.route,
+        queryParams:this.genreParams
+
+      })
+
+    }
   }
 
 }
