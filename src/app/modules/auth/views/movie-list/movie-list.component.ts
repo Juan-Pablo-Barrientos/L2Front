@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbCalendar, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'gdp-movie-list',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieListComponent implements OnInit {
 
-  constructor() { }
+  closeResult = '';
+  model: NgbDateStruct;
+  date: { year: number; month: number; } | undefined;
+
+  constructor(private modalService: NgbModal ,private calendar: NgbCalendar) { }
 
   ngOnInit(): void {
   }
 
+  openShow(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+  }
+  openEdit(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+  }
+  openDelete(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+  }
 }

@@ -22,13 +22,14 @@
           </div>
         </td>
         <td>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
+
+          <button type="button" (click)="openShow(modalShow)" class="btn btn-link btn-sm btn-rounded">
             Ver
           </button>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
+          <button type="button" (click)="openEdit(modalEdit)" class="btn btn-link btn-sm btn-rounded">
             Editar
           </button>
-          <button type="button" class="btn btn-link btn-sm btn-rounded">
+          <button type="button" (click)="openDelete(modalDelete)" class="btn btn-link btn-sm btn-rounded">
             Borrar
           </button>
         </td>
@@ -38,3 +39,65 @@
     </tbody>
   </table>
   </div>
+
+  <ng-template #modalShow let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modalShow">Ver</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="dateOfBirth">Nombre:</label>
+        </div>
+        <div class="mb-3">
+          <label for="dateOfBirth">Genero:</label>
+        </div>
+        <div class="mb-3">
+          <label for="dateOfBirth">Director:</label>
+        </div>
+        <div class="mb-3">
+          <label for="dateOfBirth">Precio:</label>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #modalEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modalEdit">Editar</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="dateOfBirth">Nombre:</label>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #modalDelete let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modalDelete">Borrar</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="dateOfBirth">Nombre:</label>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
