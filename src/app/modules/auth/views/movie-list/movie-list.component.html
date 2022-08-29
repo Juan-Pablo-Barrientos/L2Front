@@ -1,6 +1,11 @@
 <div class="container">
   <div class="m-2"><h1 class="display-1 text-center">Listado de peliculas</h1></div>
   <hr class="bg-secondary border-2 border-top border-secondary">
+  <div class="text-center">
+    <button type="button" (click)="openCreate(modalCreate)" class="btn-success btn btn-lg mt-2">
+      Nueva pelicula
+    </button>
+  </div>
   <table class="table align-middle mb-0 bg-white mt-5">
     <thead class="bg-light">
       <tr>
@@ -88,6 +93,23 @@
   <ng-template #modalDelete let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modalDelete">Borrar</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="dateOfBirth">Nombre:</label>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+
+  <ng-template #modalCreate let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modalCreate">Borrar</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">

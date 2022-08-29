@@ -26,4 +26,7 @@ export class MovieListComponent implements OnInit {
   openDelete(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
   }
+  openCreate(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+  }
 }
