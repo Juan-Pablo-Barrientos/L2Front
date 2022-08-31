@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
+import {ActivatedRouteSnapshot,CanActivate,CanLoad,Router,RouterStateSnapshot,} from '@angular/router';
 import { Observable } from 'rxjs';
-
 
 import { AuthService } from '../service/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthGuard implements  CanLoad {
+export class AuthGuard implements CanLoad, CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  canLoad()
-  {
-    if (this.authService.isLoggedIn()) {
-      return true
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.authService.isLoggedInAdmin()) {
+      return true;
     }
-    return !this.authService.isLoggedIn();
+    this.router.navigate(['/home']);
+    alert('You are not allowed to view this page');
+    return false;
+  }
+
+  canLoad() {
+    if (this.authService.isLoggedInAdmin()) {
+      console.log(this.authService.isLoggedInAdmin);
+      return true;
+    }
+    return false;
   }
 }

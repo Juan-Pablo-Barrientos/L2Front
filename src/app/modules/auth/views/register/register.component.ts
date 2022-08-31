@@ -25,8 +25,6 @@ export class RegisterComponent {
     phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     dniControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
   },{validators: [this.checkPasswords]})
-
-  this.signUpForm.valueChanges.subscribe((value: any) => console.log(value))
   }
 
   constructor(private dataService : DataService) {

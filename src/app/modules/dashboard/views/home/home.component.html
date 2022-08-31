@@ -8,7 +8,7 @@
       <img [src]="images[i]" alt="Random first slide">
     </div>
     <div class="carousel-caption">
-      <a href="#" class="carouselTitle">
+      <a [routerLink]="['/movieDetails/'+i]" class="carouselTitle">
        <h3 class="display-3">Pelicula {{i+1}}</h3>
       </a>
       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>

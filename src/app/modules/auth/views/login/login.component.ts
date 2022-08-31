@@ -35,9 +35,9 @@ export class LoginComponent implements OnInit {
       }
     )
     .subscribe(success => {
-      if (success) {
-        this.router.navigate(['/userList']);
-      }
+      if (this.authService.isLoggedIn()) {
+        this.router.navigate(['/home']);
+      }else{alert("Nombre de usuario o contraseña incorrecta")}
     });
   }
 

@@ -11,8 +11,6 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-
-
   userExists(username: string): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + 'user/userExist/'+username)
 
@@ -20,6 +18,10 @@ export class DataService {
 
   addUser(request: any): Observable<ArrayBuffer> {
     return this.http.put<ArrayBuffer>(this.baseUrl + 'user', request);
+  }
+
+  editUserPassword(request: any,idUser:number): Observable<ArrayBuffer> {
+    return this.http.put<ArrayBuffer>(this.baseUrl + 'user/'+idUser, request);
   }
 
   addContactPost(request: any): Observable<ArrayBuffer> {
