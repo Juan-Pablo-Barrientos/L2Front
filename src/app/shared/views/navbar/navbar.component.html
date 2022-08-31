@@ -9,10 +9,10 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="'/home'" routerLinkActive="text-white">Inicio</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
           <a class="nav-link" [routerLink]="'/login'" routerLinkActive="text-white" >Iniciar sesion</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
           <a class="nav-link" [routerLink]="'/register'" routerLinkActive="text-white" >Registrarse</a>
         </li>
         <li class="nav-item dropdown">
@@ -24,12 +24,12 @@
             <li><a class="dropdown-item" href="#" [routerLink]="'/userList'" >Usuarios</a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf='this.authService.isLoggedIn() == true'>
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Usuario
           </a>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#" [routerLink]="'/userPanel'" >Perfil</a></li>
+          <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" (click)="openShow(userPanelModal)" >Perfil</a></li>
             <li><a class="dropdown-item" href="#" (click)="logOut()">Salir</a></li>
           </ul>
         </li>
@@ -41,3 +41,31 @@
     </div>
   </div>
 </nav>
+
+<!-- userPanel Modal -->
+
+<ng-template #userPanelModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="userPanelModal">Ver</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="dateOfBirth">Nombre:</label>
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirth">Genero:</label>
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirth">Director:</label>
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirth">Precio:</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

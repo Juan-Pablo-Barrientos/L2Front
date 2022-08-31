@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 //Componentes
-import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent, UserPanelComponent } from '@gdp/auth/views';
+import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent} from '@gdp/auth/views';
 import { HomeComponent,FrequentQuestionsComponent,ContactusComponent,AboutusComponent, MovieDetailComponent } from '@gdp/dashboard/views';
+import { AdminGuard } from './modules/auth/guards/admin.guard';
+import { AuthGuard } from './modules/auth/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -36,19 +38,19 @@ const routes: Routes = [
   },
   {
     path:'userList',
-    component:UserListComponent
+    component:UserListComponent,
+    canActivate:[AdminGuard],
+    canLoad:[AdminGuard]
   },
   {
     path:'movieList',
-    component:MovieListComponent
+    component:MovieListComponent,
+    canActivate:[AdminGuard],
+    canLoad:[AdminGuard]
   },
   {
     path: 'movieDetails/:id',
     component: MovieDetailComponent
-  },
-  {
-    path: 'userPanel',
-    component: UserPanelComponent
   },
   {
     path: '**',

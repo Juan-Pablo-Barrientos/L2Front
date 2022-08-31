@@ -3,6 +3,9 @@ import { FormControl, Validators,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
+
+import { AuthService } from '../../service/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,19 +16,29 @@ export class LoginComponent implements OnInit {
   faArrowRightToBracket = faArrowRightToBracket;
   loginForm: any;
 
-  constructor(private router: Router) { }
+
+  constructor(private router: Router,private authService: AuthService, ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup ({
-    emailControl:new FormControl('',[Validators.required]),
+    usernameControl:new FormControl('',[Validators.required]),
     passwordControl:new FormControl('',[Validators.required]),
-    rememberControl:new FormControl(false),
     })
   }
 
   onSubmit(){
-    console.log("asd")
-    this.router.navigateByUrl('/home')
+
+    this.authService.login(
+      {
+        username: this.loginForm.controls.usernameControl.value,
+        password: this.loginForm.controls.passwordControl.value
+      }
+    )
+    .subscribe(success => {
+      if (success) {
+        this.router.navigate(['/userList']);
+      }
+    });
   }
 
 }

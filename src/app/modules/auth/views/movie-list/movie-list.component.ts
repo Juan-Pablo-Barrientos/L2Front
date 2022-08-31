@@ -18,15 +18,15 @@ export class MovieListComponent implements OnInit {
   }
 
   openShow(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+    this.modalService.open(content, {ariaLabelledBy: 'modalShow'}).result
   }
   openEdit(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+    this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
   }
   openDelete(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+    this.modalService.open(content, {ariaLabelledBy: 'modalDelete'}).result
   }
   openCreate(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+    this.modalService.open(content, {ariaLabelledBy: 'modalCreate'}).result
   }
 }
