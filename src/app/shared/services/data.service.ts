@@ -12,19 +12,34 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   userExists(username: string): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + 'user/userExist/'+username)
+    return this.http.get<Response>(this.baseUrl + '/users/userExist/'+username)
 
   }
 
   addUser(request: any): Observable<ArrayBuffer> {
-    return this.http.put<ArrayBuffer>(this.baseUrl + 'user', request);
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/users', request);
   }
 
   editUserPassword(request: any,idUser:number): Observable<ArrayBuffer> {
-    return this.http.put<ArrayBuffer>(this.baseUrl + 'user/'+idUser, request);
+    return this.http.put<ArrayBuffer>(this.baseUrl + '/users/'+idUser, request);
+  }
+
+  editUser(request: any,idUser:number): Observable<ArrayBuffer> {
+    return this.http.put<ArrayBuffer>(this.baseUrl + '/users/'+idUser, request);
   }
 
   addContactPost(request: any): Observable<ArrayBuffer> {
-    return this.http.put<ArrayBuffer>(this.baseUrl + 'contact', request);
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/contact', request);
+  }
+
+  getUsers(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + '/users');
+  }
+  getUser(idUser:number): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + '/users/'+idUser);
+  }
+
+  delUser(idUser:number): Observable<Response> {
+    return this.http.delete<Response>(this.baseUrl + '/users/'+idUser);
   }
 }

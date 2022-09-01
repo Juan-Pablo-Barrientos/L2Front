@@ -4,6 +4,7 @@ import { catchError, config, map, mapTo, Observable, of, tap, throwError } from 
 import { environment } from 'src/environments/environment';
 import { Tokens } from '../models/tokens';
 import jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,9 @@ export class AuthService {
   private loggedUserName: string|null;
   private loggedUserRole: number|null;
   private loggedUserId: number|null;
-  private loggedUser:any|null
+  private loggedUser:any|null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient ,private router:Router) {}
 
   login(user: { username: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${environment.apiUrl}/users/login`, user)
@@ -35,9 +36,6 @@ export class AuthService {
       this.http.get<Response>(`${environment.apiUrl}/users/`+this.loggedUserId).subscribe((response:any)=>{
         this.loggedUser=response
     })} else{
-      this.logout();
-    }
-    if (!this.loggedUser){
       this.logout();
     }
   }
@@ -58,7 +56,7 @@ export class AuthService {
   }
 
   isLoggedInAdmin():boolean {
-    if(this.loggedUser?.rol == 1){ return true}
+    if(this.loggedUser?.rol === 1){ return true}
     else {return false};
   }
 

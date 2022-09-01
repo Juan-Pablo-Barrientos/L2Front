@@ -18,8 +18,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(private modalService: NgbModal, public authService:AuthService, public dataService:DataService , private router:Router) { }
 
-
-
   ngOnInit(): void {
 
     this.authService.isLoggedIn() ? this.authService.restoreLoggedUser() : null;
@@ -34,7 +32,6 @@ export class NavbarComponent implements OnInit {
 
   logOut(){
     this.authService.logout();
-    this.router.navigate(['/home']);
   }
 
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => {

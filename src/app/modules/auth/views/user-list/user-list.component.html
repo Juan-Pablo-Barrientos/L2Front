@@ -12,12 +12,12 @@
 
 
 
-    <tr>
+    <tr *ngFor="let user of users">
       <td>
         <div class="d-flex align-items-center">
           <div class="ms-3">
-            <p class="fw-bold mb-1">John Doe</p>
-            <p class="text-muted mb-0">john.doe@gmail.com</p>
+            <p class="fw-bold mb-1">{{user.firstname}} {{user.lastname}}</p>
+            <p class="text-muted mb-0">{{user.email}}</p>
           </div>
         </div>
       </td>
@@ -26,46 +26,84 @@
         <button type="button" (click)="openShow(modalShow)" class="btn btn-link btn-sm btn-rounded">
           Ver
         </button>
-        <button type="button" (click)="openEdit(modalEdit)" class="btn btn-link btn-sm btn-rounded">
+        <button type="button" (click)="openEdit(modalEdit, user.id)" class="btn btn-link btn-sm btn-rounded">
           Editar
         </button>
         <button type="button" (click)="openDelete(modalDelete)" class="btn btn-link btn-sm btn-rounded">
           Borrar
         </button>
       </td>
-    </tr>
 
+      <!--Modal show-->
+
+      <ng-template #modalShow let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modalShow">Usuario: {{user.firstname}} {{user.lastname}}</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body lead">
+            <div class="mb-3">
+              <label for="">Id: {{user.id}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Username: {{user.username}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Nombre: {{user.firstname}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Dni: {{user.dni}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Apellido:  {{user.lastname}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Email:  {{user.email}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Nombre de usuario:  {{user.username}}</label>
+            </div>
+            <div class="mb-3">
+              <label *ngIf="(user.rol)==1" for="">Rol:  Admin</label>
+              <label *ngIf="(user.rol)==0" for="">Rol:  Cliente</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cerrar</button>
+        </div>
+      </ng-template>
+
+
+
+      <!--Modal delete-->
+
+      <ng-template #modalDelete let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modalDelete">Borrar usuario</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body lead">
+          <form>
+            <div class="mb-3">
+              <label for="dateOfBirth">Esta seguro de que quiere borrar al usuario {{user.firstname}} {{user.lastname}}</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="deleteUser(user.id);modal.close('Confirm click')">Si</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Cancelar</button>
+        </div>
+      </ng-template>
+
+    </tr>
 
   </tbody>
 </table>
 </div>
 
-<ng-template #modalShow let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modalShow">Ver</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="mb-3">
-        <label for="dateOfBirth">Nombre:</label>
-      </div>
-      <div class="mb-3">
-        <label for="dateOfBirth">Apellido:</label>
-      </div>
-      <div class="mb-3">
-        <label for="dateOfBirth">Email:</label>
-      </div>
-      <div class="mb-3">
-        <label for="dateOfBirth">Username:</label>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-  </div>
-</ng-template>
-
+<!--Modal edit-->
 
 <ng-template #modalEdit let-modal>
   <div class="modal-header">
@@ -73,31 +111,50 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
-    <form>
-      <div class="mb-3">
-        <label for="dateOfBirth">Nombre:</label>
+    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+      <div class="form-floating mb-2">
+        <input type="text" value="" class="form-control" formControlName="idControl" name="id" id="id" placeholder="Nombre de usuario">
+        <label for="id">Id</label>
       </div>
+
+      <div class="form-floating mb-2">
+        <input type="text" value="" class="form-control" formControlName="usernameControl" name="username" id="username" placeholder="Nombre de usuario">
+        <label for="username">Nombre de usuario</label>
+      </div>
+
+      <div class="form-floating mb-2">
+        <input type="text" formControlName="firstnameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
+        <label for="name">Nombre</label>
+      </div>
+
+      <div class="form-floating mb-2">
+        <input type="text" formControlName="lastnameControl" name="surname" id="surname" placeholder="Apellido" class="form-control"/>
+        <label for="surname">Apellido</label>
+      </div>
+
+      <div class="form-floating mb-2">
+        <input type="text"  formControlName="emailControl" name="email" id="email"  type="email" placeholder="Email" class="form-control"/>
+        <label for="email">Email</label>
+      </div>
+
+      <div class="form-floating mb-2">
+        <input formControlName="dniControl" name="dni" id="dni" placeholder="Dni" type="text"class="form-control"/>
+        <label for="phone">DNI</label>
+      </div>
+
+      <div class="form-check form-check-inline lead">
+        <input class="form-check-input" type="radio" formControlName="role" name="role" id="Admin" value="Admin">
+        <label class="form-check-label" for="Admin">Admin</label>
+      </div>
+      <div class="form-check form-check-inline lead">
+        <input class="form-check-input" type="radio" formControlName="role" name="role" id="client" value="Client">
+        <label class="form-check-label" for="client">Cliente</label>
+      </div>
+
+        <button type="submit" [disabled]="!editUserForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-  </div>
-</ng-template>
-
-
-<ng-template #modalDelete let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modalDelete">Borrar</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="mb-3">
-        <label for="dateOfBirth">Nombre:</label>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Guardar</button>
   </div>
 </ng-template>

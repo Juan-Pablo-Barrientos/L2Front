@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
 
+    this.authService.logout();
+
     this.authService.login(
       {
         username: this.loginForm.controls.usernameControl.value,
