@@ -15,7 +15,6 @@ import { AuthModule } from '@gdp/auth/modules';
 //Guards
 import { AuthGuard } from './modules/auth/guards/auth.guard';
 import { AuthService } from './modules/auth/service/auth.service';
-import { DurationPickerModule } from 'ngx-duration-picker';
 
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ import { DurationPickerModule } from 'ngx-duration-picker';
     AuthModule,
     HttpClientModule,
     NgbModule,
-    DurationPickerModule,
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
