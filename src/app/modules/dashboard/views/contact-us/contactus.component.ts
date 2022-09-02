@@ -10,7 +10,8 @@ import { DataService } from '@gdp/shared/services';
 export class ContactusComponent {
 
   contactForm=new FormGroup({
-    firstNameControl: new FormControl('',[Validators.required, Validators.maxLength(50)]),
+    emailControl: new FormControl('',[Validators.required, Validators.maxLength(50)]),
+    phoneControl: new FormControl('',[Validators.required, Validators.maxLength(50)]),
     commentControl: new FormControl('',[Validators.required, Validators.maxLength(255)]),
   });
 
@@ -26,11 +27,17 @@ export class ContactusComponent {
 
   onSubmit(){
     let request = {
-      firstName : this.contactForm.controls.firstNameControl.value,
-      comment : this.contactForm.controls.commentControl.value,
+      phone_number : this.contactForm.controls.phoneControl.value,
+      email : this.contactForm.controls.emailControl.value,
+      textarea : this.contactForm.controls.commentControl.value,
     }
-    this.dataService.addUser(request).subscribe(response => {
-      console.log(response);
+    this.dataService.addContact(request).subscribe((res:any) => {console.log(res)
+      if (res.status==201){
+        alert("Exito");
+        this.contactForm.reset();
+      }else{
+        alert("Fallo el envio del formulario")
+      }
     });
   }
 

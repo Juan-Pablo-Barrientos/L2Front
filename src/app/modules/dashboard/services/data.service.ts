@@ -12,11 +12,6 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  sendContactForm(formContact:JSON) {
-    return this.http.post(this.baseUrl+'contact',formContact)
-    .pipe(catchError(error=>{return[]}))
-    .subscribe()
-  }
 
 
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DurationPickerModule } from 'ngx-duration-picker';
 
 //Componentes
 import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent } from '@gdp/auth/views';
@@ -30,7 +31,9 @@ import { AdminGuard } from './guards/admin.guard';
     BrowserModule,
     FontAwesomeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DurationPickerModule,
+
   ],
   exports:[
     LoginComponent,
