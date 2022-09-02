@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '@gdp/shared/services';
 import { NgbCalendar, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import jwt_decode from 'jwt-decode';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'gdp-movie-list',
@@ -17,7 +19,7 @@ export class MovieListComponent implements OnInit {
   genres:any;
   directors:any;
 
-  constructor(private modalService: NgbModal ,private dataService:DataService) { }
+  constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService) { }
 
   get getCreateMovieForm(){
     return this.createMovieForm.controls;
@@ -33,7 +35,8 @@ export class MovieListComponent implements OnInit {
       hoursControl: new FormControl('',[Validators.required]),
       minutesControl: new FormControl('',[Validators.required]),
       file: new FormControl('', [Validators.required]),
-      fileSource: new FormControl('', [Validators.required])
+      fileSource: new FormControl('', [Validators.required]),
+      format: new FormControl('', [Validators.required])
     });
 
     this.dataService.getMovies().subscribe((response:any)=>{
@@ -61,16 +64,14 @@ export class MovieListComponent implements OnInit {
   }
 
   onSubmit(){
-    const headers = new HttpHeaders({
-      Authentication:''
-    })
-
     const payload = {
       name : this.createMovieForm.controls['nameControl'].value,
       synopsis : this.createMovieForm.controls['synopsisControl'].value,
       id_director : this.createMovieForm.controls['genreControl'].value,
       id_genre : this.createMovieForm.controls['directorControl'].value,
-      duration : (this.createMovieForm.controls['hoursControl'].value.concat(":")).concat(this.createMovieForm.controls['minutesControl'].value)
+      duration : (this.createMovieForm.controls['hoursControl'].value.concat(":")).concat(this.createMovieForm.controls['minutesControl'].value),
+      format_movie:this.createMovieForm.controls['format'].value,
+      id_usr:(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user
     }
 
     const formData = new FormData()

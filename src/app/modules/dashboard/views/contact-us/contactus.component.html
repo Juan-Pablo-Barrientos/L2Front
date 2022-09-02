@@ -14,7 +14,7 @@
     <label for="comment">Comentario</label
     ><textarea formControlName="commentControl"  name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
   </div>
-  <button (click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
+  <button (click)="reset()" type="button"  class="btn btn-secondary m-2">Limpiar campos</button>
   <button type="submit" [disabled]="!contactForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
 </form>
 

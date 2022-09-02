@@ -105,7 +105,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="createMovieForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="createMovieForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
 
         <div class="form-floating mb-2">
           <input type="text" formControlName="nameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
@@ -117,18 +117,24 @@
           <label for="synopsis">Sinopsis</label>
         </div>
 
-        <select class="form-select mb-2" formControlName="genreControl" name="genre" id="genre" aria-label="Default select example">
-          <option value='' selected>Seleccione genero</option>
-          <option *ngFor="let genre of genres" [value]="genre.id" >{{genre.name}}</option>
-        </select>
+        <div class="form-control mb-2">
+          <label class="me-2 mb-2"for="genre">Genero </label>
+          <select class="form-select mb-2" formControlName="genreControl" name="genre" id="genre" aria-label="Default select example">
+            <option value='' selected>Seleccione genero</option>
+            <option *ngFor="let genre of genres" [value]="genre.id" >{{genre.name}}</option>
+          </select>
+        </div>
 
-        <select class="form-select mb-2" formControlName="directorControl" name="director" id="director" aria-label="Default select example">
+        <div class="form-control mb-2">
+          <label class="me-2 mb-2"for="director">Director </label>
+          <select class="form-select mb-2" formControlName="directorControl" name="director" id="director" aria-label="Default select example">
           <option value='' selected>Seleccione director</option>
           <option *ngFor="let director of directors" [value]="director.id" >{{director.name}} {{director.lastname}}</option>
         </select>
+        </div>
 
         <div class="form-control mb-2">
-          <label class="me-2 mb-2"for="duration">Duracion: </label>
+          <label class="me-2 mb-2"for="duration">Duracion </label>
           <select class="form-select mb-2" formControlName="hoursControl" name="hours" id="hours" aria-label="Default select example">
             <option value='' selected>HS</option>
             <option value='01'>1</option>
@@ -152,15 +158,23 @@
           </select>
         </div>
 
+        <div class="form-check form-check-inline lead">
+          <input class="form-check-input" type="radio" formControlName="format" name="format" id="2D" value="2D">
+          <label class="form-check-label" for="2d">2D</label>
+        </div>
+        <div class="form-check form-check-inline lead">
+          <input class="form-check-input" type="radio" formControlName="format" name="format" id="3D" value="3D">
+          <label class="form-check-label" for="3d">3D</label>
+        </div>
+
         <div class="form-group">
-          <label for="file">File</label>
-          <input formControlName="file"id="file" type="file" class="form-control" (change)="onFileChange($event)">
+          <label for="file">Imagen</label>
+          <input formControlName="file"id="file" name="file"type="file" class="form-control" (change)="onFileChange($event)">
           <div *ngIf="getCreateMovieForm['file'].touched && getCreateMovieForm.file.invalid" class="alert alert-danger">
               <div *ngIf="getCreateMovieForm['file'].errors['required']">File is required.</div>
           </div>
         </div>
-
-        <button (click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
+        <button type="button"(click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
 
         <button type="submit" [disabled]="!createMovieForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
       </form>{{createMovieForm.valid}}
