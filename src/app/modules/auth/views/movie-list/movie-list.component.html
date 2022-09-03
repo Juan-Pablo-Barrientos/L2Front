@@ -10,6 +10,7 @@
     <thead class="bg-light">
       <tr>
         <th>Nombre</th>
+        <th>Formato</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -22,18 +23,24 @@
           <div class="d-flex align-items-center">
             <div class="ms-3">
               <p class="fw-bold mb-1">{{movie.name}}</p>
-              <p class="text-muted mb-0">{{movie.genre}}</p>
+              <p class="text-muted mb-0">{{movie.id_genre}}</p>
             </div>
           </div>
         </td>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{movie.format_movie}}</p>
+            </div>
+          </div></td>
         <td>
 
           <button type="button" (click)="openShow(modalShow)" class="btn btn-link btn-sm btn-rounded">
             Ver
           </button>
-          <!--<button type="button" (click)="openEdit(modalEdit)" class="btn btn-link btn-sm btn-rounded">
+          <button type="button" (click)="openEdit(modalEdit,movie.id)" class="btn btn-link btn-sm btn-rounded">
             Editar
-          </button>-->
+          </button>
           <button type="button" (click)="openDelete(modalDelete)" class="btn btn-link btn-sm btn-rounded">
             Borrar
           </button>
@@ -60,7 +67,17 @@
               <label for="">Duracion: {{movie.duration}}</label>
             </div>
             <div class="mb-3">
-              <label for="">Genero:  {{movie.genre.id}}</label>
+              <label for="">Genero:  {{movie.id_genre}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Director:  {{movie.name}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Poster</label>
+              <img [src]="movie.path_img">
+            </div>
+            <div class="mb-3">
+              <label for="">Formato:  {{movie.format_movie}}</label>
             </div>
         </div>
         <div class="modal-footer">
@@ -80,7 +97,7 @@
         <div class="modal-body lead">
           <form>
             <div class="mb-3">
-              <label for="dateOfBirth">Esta seguro de que quiere borrar al usuario {{movie.name}}</label>
+              <label for="dateOfBirth">Esta seguro de que quiere borrar la pelicula {{movie.name}}</label>
             </div>
           </form>
         </div>
@@ -174,7 +191,7 @@
               <div *ngIf="getCreateMovieForm['file'].errors['required']">File is required.</div>
           </div>
         </div>
-        <button type="button"(click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
+        <button type="button"(click)="resetCreate()"  class="btn btn-secondary m-2">Limpiar campos</button>
 
         <button type="submit" [disabled]="!createMovieForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
       </form>{{createMovieForm.valid}}
@@ -185,58 +202,88 @@
   </ng-template>
 
   <!--Modal edit-->
-<!--
+
 <ng-template #modalEdit let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modalEdit">Editar</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
-      <div class="form-floating mb-2">
-        <input type="text" value="" class="form-control" formControlName="idControl" name="id" id="id" placeholder="Nombre de usuario">
-        <label for="id">Id</label>
-      </div>
+    <form [formGroup]="editMovieForm" (ngSubmit)="onSubmitEdit()" enctype="multipart/form-data">
 
       <div class="form-floating mb-2">
-        <input type="text" value="" class="form-control" formControlName="usernameControl" name="username" id="username" placeholder="Nombre de usuario">
-        <label for="username">Nombre de usuario</label>
-      </div>
-
-      <div class="form-floating mb-2">
-        <input type="text" formControlName="firstnameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
+        <input type="text" formControlName="nameEditControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
         <label for="name">Nombre</label>
       </div>
 
       <div class="form-floating mb-2">
-        <input type="text" formControlName="lastnameControl" name="surname" id="surname" placeholder="Apellido" class="form-control"/>
-        <label for="surname">Apellido</label>
+        <textarea type="text" formControlName="synopsisEditControl" name="synopsis" id="synopsis" placeholder="Sinopsis" class="form-control"></textarea>
+        <label for="synopsis">Sinopsis</label>
       </div>
 
-      <div class="form-floating mb-2">
-        <input type="text"  formControlName="emailControl" name="email" id="email"  type="email" placeholder="Email" class="form-control"/>
-        <label for="email">Email</label>
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="genre">Genero </label>
+        <select class="form-select mb-2" formControlName="genreEditControl" name="genre" id="genre" aria-label="Default select example">
+          <option value='' selected>Seleccione genero</option>
+          <option *ngFor="let genre of genres" [value]="genre.id" >{{genre.name}}</option>
+        </select>
       </div>
 
-      <div class="form-floating mb-2">
-        <input formControlName="dniControl" name="dni" id="dni" placeholder="Dni" type="text"class="form-control"/>
-        <label for="phone">DNI</label>
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="director">Director </label>
+        <select class="form-select mb-2" formControlName="directorEditControl" name="director" id="director" aria-label="Default select example">
+        <option value='' selected>Seleccione director</option>
+        <option *ngFor="let director of directors" [value]="director.id" >{{director.name}} {{director.lastname}}</option>
+      </select>
+      </div>
+
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="duration">Duracion </label>
+        <select class="form-select mb-2" formControlName="hoursEditControl" name="hours" id="hours" aria-label="Default select example">
+          <option value='' selected>HS</option>
+          <option value='01'>1</option>
+          <option value='02'>2</option>
+        </select>
+        <select class="form-select mb-2" formControlName="minutesEditControl" name="minutes" id="minutes" aria-label="Default select example">
+          <option value='' selected>MIN</option>
+          <option value='00'>00</option>
+          <option value='05'>05</option>
+          <option value='10'>10</option>
+          <option value='15'>15</option>
+          <option value='20'>20</option>
+          <option value='25'>25</option>
+          <option value='30'>30</option>
+          <option value='35'>35</option>
+          <option value='40'>40</option>
+          <option value='45'>45</option>
+          <option value='50'>50</option>
+          <option value='55'>55</option>
+          <option value='59'>59</option>
+        </select>
       </div>
 
       <div class="form-check form-check-inline lead">
-        <input class="form-check-input" type="radio" formControlName="role" name="role" id="Admin" value="Admin">
-        <label class="form-check-label" for="Admin">Admin</label>
+        <input class="form-check-input" type="radio" formControlName="format" name="format" id="2D" value="2D">
+        <label class="form-check-label" for="2d">2D</label>
       </div>
       <div class="form-check form-check-inline lead">
-        <input class="form-check-input" type="radio" formControlName="role" name="role" id="client" value="Client">
-        <label class="form-check-label" for="client">Cliente</label>
+        <input class="form-check-input" type="radio" formControlName="format" name="format" id="3D" value="3D">
+        <label class="form-check-label" for="3d">3D</label>
       </div>
 
-        <button type="submit" [disabled]="!editUserForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
-    </form>
+      <div class="form-group lead">
+        <label for="img">Imagen actual</label>
+        <img [src]="currentImagePath">
+      </div>
+      <div class="form-group lead">
+        <label for="img">Subir nueva imagen</label>
+        <input id="file" formControlName="fileEdit" name="file"type="file" class="form-control" (change)="onEditFileChange($event)">
+      </div>
+
+      <button type="submit" [disabled]="!editMovieForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
+    </form>{{editMovieForm.valid}}
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Guardar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
   </div>
 </ng-template>
--->

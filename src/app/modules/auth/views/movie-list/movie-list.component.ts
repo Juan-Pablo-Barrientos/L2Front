@@ -18,11 +18,16 @@ export class MovieListComponent implements OnInit {
   createMovieForm:any
   genres:any;
   directors:any;
+  editMovieForm:any;
+  currentImagePath:any;
 
   constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService) { }
 
   get getCreateMovieForm(){
     return this.createMovieForm.controls;
+  }
+  get getEditMovieForm(){
+    return this.editMovieForm.controls;
   }
 
   ngOnInit(): void {
@@ -55,7 +60,7 @@ export class MovieListComponent implements OnInit {
     })
 
   }
-  reset() {
+  resetCreate() {
     this.createMovieForm.reset();
     this.createMovieForm.controls['genreControl'].setValue('')
     this.createMovieForm.controls['hoursControl'].setValue('')
@@ -85,7 +90,7 @@ export class MovieListComponent implements OnInit {
     this.dataService.addMovie(formData).subscribe((res:any) => {console.log(res)
       if (res.status==201){
         alert("Exito");
-        this.createMovieForm.reset();
+        this.createMovieForm.resetCreate();
       }else{
         alert("Fallo el envio del formulario")
       }
@@ -100,23 +105,90 @@ export class MovieListComponent implements OnInit {
   openShow(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modalShow'}).result
   }
-  openEdit(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
+  openEdit(content: any,idMovie:number) {
+  const movie = this.movies.find((movie: { id: number; }) =>movie.id===idMovie)
+  this.currentImagePath=movie.path_img;
+  this.editMovieForm = new FormGroup({
+    nameEditControl: new FormControl(movie.name,[Validators.required, Validators.maxLength(50)]),
+    synopsisEditControl: new FormControl(movie.synopsis,[Validators.required, Validators.maxLength(255)]),
+    genreEditControl: new FormControl(movie.id_genre,[Validators.required]),
+    directorEditControl: new FormControl(movie.id_director,[Validators.required]),
+    hoursEditControl: new FormControl(movie.duration.substring(0,2),[Validators.required]),
+    minutesEditControl: new FormControl(movie.duration.substring(3,5),[Validators.required]),
+    fileEdit: new FormControl(''),
+    fileSourceEdit: new FormControl(''),
+    format: new FormControl(movie.format_movie, [Validators.required])
+  })
+  this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
   }
+
+  onSubmitEdit(){
+    const payload = {
+      name : this.editMovieForm.controls['nameEditControl'].value,
+      synopsis : this.editMovieForm.controls['synopsisEditControl'].value,
+      id_director : this.editMovieForm.controls['genreEditControl'].value,
+      id_genre : this.editMovieForm.controls['directorEditControl'].value,
+      duration : (this.editMovieForm.controls['hoursEditControl'].value.concat(":")).concat(this.editMovieForm.controls['minutesEditControl'].value),
+      format_movie:this.editMovieForm.controls['format'].value,
+      id_usr:(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user
+    }
+
+    const formData = new FormData()
+    formData.append('imgFile',this.editMovieForm.get('fileSourceEdit').value)
+    formData.append('payload',JSON.stringify(payload))
+
+    console.log(formData)
+    console.log(formData.get('payload'))
+    console.log(formData.get('imgFile'))
+
+    this.dataService.addMovie(formData).subscribe((res:any) => {console.log(res)
+      if (res.status==201){
+        alert("Exito");
+      }else{
+        alert("Fallo el envio del formulario")
+      }
+    });
+  }
+
   openDelete(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modalDelete'}).result
   }
   openCreate(content: any) {
+    this.resetCreate();
     this.modalService.open(content, {ariaLabelledBy: 'modalCreate'}).result
   }
 
   onFileChange(event:any) {
 
     if (event.target.files.length > 0) {
+      if(event.target.files[0].size > 4097152){
+      alert("File is too big!");
+      event.target.value = null;
+      event.target.files[0] = "";
+      this.createMovieForm.patchValue({
+        fileSource: ""
+      })}
+   else{
       const file = event.target.files[0];
       this.createMovieForm.patchValue({
         fileSource: file
-      });
+      })}
     }
+  }
+  onEditFileChange(event:any) {
+    if(event.target.files.length > 0){
+    if(event.target.files[0].size > 4097152){
+      alert("File is too big!");
+      event.target.value = null;
+      event.target.files[0] = "";
+      this.editMovieForm.patchValue({
+        fileSourceEdit: ""
+      })}
+     else{
+      const file = event.target.files[0];
+      this.editMovieForm.patchValue({
+        fileSourceEdit: file
+      })}
+     }
   }
 }

@@ -44,6 +44,7 @@ export class UserListComponent implements OnInit {
     this.dataService.editUser(request,this.editUserForm.controls.idControl.value).subscribe(response => {
       console.log(response);
     });
+    window.location.reload()
   }
 
   openShow(content: any) {
