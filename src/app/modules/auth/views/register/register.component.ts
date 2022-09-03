@@ -32,13 +32,13 @@ export class RegisterComponent {
 
   onSubmit() {
     let request = {
-      name : this.signUpForm.controls.nameControl.value,
-      surname : this.signUpForm.controls.surnameControl.value,
+      firstname : this.signUpForm.controls.nameControl.value,
+      lastname : this.signUpForm.controls.surnameControl.value,
       username : this.signUpForm.controls.usernameControl.value,
       password : this.signUpForm.controls.passwordControl.value,
       email : this.signUpForm.controls.emailControl.value,
       dni : this.signUpForm.controls.dniControl.value,
-      role: 'client',
+      rol: 0,
       phoneNumber : this.signUpForm.controls.phoneControl.value,
     }
     this.dataService.addUser(request).subscribe(response => {

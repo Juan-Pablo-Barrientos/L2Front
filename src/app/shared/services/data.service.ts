@@ -17,7 +17,7 @@ export class DataService {
   }
 
   addUser(request: any): Observable<ArrayBuffer> {
-    return this.http.post<ArrayBuffer>(this.baseUrl + '/users', request);
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/users/register', request);
   }
 
 
