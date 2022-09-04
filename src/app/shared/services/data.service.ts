@@ -49,6 +49,9 @@ export class DataService {
   getUsers(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/users');
   }
+  getShowsByDayAndTheaters(request:any): Observable<Response> {
+    return this.http.post<Response>(this.baseUrl + '/theaters',request);
+  }
   getMovies(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/movies');
   }

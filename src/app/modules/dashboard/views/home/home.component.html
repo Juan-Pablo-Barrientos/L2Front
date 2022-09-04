@@ -4,15 +4,13 @@
 
 
   <ng-template *ngFor="let item of imagesCinema;let i = index" ngbSlide>
+    <a [routerLink]="['/movieDetails/'+imagesCinema[i].id]">
     <div class="picsum-img-wrapper">
       <img [src]="imagesCinema[i].path_img" alt="Random first slide" class="mh-100 fitCarouselImg" >
     </div>
-    <div class="carousel-caption">
-      <a [routerLink]="['/movieDetails/'+imagesCinema[i].id]" class="carouselTitle">
-       <h3 class="display-3">{{imagesCinema[i].name}}</h3>
-      </a>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    <div>
     </div>
+  </a>
   </ng-template>
  </ngb-carousel>
 </div>
@@ -43,9 +41,9 @@
   <div *ngFor="let item of imagesCinema;let i = index">
       <div class="col">
         <a [routerLink]="['/movieDetails/'+imagesCinema[i].id]">
-          <div class="card fir-picture">
+          <div class="card  ">
             <!-- Falta agregar un max width y height -->
-            <img [src]="imagesCinema[i].path_img" class="card-img-top" alt="...">
+            <img [src]="imagesCinema[i].path_img" class="card-img-top mh-100 fitCardImg">
             <div class="card-body">
               <h5 class="card-title text-center">{{imagesCinema[i].name}}</h5>
             </div>

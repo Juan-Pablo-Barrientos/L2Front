@@ -44,6 +44,9 @@
           <button type="button" (click)="openDelete(modalDelete)" class="btn btn-link btn-sm btn-rounded">
             Borrar
           </button>
+          <button type="button" (click)="openAddShows(modalAddShows, movie.id)" class="btn btn-link btn-sm btn-rounded">
+            Añadir funciones
+          </button>
         </td>
 
         <!--Modal show-->
@@ -115,6 +118,8 @@
     </tbody>
   </table>
   </div>
+
+<!--Modal create-->
 
   <ng-template #modalCreate let-modal>
     <div class="modal-header">
@@ -227,6 +232,7 @@
         <input type="time" class="form-control" formControlName="hoursEditControl" name="hours" id="hours" min="00:00" max="03:00">
       </div>
 
+      <label class="lead me-2">Formato</label>
       <div class="form-check form-check-inline lead">
         <input class="form-check-input" type="radio" formControlName="format" name="format" id="2D" value="2D">
         <label class="form-check-label" for="2d">2D</label>
@@ -235,12 +241,12 @@
         <input class="form-check-input" type="radio" formControlName="format" name="format" id="3D" value="3D">
         <label class="form-check-label" for="3d">3D</label>
       </div>
-
-      <div class="form-group lead fit-picture">
-        <label for="img">Imagen actual</label>
-        <img [src]="currentImagePath">
+      <div class="">
+        <div class="lead fit-picture text-center">
+          <label for="img" >Imagen actual</label>
+          <img class="rounded"[src]="currentImagePath" >
+        </div>
       </div>
-
       <div class="form-group lead">
         <label for="fileEdit">Nueva imagen</label>
         <input formControlName="fileEdit"id="fileEdit" name="fileEdit" type="file" class="form-control" (change)="onEditFileChange($event)">
@@ -251,7 +257,52 @@
 
 
       <button type="submit" [disabled]="!editMovieForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
-    </form>{{editMovieForm.valid}}
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+  </div>
+</ng-template>
+
+<!--Modal addShows-->
+
+<ng-template #modalAddShows let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modalCreate">Añadir funciones</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addShowForm" (ngSubmit)="onSubmitAddShow()">
+
+      <div class="form-floating mb-2">
+        <input type="text" value="" class="form-control" formControlName="idShowControl" name="id" id="id" placeholder="Id de la pelicula">
+        <label for="id">Id</label>
+      </div>
+
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="theaters">Sala </label>
+        <select class="form-select mb-2" formControlName="theaterShowControl" name="theaters" (change)="onDateChange()" id="theaters" aria-label="Default select example">
+          <option value='' selected>Seleccione Sala</option>
+          <option *ngFor="let theater of theaters" [value]="theater.id" >{{theater.id}}</option>
+        </select>
+      </div>
+
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="day">Dia </label>
+        <input type="date" formControlName="dayShowControl" id="day" name="day" [min]="minDate" (change)="onDateChange()" [max]="maxDate">
+      </div>
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="time">Hora </label>
+        <select class="form-select mb-2" formControlName="timeShowControl" name="time" id="time" (change)="onDateChange()" aria-label="Default select example">
+          <option value='' selected>Seleccione hora</option>
+          <option *ngFor="let time of times" [value]="time.time" >{{time.time}}</option>
+        </select>
+      </div>
+
+      <button type="button"(click)="resetAddShow()"  class="btn btn-secondary m-2">Limpiar campos</button>
+
+      <button type="submit" [disabled]="!addShowForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
+    </form>{{addShowForm.valid}}
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
