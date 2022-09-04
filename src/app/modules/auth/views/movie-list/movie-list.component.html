@@ -70,10 +70,13 @@
               <label for="">Duracion: {{movie.duration}}</label>
             </div>
             <div class="mb-3">
-              <label for="">Genero:  {{movie.id_genre}}</label>
+              <label for="">Genero:  {{movie.genre.name}}</label>
             </div>
             <div class="mb-3">
-              <label for="">Director:  {{movie.name}}</label>
+              <label for="">Director:  {{movie.director.name}} {{movie.director.lastname}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Formato:  {{movie.format_movie}}</label>
             </div>
             <div class="mb-3 fit-picture">
               <label for="">Poster</label>
