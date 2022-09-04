@@ -38,7 +38,6 @@ export class MovieListComponent implements OnInit {
       genreControl: new FormControl('',[Validators.required]),
       directorControl: new FormControl('',[Validators.required]),
       hoursControl: new FormControl('',[Validators.required]),
-/*       minutesControl: new FormControl('',[Validators.required]), */
       file: new FormControl('', [Validators.required]),
       fileSource: new FormControl('', [Validators.required]),
       format: new FormControl('', [Validators.required])
@@ -64,21 +63,10 @@ export class MovieListComponent implements OnInit {
     this.createMovieForm.reset();
     this.createMovieForm.controls['genreControl'].setValue('')
     this.createMovieForm.controls['hoursControl'].setValue('')
-/*     this.createMovieForm.controls['minutesControl'].setValue('') */
     this.createMovieForm.controls['directorControl'].setValue('')
   }
 
   onSubmit(){
-/*     const payload = {
-      name : this.createMovieForm.controls['nameControl'].value,
-      synopsis : this.createMovieForm.controls['synopsisControl'].value,
-      id_director : this.createMovieForm.controls['genreControl'].value,
-      id_genre : this.createMovieForm.controls['directorControl'].value,
-      duration : (this.createMovieForm.controls['hoursControl'].value.concat(":")).concat(this.createMovieForm.controls['minutesControl'].value),
-      format_movie:this.createMovieForm.controls['format'].value,
-      id_usr:(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user
-    } */
-      /* Saque este payload porque iba a ser dificil trabajar con un JSON en el back, habria que cambiar en el metodo edit */
     const formData = new FormData()
     formData.append('myImage',this.createMovieForm.get('fileSource').value);
     formData.append('name',this.createMovieForm.controls['nameControl'].value);
@@ -89,15 +77,10 @@ export class MovieListComponent implements OnInit {
     formData.append('format_movie',this.createMovieForm.controls['format'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
-
-    console.log(formData)
-    console.log(formData.get('payload'))
-    console.log('MI',formData.get('na'))
-
     this.dataService.addMovie(formData).subscribe((res:any) => {console.log(res)
       if (res.status==201){
         alert("Exito");
-        this.createMovieForm.resetCreate();
+        window.location.reload()
       }else{
         alert("Fallo el envio del formulario")
       }
@@ -116,12 +99,12 @@ export class MovieListComponent implements OnInit {
   const movie = this.movies.find((movie: { id: number; }) =>movie.id===idMovie)
   this.currentImagePath=movie.path_img;
   this.editMovieForm = new FormGroup({
+    idEditControl:new FormControl({value:movie.id,disabled:true},[Validators.required,Validators.maxLength(50)]),
     nameEditControl: new FormControl(movie.name,[Validators.required, Validators.maxLength(50)]),
-    synopsisEditControl: new FormControl(movie.synopsis,[Validators.required, Validators.maxLength(255)]),
+    synopsisEditControl: new FormControl(movie.synopsis,[Validators.required]),
     genreEditControl: new FormControl(movie.id_genre,[Validators.required]),
     directorEditControl: new FormControl(movie.id_director,[Validators.required]),
-    hoursEditControl: new FormControl(movie.duration.substring(0,2),[Validators.required]),
-    minutesEditControl: new FormControl(movie.duration.substring(3,5),[Validators.required]),
+    hoursEditControl: new FormControl(movie.duration,[Validators.required]),
     fileEdit: new FormControl(''),
     fileSourceEdit: new FormControl(''),
     format: new FormControl(movie.format_movie, [Validators.required])
@@ -130,27 +113,20 @@ export class MovieListComponent implements OnInit {
   }
 
   onSubmitEdit(){
-    const payload = {
-      name : this.editMovieForm.controls['nameEditControl'].value,
-      synopsis : this.editMovieForm.controls['synopsisEditControl'].value,
-      id_director : this.editMovieForm.controls['genreEditControl'].value,
-      id_genre : this.editMovieForm.controls['directorEditControl'].value,
-      duration : (this.editMovieForm.controls['hoursEditControl'].value.concat(":")).concat(this.editMovieForm.controls['minutesEditControl'].value),
-      format_movie:this.editMovieForm.controls['format'].value,
-      id_usr:(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user
-    }
-
     const formData = new FormData()
-    formData.append('imgFile',this.editMovieForm.get('fileSourceEdit').value)
-    formData.append('payload',JSON.stringify(payload))
+    formData.append('myImage',this.editMovieForm.get('fileSourceEdit').value);
+    formData.append('name',this.editMovieForm.controls['nameEditControl'].value);
+    formData.append('synopsis',this.editMovieForm.controls['synopsisEditControl'].value );
+    formData.append('id_director',this.editMovieForm.controls['genreEditControl'].value );
+    formData.append('id_genre',this.editMovieForm.controls['directorEditControl'].value );
+    formData.append('duration',this.editMovieForm.controls['hoursEditControl'].value );
+    formData.append('format_movie',this.editMovieForm.controls['format'].value );
+    formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
-    console.log(formData)
-    console.log(formData.get('payload'))
-    console.log(formData.get('imgFile'))
-
-    this.dataService.addMovie(formData).subscribe((res:any) => {console.log(res)
-      if (res.status==201){
+    this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe((res:any) => {console.log(res)
+      if (res.status==200){
         alert("Exito");
+        window.location.reload()
       }else{
         alert("Fallo el envio del formulario")
       }
@@ -193,6 +169,7 @@ export class MovieListComponent implements OnInit {
       })}
      else{
       const file = event.target.files[0];
+      console.log("tamo aca")
       this.editMovieForm.patchValue({
         fileSourceEdit: file
       })}

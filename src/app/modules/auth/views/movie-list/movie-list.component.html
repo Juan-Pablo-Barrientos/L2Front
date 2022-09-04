@@ -72,7 +72,7 @@
             <div class="mb-3">
               <label for="">Director:  {{movie.name}}</label>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 fit-picture">
               <label for="">Poster</label>
               <img [src]="movie.path_img">
             </div>
@@ -152,28 +152,7 @@
 
         <div class="form-control mb-2">
           <label class="me-2 mb-2"for="duration">Duracion </label>
-          <input type="time" class="form-control" formControlName="hoursControl" name="hours" id="hours">
-<!--           <select class="form-select mb-2" formControlName="hoursControl" name="hours" id="hours" aria-label="Default select example">
-            <option value='' selected>HS</option>
-            <option value='01'>1</option>
-            <option value='02'>2</option>
-          </select>
-          <select class="form-select mb-2" formControlName="minutesControl" name="minutes" id="minutes" aria-label="Default select example">
-            <option value='' selected>MIN</option>
-            <option value='00'>00</option>
-            <option value='05'>05</option>
-            <option value='10'>10</option>
-            <option value='15'>15</option>
-            <option value='20'>20</option>
-            <option value='25'>25</option>
-            <option value='30'>30</option>
-            <option value='35'>35</option>
-            <option value='40'>40</option>
-            <option value='45'>45</option>
-            <option value='50'>50</option>
-            <option value='55'>55</option>
-            <option value='59'>59</option>
-          </select> -->
+          <input type="time" class="form-control" formControlName="hoursControl" name="hours" id="hours" min="00:00" max="03:00">
         </div>
 
         <div class="form-check form-check-inline lead">
@@ -213,6 +192,11 @@
     <form [formGroup]="editMovieForm" (ngSubmit)="onSubmitEdit()" action="/movies/" enctype="multipart/form-data" method="POST">
 
       <div class="form-floating mb-2">
+        <input type="text" value="" class="form-control" formControlName="idEditControl" name="id" id="id" placeholder="Id de la pelicula">
+        <label for="id">Id</label>
+      </div>
+
+      <div class="form-floating mb-2">
         <input type="text" formControlName="nameEditControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
         <label for="name">Nombre</label>
       </div>
@@ -239,29 +223,8 @@
       </div>
 
       <div class="form-control mb-2">
-        <label class="me-2 mb-2"for="duration">Duracion </label>
-        <input type="time" class="form-control" formControlName="hoursControl" name="hours" id="hours">
-<!--         <select class="form-select mb-2" formControlName="hoursEditControl" name="hours" id="hours" aria-label="Default select example">
-          <option value='' selected>HS</option>
-          <option value='01'>1</option>
-          <option value='02'>2</option>
-        </select>
-        <select class="form-select mb-2" formControlName="minutesEditControl" name="minutes" id="minutes" aria-label="Default select example">
-          <option value='' selected>MIN</option>
-          <option value='00'>00</option>
-          <option value='05'>05</option>
-          <option value='10'>10</option>
-          <option value='15'>15</option>
-          <option value='20'>20</option>
-          <option value='25'>25</option>
-          <option value='30'>30</option>
-          <option value='35'>35</option>
-          <option value='40'>40</option>
-          <option value='45'>45</option>
-          <option value='50'>50</option>
-          <option value='55'>55</option>
-          <option value='59'>59</option>
-        </select> -->
+        <label class="me-2 mb-2"for="duration">Duracion</label>
+        <input type="time" class="form-control" formControlName="hoursEditControl" name="hours" id="hours" min="00:00" max="03:00">
       </div>
 
       <div class="form-check form-check-inline lead">
@@ -273,14 +236,19 @@
         <label class="form-check-label" for="3d">3D</label>
       </div>
 
-      <div class="form-group lead">
+      <div class="form-group lead fit-picture">
         <label for="img">Imagen actual</label>
         <img [src]="currentImagePath">
       </div>
+
       <div class="form-group lead">
-        <label for="img">Subir nueva imagen</label>
-        <input id="file" formControlName="fileEdit" type="image" name="myImage" accept="image/jpeg" class="form-control" (change)="onEditFileChange($event)">
+        <label for="fileEdit">Nueva imagen</label>
+        <input formControlName="fileEdit"id="fileEdit" name="fileEdit" type="file" class="form-control" (change)="onEditFileChange($event)">
+        <div *ngIf="getEditMovieForm['fileEdit'].touched && getEditMovieForm.fileEdit.invalid" class="alert alert-danger">
+            <div *ngIf="getEditMovieForm['fileEdit'].errors['required']">File is required.</div>
+        </div>
       </div>
+
 
       <button type="submit" [disabled]="!editMovieForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
     </form>{{editMovieForm.valid}}

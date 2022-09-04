@@ -5,8 +5,7 @@
 
   <ng-template *ngFor="let item of imagesCinema;let i = index" ngbSlide>
     <div class="picsum-img-wrapper">
-      <!-- Aca tambien faltaria max width/height y min -->
-      <img [src]="imagesCinema[i].path_img" alt="Random first slide">
+      <img [src]="imagesCinema[i].path_img" alt="Random first slide" class="mh-100 fitCarouselImg" >
     </div>
     <div class="carousel-caption">
       <a [routerLink]="['/movieDetails/'+imagesCinema[i].id]" class="carouselTitle">
@@ -44,7 +43,7 @@
   <div *ngFor="let item of imagesCinema;let i = index">
       <div class="col">
         <a [routerLink]="['/movieDetails/'+imagesCinema[i].id]">
-          <div class="card">
+          <div class="card fir-picture">
             <!-- Falta agregar un max width y height -->
             <img [src]="imagesCinema[i].path_img" class="card-img-top" alt="...">
             <div class="card-body">

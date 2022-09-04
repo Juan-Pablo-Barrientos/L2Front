@@ -24,7 +24,9 @@ export class DataService {
   addMovie(request: any): Observable<HttpResponse<ArrayBuffer>> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/movies', request,{ observe: 'response' });
   }
-
+  editMovie(request: any,idMovie:any): Observable<HttpResponse<ArrayBuffer>> {
+    return this.http.put<ArrayBuffer>(this.baseUrl + '/movies/'+idMovie, request,{ observe: 'response' });
+  }
   addImg(request: any): Observable<Response> {
     return this.http.put<Response>(this.baseUrl + '/movies/imgupload', request);
   }

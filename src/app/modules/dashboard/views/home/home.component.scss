@@ -6,10 +6,27 @@
 @media only screen and (min-width: 1100px) {
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
-  margin-left: 250px;
-  margin-right: 250px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+.fitCarouselImg{
+  width: 50%;
+  height: 50em;
 }
 }
+
+@media only screen and (max-width: 1100px) {
+  .fitCarouselImg{
+    width: 80%;
+    height: 40em;
+  }
+  .carousel-control-next,
+  .carousel-control-prev /*, .carousel-indicators */ {
+    margin-left: 3em;
+    margin-right: 3em;
+  }
+  }
+
 a { color: inherit;
   text-decoration: none;}
 a:hover{
@@ -37,3 +54,9 @@ a:hover{
 
   transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
+
+.fit-picture {
+  width: 18em; }
+  .fit-picture img {
+    width: 100%; }
+
