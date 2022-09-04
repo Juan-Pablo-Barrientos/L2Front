@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '@gdp/shared/services';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -19,6 +20,9 @@ export class HomeComponent implements OnInit {
   @ViewChild('carousel', { static: true })
   carousel!: NgbCarousel;
   genreParams:any={};
+  
+
+  public imagesCinema: any = [];
 
   togglePaused() {
     if (this.paused) {
@@ -29,9 +33,15 @@ export class HomeComponent implements OnInit {
     this.paused = !this.paused;
   }
 
-  constructor(private route: ActivatedRoute, private router:Router) { }
+  constructor(private route: ActivatedRoute, private router:Router, private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.dataService.getMovies().subscribe((res: any) => {
+      res.forEach((movie:any)=> {   
+      this.imagesCinema = res;
+      });
+      console.log(this.imagesCinema)
+    })
   }
 
   genreFilter(event:any){

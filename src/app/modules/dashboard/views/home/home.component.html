@@ -3,13 +3,14 @@
 
 
 
-  <ng-template *ngFor="let item of images;let i = index" ngbSlide>
+  <ng-template *ngFor="let item of imagesCinema;let i = index" ngbSlide>
     <div class="picsum-img-wrapper">
-      <img [src]="images[i]" alt="Random first slide">
+      <!-- Aca tambien faltaria max width/height y min -->
+      <img [src]="imagesCinema[i].path_img" alt="Random first slide">
     </div>
     <div class="carousel-caption">
-      <a [routerLink]="['/movieDetails/'+i]" class="carouselTitle">
-       <h3 class="display-3">Pelicula {{i+1}}</h3>
+      <a [routerLink]="['/movieDetails/'+imagesCinema[i].id]" class="carouselTitle">
+       <h3 class="display-3">{{imagesCinema[i].name}}</h3>
       </a>
       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
     </div>
@@ -40,13 +41,14 @@
 
 <div class="container mt-3 mb-3">
   <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div *ngFor="let item of images;let i = index">
+  <div *ngFor="let item of imagesCinema;let i = index">
       <div class="col">
-        <a [routerLink]="['/movieDetails/'+i]">
+        <a [routerLink]="['/movieDetails/'+imagesCinema[i].id]">
           <div class="card">
-            <img [src]="images[i]" class="card-img-top" alt="...">
+            <!-- Falta agregar un max width y height -->
+            <img [src]="imagesCinema[i].path_img" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title text-center">Pelicula {{i+1}}</h5>
+              <h5 class="card-title text-center">{{imagesCinema[i].name}}</h5>
             </div>
           </div>
         </a>

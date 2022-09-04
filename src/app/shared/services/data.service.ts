@@ -25,6 +25,10 @@ export class DataService {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/movies', request,{ observe: 'response' });
   }
 
+  addImg(request: any): Observable<Response> {
+    return this.http.put<Response>(this.baseUrl + '/movies/imgupload', request);
+  }
+
   addContact(request: any ): Observable<HttpResponse<ArrayBuffer>> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/contact', request,{ observe: 'response' });
   }
@@ -45,6 +49,10 @@ export class DataService {
   }
   getMovies(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/movies');
+  }
+  getMovie(idMovie: number): Observable<Response> {
+    console.log(idMovie)
+    return this.http.get<Response>(this.baseUrl+'/movies/'+idMovie)
   }
   getGenres(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/genres');

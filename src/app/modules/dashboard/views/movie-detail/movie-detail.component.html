@@ -1,10 +1,8 @@
 <div class="container">
   <div class="row">
       <div class="col-lg-8">
-              <h2 class="display-2"> <!--{{movie.genre}}--> Genero<br><strong><!--{{movie.title}}--> Titulo</strong></h2>
-              <p class="description"><!-- movie.description-->Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Consectetur earum non atque recusandae, sint ullam accusantium. Fugit voluptat
-                e iusto ratione qui, vero, delectus labore sapiente vitae tempora nulla neque consequatur.</p>
+              <h2 class="display-2"> <!--{{movie.genre}}--> Genero<br><strong>{{movie.name}}</strong></h2>
+              <p class="description">{{movie.synopsis}}</p>
 
           <button class="bg-dark rounded-pill text-white btn btn-lg">Entradas</button>
 
@@ -12,12 +10,13 @@
       <div class="col-lg-4">
           <div class="mt-2">
               <figure class="fit-picture">
-                  <img src="" alt="Image">
+                  <img [src]="movie.path_img" alt="Image">
                 </figure>
               <ul>
-                  <li><strong>Título</strong>{{movie.title}}</li>
+                  <li><strong>Título:</strong> {{movie.name}}</li>
                   <li><strong>Género:</strong>{{movie.genre}}</li>
-                  <li><strong>Director:</strong>{{movie.director.name}}</li>
+                  <li><strong>Director:</strong>{{movie.id_director}}</li>
+                  <li><strong>Duración:</strong> {{movie.duration}}</li>
               </ul>
           </div>
       </div>
