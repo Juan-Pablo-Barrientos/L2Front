@@ -27,6 +27,9 @@ export class DataService {
   addUser(request: any): Observable<ArrayBuffer> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/users/register', request);
   }
+  addShow(request: any): Observable<HttpResponse<ArrayBuffer>>  {
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/shows', request,{ observe: 'response' });
+  }
   getMovieRating(movieName:string): Observable<ArrayBuffer> {
     return this.http.get<ArrayBuffer>('http://www.omdbapi.com/?apikey=af770909&t='+movieName);
   }
@@ -61,7 +64,7 @@ export class DataService {
   }
 
   getShowsByTheaterAndMovie(request:any): Observable<Response> {
-    return this.http.post<Response>(this.baseUrl + '/theater/',request);
+    return this.http.post<Response>(this.baseUrl + '/shows/showsdate',request);
   }
 
   getTheaters(): Observable<Response> {
@@ -72,7 +75,7 @@ export class DataService {
     return this.http.get<Response>(this.baseUrl + '/users');
   }
   getShowsByDayAndTheaters(request:any): Observable<Response> {
-    return this.http.post<Response>(this.baseUrl + '/theaters',request);
+    return this.http.post<Response>(this.baseUrl + '/shows/showsdate',request);
   }
   getMovie(idMovie: number): Observable<Response> {
     console.log(idMovie)

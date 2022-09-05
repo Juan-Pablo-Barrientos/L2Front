@@ -278,7 +278,7 @@
     <form [formGroup]="addShowForm" (ngSubmit)="onSubmitAddShow()">
 
       <div class="form-floating mb-2">
-        <input type="text" value="" class="form-control" formControlName="idShowControl" name="id" id="id" placeholder="Id de la pelicula">
+        <input type="text" value="" class="form-control" formControlName="idMovieControl" name="id" id="id" placeholder="Id de la pelicula">
         <label for="id">Id</label>
       </div>
 
@@ -304,8 +304,8 @@
 
       <button type="button"(click)="resetAddShow()"  class="btn btn-secondary m-2">Limpiar campos</button>
 
-      <button type="submit" [disabled]="!addShowForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
-    </form>{{addShowForm.valid}}
+      <button type="submit" [disabled]="!addShowForm.valid" class="btn btn-primary float-end m-2" (click)="modal.close('Save click')">Guardar</button>
+    </form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>

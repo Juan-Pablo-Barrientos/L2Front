@@ -30,6 +30,7 @@ export class MovieListComponent implements OnInit {
   times:any;
   titleSearch:any='';
   id_genre:any;
+  timesIncoming: any;
 
   constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService) { }
 
@@ -59,14 +60,16 @@ export class MovieListComponent implements OnInit {
       format: new FormControl('', [Validators.required])
     });
 
+    this.dataService.getTheaters().subscribe((response:any)=>{
+      this.theaters=response;
+    })
+
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((response:any)=>{
       this.movies=response;
-      console.log(response)
     })
 
     this.dataService.getGenres().subscribe((response:any)=>{
       this.genres=response;
-      console.log(response)
     })
 
     this.dataService.getDirectors().subscribe((response:any)=>{
@@ -129,9 +132,6 @@ export class MovieListComponent implements OnInit {
     window.location.reload();
   }
 
-  onSubmitAddShow(){
-    return null
-  }
 
 
   openShow(content: any) {
@@ -163,15 +163,37 @@ export class MovieListComponent implements OnInit {
   }
   openAddShows(content: any, idMovie:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modalAddShow'}).result
-    console.log(this.theaters)
     this.addShowForm = new FormGroup({
-    idShowControl:new FormControl({value:idMovie,disabled:true},[Validators.required,Validators.maxLength(50)]),
+    idMovieControl:new FormControl({value:idMovie,disabled:true},[Validators.required,Validators.maxLength(50)]),
     theaterShowControl: new FormControl('',[Validators.required]),
     dayShowControl: new FormControl('',[Validators.required]),
     timeShowControl: new FormControl('',[Validators.required])
   })
+  this.resetAddShow();
+}
 
+onSubmitAddShow(){
+  const date_time= this.addShowForm.controls.dayShowControl.value.concat(" ").concat(this.addShowForm.controls.timeShowControl.value).concat(":00")
+  console.log(date_time)
+  let request = {
+    date_time : date_time,
+    tickets_availables : 200,
+    id_movie : this.addShowForm.controls.idMovieControl.value,
+    id_theaters : this.addShowForm.controls.theaterShowControl.value,
   }
+  console.log(request.date_time)
+  this.dataService.addShow(request).subscribe(response => {
+    console.log(response);
+    if (response.status==201){
+      alert("Exito");
+      this.addShowForm.reset();
+    }else{
+      alert("Fallo el envio del formulario")
+    }
+  });
+
+}
+
 
   onFileChange(event:any) {
 
@@ -213,14 +235,14 @@ export class MovieListComponent implements OnInit {
     if(this.addShowForm.controls['theaterShowControl'].value && this.addShowForm.controls['dayShowControl'].value){
       let Idtheater = this.addShowForm.controls['theaterShowControl'].value
       let day = this.addShowForm.controls['dayShowControl'].value
-      console.log("getHours")
+
       let request = {
-        theaterId:Idtheater,
-        day:day
+        theater:Idtheater,
+        date_time:day
       }
 
-      this.dataService.getShowsByDayAndTheaters(request)
-
+      this.dataService.getShowsByDayAndTheaters(request).subscribe((response:any)=>{
+      this.timesIncoming=response;
       this.times=[
         {
           time:"17:00"
@@ -232,7 +254,20 @@ export class MovieListComponent implements OnInit {
           time:"23:00"
         },
       ]
-
+      this.timesIncoming.forEach((timeIncoming:any,j:any) => {
+        this.times.forEach((time:any,i:any)  => {
+          let timeIncomingAux = timeIncoming
+          if(timeIncomingAux.date_time.length >8){
+          timeIncomingAux.date_time=timeIncomingAux.date_time.slice(11,16)
+          }
+          if (time.time===timeIncomingAux.date_time){
+            const indexToRemove=this.times.indexOf(time)
+            this.times.splice(indexToRemove,1)
+          }
+        });
+      })
+      if(this.times.length==0) {alert("No hay mas funciones disponibles para ese dia")}
+      })
     }
   }
 
