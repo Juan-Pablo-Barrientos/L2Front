@@ -28,6 +28,8 @@ export class MovieListComponent implements OnInit {
   maxDate:string;
   now = new Date();
   times:any;
+  titleSearch:any='';
+  id_genre:any;
 
   constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService) { }
 
@@ -45,27 +47,6 @@ export class MovieListComponent implements OnInit {
     this.minDate=new Date().toISOString().split('T')[0];
     this.maxDate=new Date(this.now.setMonth(this.now.getMonth() + 1)).toISOString().split('T')[0];
 
-    this.theaters=[
-      {
-        id:1
-      },
-      {
-        id:2
-      },
-      {
-        id:3
-      },
-      {
-        id:4
-      },
-      {
-        id:5
-      },
-      {
-        id:6
-      },
-    ]
-
 
     this.createMovieForm=new FormGroup({
       nameControl: new FormControl('',[Validators.required, Validators.maxLength(50)]),
@@ -78,7 +59,7 @@ export class MovieListComponent implements OnInit {
       format: new FormControl('', [Validators.required])
     });
 
-    this.dataService.getMovies().subscribe((response:any)=>{
+    this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((response:any)=>{
       this.movies=response;
       console.log(response)
     })
@@ -144,14 +125,8 @@ export class MovieListComponent implements OnInit {
     formData.append('format_movie',this.editMovieForm.controls['format'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
-    this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe((res:any) => {console.log(res)
-      if (res.status==200){
-        alert("Exito");
-        window.location.reload()
-      }else{
-        alert("Fallo el envio del formulario")
-      }
-    });
+    this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe()
+    window.location.reload();
   }
 
   onSubmitAddShow(){

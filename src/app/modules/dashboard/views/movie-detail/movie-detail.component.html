@@ -1,24 +1,74 @@
 <div class="container">
   <div class="row">
       <div class="col-lg-8">
-              <h2 class="display-2"> <!--{{movie.genre}}--> Genero<br><strong>{{movie.name}}</strong></h2>
+              <h2 class="display-2"> {{movie.genre.name}}<br><strong>{{movie.name}}</strong></h2>
               <p class="description">{{movie.synopsis}}</p>
-
-          <button class="bg-dark rounded-pill text-white btn btn-lg">Entradas</button>
-
       </div>
-      <div class="col-lg-4">
-          <div class="mt-2">
-              <figure class="fit-picture">
-                  <img [src]="movie.path_img" alt="Image">
+      <div class="col-lg-4 shadow-lg p-3 mb-5 bg-body rounded movieCard" >
+          <div >
+              <figure class="fit-picture ">
+                  <img class="" [src]="movie.path_img" alt="Image">
                 </figure>
               <ul>
                   <li><strong>Título:</strong> {{movie.name}}</li>
-                  <li><strong>Género:</strong>{{movie.genre}}</li>
-                  <li><strong>Director:</strong>{{movie.id_director}}</li>
+                  <li><strong>Género:</strong> {{movie.genre.name}}</li>
+                  <li><strong>Director:</strong> {{movie.director.name}} {{movie.director.lastname}}</li>
                   <li><strong>Duración:</strong> {{movie.duration}}</li>
+                  <li><strong>Rating IMDB:</strong> {{ratingIMDB}}</li>
               </ul>
           </div>
       </div>
+      <button class="bg-dark rounded-pill text-white btn btn-lg mb-2" (click)="openBuyTickets(modalBuyTicket)">Entradas</button>
   </div>
 </div>
+
+
+<!--Modal buyTicket-->
+
+<ng-template #modalBuyTicket let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modalCreate">Comprar entradas</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="buyTicketsForm" (ngSubmit)="onSubmitBuyTickets()">
+
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="theaters">Sala </label>
+        <select class="form-select mb-2" formControlName="theaterControl" name="theaters" (change)="onTheaterChange()" id="theaters" aria-label="Default select example">
+          <option value='' selected>Seleccione Sala</option>
+          <option *ngFor="let theater of theaters" [value]="theater.id" >{{theater.id}}</option>
+        </select>
+      </div>
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="theaters">Funcion </label>
+        <select class="form-select mb-2" formControlName="showControl" name="show" id="show" aria-label="Default select example">
+          <option value='' selected>Seleccione Funcion</option>
+          <option value="1">1</option>
+          <!--<option *ngFor="let show of shows" [value]="show.id" >{{show.day}} {{show.hour}}</option>-->
+        </select>
+      </div>
+
+      <div class="form-floating mb-2">
+        <input type="text"  formControlName="emailControl" name="email" id="email"  type="email" placeholder="Email" class="form-control"/>
+        <label for="email">Email</label>
+      </div>
+
+      <div class="form-floating mb-2">
+        <input formControlName="dniControl" name="dni" id="dni" placeholder="Dni" type="text"class="form-control"/>
+        <label for="phone">DNI</label>
+      </div>
+      <div class="form-floating mb-2">
+        <input formControlName="quantityControl" name="quantity" id="quantity" placeholder="Quantity" type="number"class="form-control" min="1" max="10" autocomplete="off" onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
+        <label for="cantidad">Cantidad</label>
+      </div>
+
+      <button type="button"(click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
+
+      <button type="submit" [disabled]="!buyTicketsForm.valid" class="btn btn-primary float-end m-2">Comprar</button>
+    </form>{{buyTicketsForm.valid}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+  </div>
+</ng-template>

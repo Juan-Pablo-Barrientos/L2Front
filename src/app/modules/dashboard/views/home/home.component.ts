@@ -12,7 +12,6 @@ import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeComponent implements OnInit {
 
-  images = [944, 1011, 984,1000,505,432,143,234,250].map((n) => `https://picsum.photos/id/${n}/900/500`);
   paused = false;
   pauseOnHover = true;
   showNavigationArrows = false;
@@ -20,9 +19,11 @@ export class HomeComponent implements OnInit {
   @ViewChild('carousel', { static: true })
   carousel!: NgbCarousel;
   genreParams:any={};
-  
-
+  genres:any;
+  titleSearch:any;
+  id_genre:any;
   public imagesCinema: any = [];
+  radioStatus: boolean;
 
   togglePaused() {
     if (this.paused) {
@@ -33,33 +34,49 @@ export class HomeComponent implements OnInit {
     this.paused = !this.paused;
   }
 
-  constructor(private route: ActivatedRoute, private router:Router, private dataService: DataService) { }
+  constructor(private route: ActivatedRoute, private router:Router, public dataService: DataService) { }
 
   ngOnInit(): void {
-    this.dataService.getMovies().subscribe((res: any) => {
-      res.forEach((movie:any)=> {   
-      this.imagesCinema = res;
-      });
-      console.log(this.imagesCinema)
+
+    this.dataService.getGenres().subscribe((res:any)=>{
+      this.genres=res;
     })
+
+    this.route.queryParams.subscribe(params => {
+      this.titleSearch = params["searchbar"]
+    })
+
+    this.route.queryParams.subscribe(params => {
+      this.id_genre = params["id_genre"]
+    })
+    this.dataService.movies=[]
+    this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((res: any) => {
+      res.forEach((res:any)=> {
+        this.dataService.movies.push(res)
+      });
+    });
+
   }
 
   genreFilter(event:any){
     {
-      if(event.target.checked){
-        this.genreParams[event.target.name]="true"
-      }else{
-        delete this.genreParams[event.target.name];
-      }
-
-      console.log(this.genreParams)
-      this.router.navigate([],{
-        relativeTo: this.route,
-        queryParams:this.genreParams
-
-      })
+      this.id_genre=event.target.value
+      console.log(event.target.value)
+      this.dataService.movies=[]
+      this.dataService.getMovies(this.titleSearch ??= "",this.id_genre).subscribe((response: any) => {
+      this.dataService.movies = response;
+    });
 
     }
   }
+
+  cleanFilter(){
+    this.id_genre=null
+    this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??='').subscribe((response: any) => {
+    this.dataService.movies = response;
+    this.radioStatus=false
+    });
+  }
+
 
 }

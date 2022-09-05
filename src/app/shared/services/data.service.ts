@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -8,18 +8,32 @@ import { environment } from 'src/environments/environment';
 })
 export class DataService {
   private baseUrl = environment.apiUrl;
-
+  movies: any=[];
   constructor(private http: HttpClient) {}
+
 
   userExists(username: string): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/users/userExist/'+username)
 
   }
+  getMovies(title: string,id_genre:number): Observable<Response> {
+    let params = new HttpParams()
+    params = params.append('title',title)
+    params = params.append('id_genre',id_genre)
+    console.log(params.keys())
+    return this.http.get<Response>(this.baseUrl + '/movies', { params: params });
+  }
 
   addUser(request: any): Observable<ArrayBuffer> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/users/register', request);
   }
+  getMovieRating(movieName:string): Observable<ArrayBuffer> {
+    return this.http.get<ArrayBuffer>('http://www.omdbapi.com/?apikey=af770909&t='+movieName);
+  }
 
+  buyTicket(request: any): Observable<HttpResponse<ArrayBuffer>> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/tickets', request,{ observe: 'response' });
+  }
 
   addMovie(request: any): Observable<HttpResponse<ArrayBuffer>> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/movies', request,{ observe: 'response' });
@@ -46,14 +60,19 @@ export class DataService {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/contact', request);
   }
 
+  getShowsByTheaterAndMovie(request:any): Observable<Response> {
+    return this.http.post<Response>(this.baseUrl + '/theater/',request);
+  }
+
+  getTheaters(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + '/theater');
+  }
+
   getUsers(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/users');
   }
   getShowsByDayAndTheaters(request:any): Observable<Response> {
     return this.http.post<Response>(this.baseUrl + '/theaters',request);
-  }
-  getMovies(): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + '/movies');
   }
   getMovie(idMovie: number): Observable<Response> {
     console.log(idMovie)

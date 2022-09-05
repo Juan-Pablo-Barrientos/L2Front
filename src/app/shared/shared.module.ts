@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Componentes
 import { FooterComponent, NavbarComponent } from '@gdp/shared/views'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -18,6 +19,7 @@ import { FooterComponent, NavbarComponent } from '@gdp/shared/views'
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   exports:[FooterComponent,NavbarComponent]
 })

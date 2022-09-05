@@ -13,10 +13,23 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
+  title: string = "";
+  id_genre: any;
   passwordChangeForm:any
 
   constructor(private modalService: NgbModal, public authService:AuthService, public dataService:DataService , private router:Router) { }
+
+  search() {
+    this.dataService.movies=[]
+    this.dataService.getMovies(this.title,this.id_genre??='').subscribe((response: any) => {
+      this.dataService.movies = response;
+    });
+  }
+  inputChange() {
+    if (this.title.length === 0) {
+      this.search();
+    }
+  }
 
   ngOnInit(): void {
 
