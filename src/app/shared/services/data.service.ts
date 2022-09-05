@@ -56,8 +56,9 @@ export class DataService {
   addContact(request: any ): Observable<HttpResponse<ArrayBuffer>> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/contact', request,{ observe: 'response' });
   }
-  editUserPassword(request: any,idUser:number): Observable<ArrayBuffer> {
-    return this.http.put<ArrayBuffer>(this.baseUrl + '/users/'+idUser, request);
+
+  editUserPassword(request: any): Observable<ArrayBuffer> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/users/changepassword', request);
   }
 
   editUser(request: any,idUser:number): Observable<ArrayBuffer> {

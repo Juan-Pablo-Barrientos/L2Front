@@ -1,7 +1,7 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbCalendar, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import jwt_decode from 'jwt-decode';
 
 
@@ -44,6 +44,12 @@ export class MovieListComponent implements OnInit {
     return this.addShowForm.controls;
   }
 
+  refreshMovieList(){
+    this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((response:any)=>{
+      this.movies=response;
+    })
+  }
+
   ngOnInit(): void {
     this.minDate=new Date().toISOString().split('T')[0];
     this.maxDate=new Date(this.now.setMonth(this.now.getMonth() + 1)).toISOString().split('T')[0];
@@ -74,7 +80,6 @@ export class MovieListComponent implements OnInit {
 
     this.dataService.getDirectors().subscribe((response:any)=>{
       this.directors=response;
-      console.log(response)
     })
 
   }
@@ -101,14 +106,21 @@ export class MovieListComponent implements OnInit {
     formData.append('format_movie',this.createMovieForm.controls['format'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
-    this.dataService.addMovie(formData).subscribe((res:any) => {console.log(res)
-      if (res.status==201){
+    this.dataService.addMovie(formData).subscribe({
+      next : ()=>{
         alert("Exito");
-        window.location.reload()
-      }else{
-        alert("Fallo el envio del formulario")
-      }
-    });
+        this.modalService.dismissAll();
+        this.refreshMovieList();
+      },
+      error: (error: HttpErrorResponse) => {
+      if (error.status==201){
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshMovieList();
+      }else {
+        alert("Error al enviar el formulario")
+      }}
+     });
   }
 
   deleteMovie(idMovie:number){
@@ -128,8 +140,21 @@ export class MovieListComponent implements OnInit {
     formData.append('format_movie',this.editMovieForm.controls['format'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
-    this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe()
-    window.location.reload();
+    this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe({
+      next : ()=>{
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshMovieList();
+      },
+      error: (error: HttpErrorResponse) => {
+      if (error.status==200){
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshMovieList();
+      }else {
+        alert("Error al enviar el formulario")
+      }}
+     });
   }
 
 

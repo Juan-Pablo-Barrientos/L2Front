@@ -92,7 +92,7 @@
         <input type="text"  formControlName="newConfirmPasswordControl" name="newConfirmPassword" id="newConfirmPassword" placeholder="Contraseña"  type="password"class="form-control"/>
         <label for="password">Confirmar contraseña nueva</label>
       </div>
-      <button type="submit" [disabled]="!passwordChangeForm.valid" class="btn btn-primary m-2">Cambiar contraseña</button>
+      <button type="submit" [disabled]="!passwordChangeForm.valid" class="btn btn-primary m-2" (click)="modal.close('Close click')">Cambiar contraseña</button>
     </form>
   </div>
   <div class="modal-footer">

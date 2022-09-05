@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import jwt_decode from 'jwt-decode';
 
 import { AuthGuard } from 'src/app/modules/auth/guards/auth.guard';
 import { AuthService } from 'src/app/modules/auth/service/auth.service';
@@ -62,11 +64,19 @@ export class NavbarComponent implements OnInit {
 
   onSubmitPassword(){
     let request = {
-      oldPassword : this.passwordChangeForm.controls.oldPasswordControl.value,
-      newPassword : this.passwordChangeForm.controls.newPasswordControl.value,
+      old : this.passwordChangeForm.controls.oldPasswordControl.value,
+      new : this.passwordChangeForm.controls.newPasswordControl.value,
+      id: this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).id_user
     }
-
-    this.dataService.editUserPassword(request, this.authService.getLoggedUser().id)
-
+    this.passwordChangeForm.reset()
+    this.dataService.editUserPassword(request).subscribe({
+      error: (error: HttpErrorResponse) => {
+        console.log(error)
+        if (error.status==200){
+          alert("Exito");
+        }else if (error.status==400){
+          alert("La contraseña vieja no coincide")
+        }}
+    });
   }
 }
