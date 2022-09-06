@@ -32,6 +32,9 @@ export class DataService {
   addUser(request: any): Observable<HttpResponse<ArrayBuffer>> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/users/register', request,{ observe: 'response' });
   }
+  addDirector(request: any): Observable<HttpResponse<ArrayBuffer>> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/directors', request,{ observe: 'response' });
+  }
   addShow(request: any): Observable<HttpResponse<ArrayBuffer>>  {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/shows', request,{ observe: 'response' });
   }
@@ -63,6 +66,9 @@ export class DataService {
 
   editUser(request: any,idUser:number): Observable<ArrayBuffer> {
     return this.http.put<ArrayBuffer>(this.baseUrl + '/users/'+idUser, request);
+  }
+  editDirector(request: any,idDirector:number): Observable<ArrayBuffer> {
+    return this.http.put<ArrayBuffer>(this.baseUrl + '/directors/'+idDirector, request);
   }
 
   addContactPost(request: any): Observable<ArrayBuffer> {
@@ -102,6 +108,9 @@ export class DataService {
 
   delUser(idUser:number): Observable<Response> {
     return this.http.delete<Response>(this.baseUrl + '/users/'+idUser);
+  }
+  delDirector(idDirector:number): Observable<Response> {
+    return this.http.delete<Response>(this.baseUrl + '/users/'+idDirector);
   }
   delMovie(idMovie:number): Observable<Response> {
     return this.http.delete<Response>(this.baseUrl + '/movies/'+idMovie);

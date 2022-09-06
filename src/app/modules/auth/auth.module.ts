@@ -10,6 +10,7 @@ import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponen
 import { AuthGuard, AdminGuard } from '@gdp/auth/guards';
 //Services
 import { AuthService } from '@gdp/auth/services';
+import { DirectorsListComponent } from './views/directors-list/directors-list.component';
 
 
 
@@ -19,7 +20,8 @@ import { AuthService } from '@gdp/auth/services';
     RegisterComponent,
     UserListComponent,
     MovieListComponent,
-    ContactUsListComponent
+    ContactUsListComponent,
+    DirectorsListComponent
   ],
   providers:[
     AuthGuard,

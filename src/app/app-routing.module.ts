@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 //Componentes
-import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent, ContactUsListComponent} from '@gdp/auth/views';
+import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent, ContactUsListComponent, DirectorsListComponent} from '@gdp/auth/views';
 import { HomeComponent,FrequentQuestionsComponent,ContactusComponent,AboutusComponent, MovieDetailComponent } from '@gdp/dashboard/views';
 //Guards
 import { AdminGuard } from '@gdp/auth/guards';
@@ -49,6 +49,13 @@ const routes: Routes = [
     canActivate:[AdminGuard],
     canLoad:[AdminGuard],
     title: 'Lista de usuarios'
+  },
+  {
+    path:'directorList',
+    component:DirectorsListComponent,
+    canActivate:[AdminGuard],
+    canLoad:[AdminGuard],
+    title: 'Lista de directores'
   },
   {
     path:'contactUsList',
