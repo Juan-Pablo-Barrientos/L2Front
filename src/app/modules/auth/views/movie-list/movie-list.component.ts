@@ -72,6 +72,7 @@ export class MovieListComponent implements OnInit {
 
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((response:any)=>{
       this.movies=response;
+      console.log(this.movies)
     })
 
     this.dataService.getGenres().subscribe((response:any)=>{
@@ -124,8 +125,21 @@ export class MovieListComponent implements OnInit {
   }
 
   deleteMovie(idMovie:number){
-    this.dataService.delMovie(idMovie).subscribe()
-    window.location.reload()
+    this.dataService.delMovie(idMovie).subscribe({
+      next : ()=>{
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshMovieList();
+      },
+      error: (error: HttpErrorResponse) => {
+      if (error.status==200){
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshMovieList();
+      }else {
+        alert("Error al enviar el formulario")
+      }}
+     })
   }
 
 
@@ -259,15 +273,16 @@ onSubmitAddShow(){
     this.times=null
     if(this.addShowForm.controls['theaterShowControl'].value && this.addShowForm.controls['dayShowControl'].value){
       let Idtheater = this.addShowForm.controls['theaterShowControl'].value
-      let day = this.addShowForm.controls['dayShowControl'].value
-
+      let day = (this.addShowForm.controls['dayShowControl'].value)
       let request = {
         theater:Idtheater,
         date_time:day
       }
-
+      console.log(request)
+      console.log("before sub")
       this.dataService.getShowsByDayAndTheaters(request).subscribe((response:any)=>{
       this.timesIncoming=response;
+      console.log(response)
       this.times=[
         {
           time:"17:00"
@@ -281,6 +296,7 @@ onSubmitAddShow(){
       ]
       this.timesIncoming.forEach((timeIncoming:any,j:any) => {
         this.times.forEach((time:any,i:any)  => {
+          console.log(timeIncoming)
           let timeIncomingAux = timeIncoming
           if(timeIncomingAux.date_time.length >8){
           timeIncomingAux.date_time=timeIncomingAux.date_time.slice(11,16)
@@ -295,5 +311,25 @@ onSubmitAddShow(){
       })
     }
   }
+
+  searchMovie() {
+    let searchMovie:any, filter:any, table:any, tr:any, td, i, txtValue;
+    searchMovie = document.getElementById("searchMovie");
+    filter = searchMovie.value.toUpperCase();
+    table = document.getElementById("movieList");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
 
 }

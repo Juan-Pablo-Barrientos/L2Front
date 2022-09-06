@@ -69,8 +69,8 @@ export class DataService {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/contact', request);
   }
 
-  getShowsByTheaterAndMovie(request:any): Observable<Response> {
-    return this.http.post<Response>(this.baseUrl + '/shows/',request);
+  getShows(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + '/shows/');
   }
 
   getTheaters(): Observable<Response> {

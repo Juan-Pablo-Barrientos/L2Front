@@ -33,19 +33,17 @@
   <div class="modal-body">
     <form [formGroup]="buyTicketsForm" (ngSubmit)="onSubmitBuyTickets()">
 
-      <div class="form-control mb-2">
-        <label class="me-2 mb-2"for="theaters">Sala </label>
-        <select class="form-select mb-2" formControlName="theaterControl" name="theaters" (change)="onTheaterChange()" id="theaters" aria-label="Default select example">
-          <option value='' selected>Seleccione Sala</option>
-          <option *ngFor="let theater of theaters" [value]="theater.id" >{{theater.id}}</option>
-        </select>
-      </div>
+
+
       <div class="form-control mb-2">
         <label class="me-2 mb-2"for="theaters">Funcion </label>
         <select class="form-select mb-2" formControlName="showControl" name="show" id="show" aria-label="Default select example">
           <option value='' selected>Seleccione Funcion</option>
-          <option value="1">1</option>
-          <!--<option *ngFor="let show of shows" [value]="show.id" >{{show.day}} {{show.hour}}</option>-->
+          <option *ngFor="let show of shows" [value]="show.id" >{{show.date_time}}
+            <div class="form-floating mb-2">
+            <input hidden formControlName="theaterControl" [value]="show.id_theaters" name="theaterId" id="theaterId" placeholder="theater" type="text"class="form-control"/>
+          </div>
+        </option>
         </select>
       </div>
 
@@ -62,11 +60,14 @@
         <input formControlName="quantityControl" name="quantity" id="quantity" placeholder="Quantity" type="number"class="form-control" min="1" max="10" autocomplete="off" onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
         <label for="cantidad">Cantidad</label>
       </div>
-
+      <span class="lead form-control" >Precio:
+        <div *ngIf="this.movie.format_movie=='2D' ">$600</div>
+        <div *ngIf="this.movie.format_movie=='3D' ">$1200</div>
+       </span>
       <button type="button"(click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
 
       <button type="submit" [disabled]="!buyTicketsForm.valid" class="btn btn-primary float-end m-2">Comprar</button>
-    </form>{{buyTicketsForm.valid}}
+    </form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>

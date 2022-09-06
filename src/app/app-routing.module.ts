@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 //Componentes
 import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent} from '@gdp/auth/views';
@@ -11,11 +12,13 @@ import { ContactUsListComponent } from './modules/auth/views/contact-us-list/con
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    title: 'CinemaLand'
   },
   {
     path:'home',
-    component: HomeComponent
+    component: HomeComponent,
+    title: 'Home'
   },
   {
     path:'login',

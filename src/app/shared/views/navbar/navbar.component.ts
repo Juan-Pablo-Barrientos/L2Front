@@ -21,16 +21,14 @@ export class NavbarComponent implements OnInit {
 
   constructor(private modalService: NgbModal, public authService:AuthService, public dataService:DataService , private router:Router) { }
 
+  //TODO search on search click
+
   search() {
     this.dataService.movies=[]
     this.dataService.getMovies(this.title,this.id_genre??='').subscribe((response: any) => {
       this.dataService.movies = response;
+      this.router.navigate(['/home']);
     });
-  }
-  inputChange() {
-    if (this.title.length === 0) {
-      this.search();
-    }
   }
 
   ngOnInit(): void {
