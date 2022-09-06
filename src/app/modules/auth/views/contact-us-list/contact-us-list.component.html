@@ -1,7 +1,11 @@
 <div class="container">
   <div class="m-2"><h1 class="display-1 text-center">Listado de mensajes</h1></div>
   <hr class="bg-secondary border-2 border-top border-secondary">
-  <table class="table align-middle mb-0 bg-white mt-5">
+  <div class="form-floating mt-3">
+    <input type="text" name="emailSearch" id="searchByEmail" placeholder="Nombre" (keyup)="searchByEmail()" class="form-control"/>
+    <label for="name">Buscar por email</label>
+  </div>
+  <table class="table align-middle mb-0 bg-white mt-5" id="contactUsList">
     <thead class="bg-light">
       <tr>
         <th>Email</th>

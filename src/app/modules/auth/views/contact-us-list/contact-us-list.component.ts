@@ -24,4 +24,23 @@ export class ContactUsListComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'modalShow'}).result
   }
 
+  searchByEmail() {
+    let searchByEmail:any, filter:any, table:any, tr:any, td, i, txtValue;
+    searchByEmail = document.getElementById("searchByEmail");
+    filter = searchByEmail.value.toUpperCase();
+    table = document.getElementById("contactUsList");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
 }
