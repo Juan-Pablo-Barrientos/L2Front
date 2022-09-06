@@ -104,6 +104,7 @@
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body lead">
+          <div *ngIf="shows.length==0"><div class="m-2"><h1 class="display-5 text-center">No hay funciones para esta pelicula</h1></div></div>
           <div *ngFor="let show of shows">
             <div class="mb-3">
               <label for="">Id de funcion: {{show.id}}</label>
