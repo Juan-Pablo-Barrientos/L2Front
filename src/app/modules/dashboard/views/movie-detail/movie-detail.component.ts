@@ -75,7 +75,8 @@ export class MovieDetailComponent implements OnInit {
     let request = {
       id_show : this.buyTicketsForm.controls.showControl.value,
       dniControl : this.buyTicketsForm.controls.dniControl.value,
-      emailControl : this.buyTicketsForm.controls.emailControl.value
+      emailControl : this.buyTicketsForm.controls.emailControl.value,
+      quantity : this.buyTicketsForm.controls.quantityControl.value
     }
     console.log(request)
     this.dataService.buyTicket(request).subscribe(response => {

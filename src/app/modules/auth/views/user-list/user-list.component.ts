@@ -25,7 +25,6 @@ export class UserListComponent implements OnInit {
 
     this.dataService.getUsers().subscribe((response:any)=>{
       this.users=response;
-      console.log(response)
     })
 
   }

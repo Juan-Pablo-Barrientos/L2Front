@@ -6,6 +6,7 @@ import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponen
 import { HomeComponent,FrequentQuestionsComponent,ContactusComponent,AboutusComponent, MovieDetailComponent } from '@gdp/dashboard/views';
 import { AdminGuard } from './modules/auth/guards/admin.guard';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { ContactUsListComponent } from './modules/auth/views/contact-us-list/contact-us-list.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,12 @@ const routes: Routes = [
   {
     path:'userList',
     component:UserListComponent,
+    canActivate:[AdminGuard],
+    canLoad:[AdminGuard]
+  },
+  {
+    path:'contactUsList',
+    component:ContactUsListComponent,
     canActivate:[AdminGuard],
     canLoad:[AdminGuard]
   },

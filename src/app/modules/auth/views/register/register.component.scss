@@ -1,4 +1,13 @@
 input.ng-invalid.ng-dirty,
 input.ng-invalid.ng-touched {
-  background-color: red;
+  border-color: rgba(229, 103, 23, 0.8);
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+  outline: 0 none;
+}
+input.ng-dirty,
+input.ng-touched{
+  border-color: green;
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px green;
+  outline: 0 none;
+
 }

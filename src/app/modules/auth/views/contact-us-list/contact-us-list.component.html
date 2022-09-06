@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="m-2"><h1 class="display-1 text-center">Listado de mensajes</h1></div>
+  <hr class="bg-secondary border-2 border-top border-secondary">
+  <table class="table align-middle mb-0 bg-white mt-5">
+    <thead class="bg-light">
+      <tr>
+        <th>Email</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+      <tr *ngFor="let contact of contacts">
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{contact.email}}</p>
+              <p class="text-muted mb-0">Telefono {{contact.phone_number}}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+
+          <button type="button" (click)="openShow(modalShow)" class="btn btn-link btn-sm btn-rounded">
+            Ver
+          </button>
+        </td>
+
+        <!--Modal show-->
+
+        <ng-template #modalShow let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modalShow">Formulario de contacto</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body lead">
+              <div class="mb-3">
+                <label for="">Id: {{contact.id}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Telefono: {{contact.phone_number}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Email: {{contact.email}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Mensaje: {{contact.textarea}}</label>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cerrar</button>
+          </div>
+        </ng-template>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>

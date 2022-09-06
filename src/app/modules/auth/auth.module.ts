@@ -9,6 +9,7 @@ import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponen
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './service/auth.service';
 import { AdminGuard } from './guards/admin.guard';
+import { ContactUsListComponent } from './views/contact-us-list/contact-us-list.component';
 
 
 
@@ -17,7 +18,8 @@ import { AdminGuard } from './guards/admin.guard';
     LoginComponent,
     RegisterComponent,
     UserListComponent,
-    MovieListComponent
+    MovieListComponent,
+    ContactUsListComponent
   ],
   providers:[
     AuthGuard,

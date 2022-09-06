@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { faMarsDouble } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -12,10 +13,14 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
 
-  userExists(username: string): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + '/users/userExist/'+username)
-
+  userExists(request:any): Observable<Response> {
+    return this.http.post<Response>(this.baseUrl + '/users/exist', request)
   }
+
+  emailExists(request:any): Observable<Response> {
+    return this.http.post<Response>(this.baseUrl + '/users/existemail', request)
+  }
+
   getMovies(title: string,id_genre:number): Observable<Response> {
     let params = new HttpParams()
     params = params.append('title',title)
@@ -24,8 +29,8 @@ export class DataService {
     return this.http.get<Response>(this.baseUrl + '/movies', { params: params });
   }
 
-  addUser(request: any): Observable<ArrayBuffer> {
-    return this.http.post<ArrayBuffer>(this.baseUrl + '/users/register', request);
+  addUser(request: any): Observable<HttpResponse<ArrayBuffer>> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/users/register', request,{ observe: 'response' });
   }
   addShow(request: any): Observable<HttpResponse<ArrayBuffer>>  {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/shows', request,{ observe: 'response' });
@@ -64,11 +69,14 @@ export class DataService {
   }
 
   getShowsByTheaterAndMovie(request:any): Observable<Response> {
-    return this.http.post<Response>(this.baseUrl + '/shows/showsdate',request);
+    return this.http.post<Response>(this.baseUrl + '/shows/',request);
   }
 
   getTheaters(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/theater');
+  }
+  getContacts(): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + '/contact');
   }
 
   getUsers(): Observable<Response> {
