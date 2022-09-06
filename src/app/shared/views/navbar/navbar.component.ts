@@ -60,6 +60,12 @@ export class NavbarComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'changePasswordModal'}).result
   }
 
+  clearSearch(){
+    this.dataService.getMovies(this.title='',this.id_genre??='').subscribe((response: any) => {
+      this.dataService.movies = response;
+    });
+  }
+
   onSubmitPassword(){
     let request = {
       old : this.passwordChangeForm.controls.oldPasswordControl.value,

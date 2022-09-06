@@ -24,7 +24,7 @@
           <div class="d-flex align-items-center">
             <div class="ms-3">
               <p class="fw-bold mb-1">{{movie.name}}</p>
-              <p class="text-muted mb-0">{{movie.id_genre}}</p>
+              <p class="text-muted mb-0">{{movie.genre.name}}</p>
             </div>
           </div>
         </td>
@@ -47,6 +47,9 @@
           </button>
           <button type="button" (click)="openAddShows(modalAddShows, movie.id)" class="btn btn-link btn-sm btn-rounded">
             Añadir funciones
+          </button>
+          <button type="button" (click)="openSeeShows(modalSeeShows, movie.id)" class="btn btn-link btn-sm btn-rounded">
+            Ver funciones
           </button>
         </td>
 
@@ -92,6 +95,35 @@
         </div>
       </ng-template>
 
+
+      <!--Modal SeeShows-->
+
+      <ng-template #modalSeeShows let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modalShow">Pelicula: {{movie.name}}</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body lead">
+          <div *ngFor="let show of shows">
+            <div class="mb-3">
+              <label for="">Id de funcion: {{show.id}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Fecha y hora: {{show.date_time}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Entradas disponibles: {{show.tickets_availables}}</label>
+            </div>
+            <div class="mb-3">
+              <label for="">Sala: {{show.id_theaters}}</label>
+            </div>
+            <hr class="bg-secondary border-2 border-top border-secondary">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cerrar</button>
+        </div>
+      </ng-template>
 
 
       <!--Modal delete-->

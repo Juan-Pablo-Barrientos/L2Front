@@ -75,9 +75,21 @@ export class DirectorsListComponent implements OnInit {
       lastname : this.editDirectorForm.controls.lastnameControl.value,
     }
     console.log(request)
-    this.dataService.editDirector(request,this.editDirectorForm.controls.idControl.value).subscribe(response => {
-    });
-    window.location.reload()
+    this.dataService.editDirector(request,this.editDirectorForm.controls.idControl.value).subscribe({
+      next : ()=>{
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshDirectorList();
+      },
+      error: (error: HttpErrorResponse) => {
+      if (error.status==200){
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshDirectorList();
+      }else {
+        alert("Error al enviar el formulario")
+      }}
+     })
   }
 
   openShow(content: any) {
@@ -99,8 +111,21 @@ export class DirectorsListComponent implements OnInit {
   }
 
   deleteDirector(idDirector:number){
-    this.dataService.delDirector(idDirector).subscribe()
-    window.location.reload()
+    this.dataService.delDirector(idDirector).subscribe({
+      next : ()=>{
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshDirectorList();
+      },
+      error: (error: HttpErrorResponse) => {
+      if (error.status==200){
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshDirectorList();
+      }else {
+        alert("Error al enviar el formulario")
+      }}
+     })
   }
 
   searchDirector() {

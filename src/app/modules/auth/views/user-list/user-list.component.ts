@@ -6,6 +6,7 @@ import { map } from 'rxjs';
 
 //Services
 import { DataService } from '@gdp/shared/services';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'gdp-user-list',
@@ -23,6 +24,12 @@ export class UserListComponent implements OnInit {
 
    }
 
+   refreshUserList(){
+    this.dataService.getUsers().subscribe((response:any)=>{
+      this.users=response;
+    })
+  }
+
   ngOnInit(): void {
 
     this.dataService.getUsers().subscribe((response:any)=>{
@@ -35,16 +42,28 @@ export class UserListComponent implements OnInit {
     let request = {
       id : this.editUserForm.controls.idControl.value,
       username : this.editUserForm.controls.usernameControl.value,
-      name : this.editUserForm.controls.firstnameControl.value,
+      firstname : this.editUserForm.controls.firstnameControl.value,
       lastname : this.editUserForm.controls.lastnameControl.value,
       email : this.editUserForm.controls.emailControl.value,
       dni : this.editUserForm.controls.dniControl.value,
       rol: this.editUserForm.controls.role.value==="Admin" ? 1 : 0,
     }
     console.log(request)
-    this.dataService.editUser(request,this.editUserForm.controls.idControl.value).subscribe(response => {
-    });
-    window.location.reload()
+    this.dataService.editUser(request,this.editUserForm.controls.idControl.value).subscribe({
+      next : ()=>{
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshUserList();
+      },
+      error: (error: HttpErrorResponse) => {
+      if (error.status==200){
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshUserList();
+      }else {
+        alert("Error al enviar el formulario")
+      }}
+     })
   }
 
   openShow(content: any) {
@@ -71,8 +90,21 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(idUser:number){
-    this.dataService.delUser(idUser).subscribe()
-    window.location.reload()
+    this.dataService.delUser(idUser).subscribe({
+      next : ()=>{
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshUserList();
+      },
+      error: (error: HttpErrorResponse) => {
+      if (error.status==200){
+        alert("Exito");
+        this.modalService.dismissAll();
+        this.refreshUserList();
+      }else {
+        alert("Error al enviar el formulario")
+      }}
+     })
   }
 
   searchUser() {

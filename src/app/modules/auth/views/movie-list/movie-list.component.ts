@@ -31,6 +31,7 @@ export class MovieListComponent implements OnInit {
   titleSearch:any='';
   id_genre:any;
   timesIncoming: any;
+  shows:any;
 
   constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService) { }
 
@@ -47,14 +48,13 @@ export class MovieListComponent implements OnInit {
   refreshMovieList(){
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((response:any)=>{
       this.movies=response;
+      this.dataService.movies=[]
     })
   }
 
   ngOnInit(): void {
     this.minDate=new Date().toISOString().split('T')[0];
     this.maxDate=new Date(this.now.setMonth(this.now.getMonth() + 1)).toISOString().split('T')[0];
-
-
     this.createMovieForm=new FormGroup({
       nameControl: new FormControl('',[Validators.required, Validators.maxLength(50)]),
       synopsisControl: new FormControl('',[Validators.required, Validators.maxLength(255)]),
@@ -101,8 +101,8 @@ export class MovieListComponent implements OnInit {
     formData.append('myImage',this.createMovieForm.get('fileSource').value);
     formData.append('name',this.createMovieForm.controls['nameControl'].value);
     formData.append('synopsis',this.createMovieForm.controls['synopsisControl'].value );
-    formData.append('id_director',this.createMovieForm.controls['genreControl'].value );
-    formData.append('id_genre',this.createMovieForm.controls['directorControl'].value );
+    formData.append('id_director',this.createMovieForm.controls['directorControl'].value );
+    formData.append('id_genre',this.createMovieForm.controls['genreControl'].value );
     formData.append('duration',this.createMovieForm.controls['hoursControl'].value );
     formData.append('format_movie',this.createMovieForm.controls['format'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
@@ -129,6 +129,7 @@ export class MovieListComponent implements OnInit {
       next : ()=>{
         alert("Exito");
         this.modalService.dismissAll();
+        this.dataService.movies=[]
         this.refreshMovieList();
       },
       error: (error: HttpErrorResponse) => {
@@ -148,8 +149,8 @@ export class MovieListComponent implements OnInit {
     formData.append('myImage',this.editMovieForm.get('fileSourceEdit').value);
     formData.append('name',this.editMovieForm.controls['nameEditControl'].value);
     formData.append('synopsis',this.editMovieForm.controls['synopsisEditControl'].value );
-    formData.append('id_director',this.editMovieForm.controls['genreEditControl'].value );
-    formData.append('id_genre',this.editMovieForm.controls['directorEditControl'].value );
+    formData.append('id_director',this.editMovieForm.controls['directorEditControl'].value );
+    formData.append('id_genre',this.editMovieForm.controls['genreEditControl'].value );
     formData.append('duration',this.editMovieForm.controls['hoursEditControl'].value );
     formData.append('format_movie',this.editMovieForm.controls['format'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
@@ -196,6 +197,10 @@ export class MovieListComponent implements OnInit {
   openDelete(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modalDelete'}).result
   }
+  openSeeShows(content: any, idMovie:number) {
+    this.getShows(idMovie)
+    this.modalService.open(content, {ariaLabelledBy: 'modalDelete'}).result
+  }
   openCreate(content: any) {
     this.resetCreate();
     this.modalService.open(content, {ariaLabelledBy: 'modalCreate'}).result
@@ -221,15 +226,22 @@ onSubmitAddShow(){
     id_theaters : this.addShowForm.controls.theaterShowControl.value,
   }
   console.log(request.date_time)
-  this.dataService.addShow(request).subscribe(response => {
-    console.log(response);
-    if (response.status==201){
+  this.dataService.addShow(request).subscribe({
+    next : ()=>{
       alert("Exito");
-      this.addShowForm.reset();
-    }else{
-      alert("Fallo el envio del formulario")
-    }
-  });
+      this.modalService.dismissAll();
+      this.refreshMovieList();
+      this.addShowForm.reset()
+    },
+    error: (error: HttpErrorResponse) => {
+    if (error.status==200){
+      alert("Exito");
+      this.modalService.dismissAll();
+      this.refreshMovieList();
+    }else {
+      alert("Error al enviar el formulario")
+    }}
+   });
 
 }
 
@@ -330,6 +342,20 @@ onSubmitAddShow(){
       }
     }
   }
+
+  getShows(idMovie:number){
+    this.shows=[]
+    this.dataService.getShows().subscribe((res:any)=>{
+    res.forEach((show:any) => {
+      if (show.id_movie==idMovie)
+      {
+        show.date_time=new Date(show.date_time)
+        show.date_time=show.date_time.toString()
+        show.date_time=show.date_time.slice(0,21)
+        this.shows.push(show)
+      }
+    })
+  })}
 
 
 }
