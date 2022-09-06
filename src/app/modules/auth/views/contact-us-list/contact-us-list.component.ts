@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '@gdp/shared/services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+//Services
+import { DataService } from '@gdp/shared/services';
 
 @Component({
   selector: 'gdp-contact-us-list',

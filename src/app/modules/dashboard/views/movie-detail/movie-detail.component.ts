@@ -4,10 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import jwt_decode from 'jwt-decode';
 import {Title} from "@angular/platform-browser";
-
-import { AuthService } from 'src/app/modules/auth/service/auth.service';
-import { DataService } from '@gdp/shared/services';
 import { empty } from 'rxjs';
+
+//Services
+import { AuthService } from '@gdp/auth/services';
+import { DataService } from '@gdp/shared/services';
 
 @Component({
   selector: 'gdp-movie-detail',

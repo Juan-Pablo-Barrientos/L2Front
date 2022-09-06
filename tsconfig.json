@@ -33,7 +33,9 @@
       "@gdp/dashboard/modules": ["src/app/modules/dashboard/index.ts"],
       // Auth
       "@gdp/auth/views": ["src/app/modules/auth/views/index.ts"],
+      "@gdp/auth/services": ["src/app/modules/auth/service/index.ts"],
       "@gdp/auth/modules": ["src/app/modules/auth/index.ts"],
+      "@gdp/auth/guards": ["src/app/modules/auth/guards/index.ts"],
 
     }
   },

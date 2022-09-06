@@ -5,11 +5,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 //Componentes
-import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent } from '@gdp/auth/views';
-import { AuthGuard } from './guards/auth.guard';
-import { AuthService } from './service/auth.service';
-import { AdminGuard } from './guards/admin.guard';
-import { ContactUsListComponent } from './views/contact-us-list/contact-us-list.component';
+import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent, ContactUsListComponent } from '@gdp/auth/views';
+//Guards
+import { AuthGuard, AdminGuard } from '@gdp/auth/guards';
+//Services
+import { AuthService } from '@gdp/auth/services';
 
 
 

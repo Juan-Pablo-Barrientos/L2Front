@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStat
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 
-
-import { AuthService } from '../service/auth.service';
+//Services
+import { AuthService } from '@gdp/auth/services';
 import { DataService } from '@gdp/shared/services';
 
 @Injectable({

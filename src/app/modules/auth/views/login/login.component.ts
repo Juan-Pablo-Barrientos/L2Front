@@ -3,8 +3,8 @@ import { FormControl, Validators,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
-
-import { AuthService } from '../../service/auth.service';
+//Services
+import { AuthService } from '@gdp/auth/services';
 
 @Component({
   selector: 'app-login',

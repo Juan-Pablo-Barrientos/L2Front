@@ -7,14 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-//Modulos
+//Modules
 import { DashboardModule } from '@gdp/dashboard/modules';
 import { SharedModule } from '@gdp/shared/modules';
 import { AuthModule } from '@gdp/auth/modules';
 
 //Guards
-import { AuthGuard } from './modules/auth/guards/auth.guard';
-import { AuthService } from './modules/auth/service/auth.service';
+import { AuthGuard } from '@gdp/auth/guards';
+import { AuthService } from '@gdp/auth/services';
 
 @NgModule({
   declarations: [

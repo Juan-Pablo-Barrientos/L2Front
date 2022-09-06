@@ -4,9 +4,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import jwt_decode from 'jwt-decode';
 
-
+//Services
 import { DataService } from '@gdp/shared/services';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '@gdp/auth/services';
 
 @Component({
   selector: 'gdp-movie-list',

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '@gdp/shared/services';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+
+//Services
+import { DataService } from '@gdp/shared/services';
 
 @Component({
   selector: 'app-register',

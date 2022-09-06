@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 
 //Componentes
-import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent} from '@gdp/auth/views';
+import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent, ContactUsListComponent} from '@gdp/auth/views';
 import { HomeComponent,FrequentQuestionsComponent,ContactusComponent,AboutusComponent, MovieDetailComponent } from '@gdp/dashboard/views';
-import { AdminGuard } from './modules/auth/guards/admin.guard';
-import { AuthGuard } from './modules/auth/guards/auth.guard';
-import { ContactUsListComponent } from './modules/auth/views/contact-us-list/contact-us-list.component';
+//Guards
+import { AdminGuard } from '@gdp/auth/guards';
 
 const routes: Routes = [
   {
@@ -18,53 +16,62 @@ const routes: Routes = [
   {
     path:'home',
     component: HomeComponent,
-    title: 'Home'
+    title: 'CinemaLand'
   },
   {
     path:'login',
-    component:LoginComponent
+    component:LoginComponent,
+    title: 'Login'
   },
   {
     path:'register',
-    component:RegisterComponent
+    component:RegisterComponent,
+    title: 'Registro'
   },
   {
     path:'aboutUs',
-    component:AboutusComponent
+    component:AboutusComponent,
+    title: 'Sobre nosotros'
   },
   {
     path:'contactUs',
-    component:ContactusComponent
+    component:ContactusComponent,
+    title: 'Contacto'
   },
   {
     path:'frequentQuestions',
-    component:FrequentQuestionsComponent
+    component:FrequentQuestionsComponent,
+    title: 'preguntasFrecuentes'
   },
   {
     path:'userList',
     component:UserListComponent,
     canActivate:[AdminGuard],
-    canLoad:[AdminGuard]
+    canLoad:[AdminGuard],
+    title: 'Lista de usuarios'
   },
   {
     path:'contactUsList',
     component:ContactUsListComponent,
     canActivate:[AdminGuard],
-    canLoad:[AdminGuard]
+    canLoad:[AdminGuard],
+    title: 'Lista de contactos'
   },
   {
     path:'movieList',
     component:MovieListComponent,
     canActivate:[AdminGuard],
-    canLoad:[AdminGuard]
+    canLoad:[AdminGuard],
+    title: 'Lista de peliculas'
   },
   {
     path: 'movieDetails/:id',
-    component: MovieDetailComponent
+    component: MovieDetailComponent,
   },
   {
     path: '**',
-    component: HomeComponent
+    component: HomeComponent,
+    title: 'CinemaLand'
   },
 
 ];

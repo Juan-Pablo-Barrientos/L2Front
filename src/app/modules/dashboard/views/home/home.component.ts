@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '@gdp/shared/services';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+
+//Services
+import { DataService } from '@gdp/shared/services';
 
 @Component({
   selector: 'app-home',

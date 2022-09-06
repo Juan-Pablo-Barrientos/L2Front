@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import jwt_decode from 'jwt-decode';
 
-import { AuthGuard } from 'src/app/modules/auth/guards/auth.guard';
-import { AuthService } from 'src/app/modules/auth/service/auth.service';
-import { DataService } from '../../services/data.service';
+//Services
+import { AuthService } from '@gdp/auth/services';
+import { DataService } from '@gdp/shared/services';
 
 @Component({
   selector: 'app-navbar',

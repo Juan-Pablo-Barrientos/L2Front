@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '@gdp/shared/services';
 import {NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
+
+//Services
+import { DataService } from '@gdp/shared/services';
 
 @Component({
   selector: 'gdp-user-list',
