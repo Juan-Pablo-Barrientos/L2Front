@@ -63,7 +63,7 @@
         <label class="lead" for="Email">Email: {{this.authService.getLoggedUser().email}}</label>
       </div>
       <form>
-        <button (click)="openPasswordChange(changePasswordModal)"  class="float-end btn btn-primary m-2 lead">Cambiar contraseña</button>
+        <button (click)="openPasswordChange(changePasswordModal)"  class="float-end btn btn-primary m-2 lead"><fa-icon [icon]="faPencil"></fa-icon> Cambiar contraseña</button>
     </form>
   </div>
   <div class="modal-footer">

@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 
 //Services
 import { DataService } from '@gdp/shared/services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -31,10 +32,10 @@ export class RegisterComponent {
   },{validators: [this.checkPasswords]})
   }
 
-  constructor(private dataService : DataService, private router:Router) {
+  constructor(private dataService : DataService, private router:Router, private toastr:ToastrService) {
   }
 
-  onSubmit() {
+  async onSubmit () {
     let request = {
       firstname : this.signUpForm.controls.nameControl.value,
       lastname : this.signUpForm.controls.surnameControl.value,
@@ -45,13 +46,13 @@ export class RegisterComponent {
       rol: 0,
       phoneNumber : this.signUpForm.controls.phoneControl.value,
     }
-    this.dataService.addUser(request).subscribe((res:any) => {
+    this.dataService.addUser(request).subscribe(async (res:any) => {
       console.log(res);
       if (res.status==201){
-        alert("Exito");
+        this.toastr.success('El registro fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
         this.router.navigate(['/login']);
       }else{
-        alert("Fallo el envio del formulario")
+        this.toastr.error('Ha ocurrido un error ', ':(',{positionClass:'toast-bottom-right'});
       }
     });
 

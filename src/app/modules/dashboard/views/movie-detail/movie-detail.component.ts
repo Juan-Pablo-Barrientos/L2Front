@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {Title} from "@angular/platform-browser";
+import { ToastrService } from 'ngx-toastr';
+
 
 //Services
 import { AuthService } from '@gdp/auth/services';
@@ -17,7 +19,7 @@ declare const getVideos:any;
   styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent implements OnInit {
-  movie:any={name:"pala"}
+  movie:any
   buyTicketsForm:any;
   theaters:any;
   times:any;
@@ -26,7 +28,14 @@ export class MovieDetailComponent implements OnInit {
   ratingIMDB:any;
   movieYear:any='';
 
-  constructor(private dataService: DataService, private route: ActivatedRoute, private modalService: NgbModal, private authService:AuthService, private titleService:Title) {
+  constructor(
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    private authService:AuthService,
+    private titleService:Title,
+    private toastr: ToastrService
+    ) {
    }
 
   getBuyTicketsForm(){
@@ -37,13 +46,15 @@ export class MovieDetailComponent implements OnInit {
       this.dataService.getMovie(this.route.snapshot.params['id']).subscribe((res:any) => {
       this.movie = res;
       this.titleService.setTitle(this.movie.name);
+      if(this.movie){
       this.dataService.getMovieRating(this.movie.name).subscribe((res:any)=>{
         this.ratingIMDB=res.Ratings[0].Value
         if(res.Year){
         this.movieYear=res.Year
         }
+        console.log("getMovies")
         //getVideos(this.movie.name,this.movieYear);
-        })
+        })}
     })
 
       this.dataService.getTheaters().subscribe((res:any)=>
@@ -89,10 +100,10 @@ export class MovieDetailComponent implements OnInit {
     console.log(request)
     this.dataService.buyTicket(request).subscribe(response => {
       if (response.status==201){
-        alert("Exito, se le ha enviado un email con el codigo");
+        this.toastr.success('Se le ha enviado un email con el codigo', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
       }else{
-        alert("Fallo el envio del formulario")
+        this.toastr.error('Fallo el envio del formulario', ':(',{positionClass:'toast-bottom-right'});
       }
     });
   }
@@ -116,7 +127,7 @@ export class MovieDetailComponent implements OnInit {
         this.shows.push(show)
       }
     });
-    if(this.shows.length==0) {alert("No hay mas funciones disponibles")}
+    if(this.shows.length==0) {this.toastr.error('No hay mas funciones disponibles para ese formato', ':(',{positionClass:'toast-bottom-right'})}
     })
   }
 }

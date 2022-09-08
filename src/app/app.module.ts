@@ -6,19 +6,20 @@ import { NgbAccordion, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Modules
 import { DashboardModule } from '@gdp/dashboard/modules';
 import { SharedModule } from '@gdp/shared/modules';
 import { AuthModule } from '@gdp/auth/modules';
-
 //Guards
 import { AuthGuard } from '@gdp/auth/guards';
 import { AuthService } from '@gdp/auth/services';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +32,8 @@ import { AuthService } from '@gdp/auth/services';
     AuthModule,
     HttpClientModule,
     NgbModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

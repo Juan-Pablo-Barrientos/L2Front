@@ -3,10 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import jwt_decode from 'jwt-decode';
+import { faTrash, faEye, faPencil, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 //Services
 import { DataService } from '@gdp/shared/services';
 import { AuthService } from '@gdp/auth/services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'gdp-movie-list',
@@ -14,7 +16,10 @@ import { AuthService } from '@gdp/auth/services';
   styleUrls: ['./movie-list.component.scss']
 })
 export class MovieListComponent implements OnInit {
-
+  faTrash = faTrash;
+  faPlus = faPlus;
+  faPencil = faPencil;
+  faEye = faEye;
   closeResult = '';
   movies:any;
   createMovieForm:any
@@ -33,7 +38,7 @@ export class MovieListComponent implements OnInit {
   timesIncoming: any;
   shows:any;
 
-  constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService) { }
+  constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService, private toastr:ToastrService) { }
 
   get getCreateMovieForm(){
     return this.createMovieForm.controls;
@@ -108,18 +113,20 @@ export class MovieListComponent implements OnInit {
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
     this.dataService.addMovie(formData).subscribe({
-      next : ()=>{
-        alert("Exito");
+      next : (res:any)=>{
+        this.toastr.success('Se ha añadido la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
-        this.refreshMovieList();
+        //this.refreshMovieList();
+        console.log(res.body+"añadida")
+        this.movies.unshift(res.body);
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==201){
-        alert("Exito");
+        this.toastr.success('Se ha añadido la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       }else {
-        alert("Error al enviar el formulario")
+        this.toastr.error('Error al enviar el formulario' , ':(' , {positionClass:'toast-bottom-right'});
       }}
      });
   }
@@ -127,18 +134,18 @@ export class MovieListComponent implements OnInit {
   deleteMovie(idMovie:number){
     this.dataService.delMovie(idMovie).subscribe({
       next : ()=>{
-        alert("Exito");
+        this.toastr.success('Se ha borrado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.dataService.movies=[]
         this.refreshMovieList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        alert("Exito");
+        this.toastr.success('Se ha borrado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       }else {
-        alert("Error al enviar el formulario")
+        this.toastr.error('Error al enviar el formulario' , ':(' , {positionClass:'toast-bottom-right'});
       }}
      })
   }
@@ -157,17 +164,17 @@ export class MovieListComponent implements OnInit {
 
     this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe({
       next : ()=>{
-        alert("Exito");
+        this.toastr.success('Se ha editado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        alert("Exito");
+        this.toastr.success('Se ha editado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       }else {
-        alert("Error al enviar el formulario")
+        this.toastr.error('Error al enviar el formulario' , ':(' , {positionClass:'toast-bottom-right'});
       }}
      });
   }
@@ -228,18 +235,18 @@ onSubmitAddShow(){
   console.log(request.date_time)
   this.dataService.addShow(request).subscribe({
     next : ()=>{
-      alert("Exito");
+      this.toastr.success('Se ha añadido la funcion', 'Exito',{positionClass:'toast-bottom-right'});
       this.modalService.dismissAll();
       this.refreshMovieList();
       this.addShowForm.reset()
     },
     error: (error: HttpErrorResponse) => {
     if (error.status==200){
-      alert("Exito");
+      this.toastr.success('Se ha añadido la funcion', 'Exito',{positionClass:'toast-bottom-right'});
       this.modalService.dismissAll();
       this.refreshMovieList();
     }else {
-      alert("Error al enviar el formulario")
+      this.toastr.error('Error al enviar el formulario' , ':(' , {positionClass:'toast-bottom-right'});
     }}
    });
 
@@ -250,7 +257,7 @@ onSubmitAddShow(){
 
     if (event.target.files.length > 0) {
       if(event.target.files[0].size > 4097152){
-      alert("File is too big!");
+      this.toastr.error('El archivo es muy grande' , ':(' , {positionClass:'toast-bottom-right'});
       event.target.value = null;
       event.target.files[0] = "";
       this.createMovieForm.patchValue({
@@ -266,7 +273,7 @@ onSubmitAddShow(){
   onEditFileChange(event:any) {
     if(event.target.files.length > 0){
     if(event.target.files[0].size > 4097152){
-      alert("File is too big!");
+      this.toastr.error('El archivo es muy grande' , ':(' , {positionClass:'toast-bottom-right'});
       event.target.value = null;
       event.target.files[0] = "";
       this.editMovieForm.patchValue({
@@ -274,7 +281,6 @@ onSubmitAddShow(){
       })}
      else{
       const file = event.target.files[0];
-      console.log("tamo aca")
       this.editMovieForm.patchValue({
         fileSourceEdit: file
       })}
@@ -290,8 +296,6 @@ onSubmitAddShow(){
         theater:Idtheater,
         date_time:day
       }
-      console.log(request)
-      console.log("before sub")
       this.dataService.getShowsByDayAndTheaters(request).subscribe((response:any)=>{
       this.timesIncoming=response;
       console.log(response)
@@ -319,8 +323,9 @@ onSubmitAddShow(){
           }
         });
       })
-      if(this.times.length==0) {alert("No hay mas funciones disponibles para ese dia")}
-      })
+      if(this.times.length==0) {
+        this.toastr.error('No hay mas funciones para ese dia' , ':(' , {positionClass:'toast-bottom-right'});
+      }})
     }
   }
 

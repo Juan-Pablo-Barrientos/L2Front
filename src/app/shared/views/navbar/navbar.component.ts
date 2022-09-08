@@ -4,10 +4,14 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import jwt_decode from 'jwt-decode';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 //Services
 import { AuthService } from '@gdp/auth/services';
 import { DataService } from '@gdp/shared/services';
+import { ToastrService } from 'ngx-toastr';
+
+declare const initGoogleApi:any;
 
 @Component({
   selector: 'app-navbar',
@@ -15,11 +19,12 @@ import { DataService } from '@gdp/shared/services';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  faPencil=faPencil
   title: string = "";
   id_genre: any;
   passwordChangeForm:any
 
-  constructor(private modalService: NgbModal, public authService:AuthService, public dataService:DataService , private router:Router) { }
+  constructor(private modalService: NgbModal, public authService:AuthService, public dataService:DataService , private router:Router, private toastr:ToastrService) { }
 
   search() {
     this.dataService.movies=[]
@@ -75,9 +80,9 @@ export class NavbarComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         console.log(error)
         if (error.status==200){
-          alert("Exito");
+          this.toastr.success('La contraseña ha sido cambiada', 'Exito',{positionClass:'toast-bottom-right'});
         }else if (error.status==400){
-          alert("La contraseña vieja no coincide")
+          this.toastr.success('La contraseña no coincide', ':(',{positionClass:'toast-bottom-right'});
         }}
     });
   }

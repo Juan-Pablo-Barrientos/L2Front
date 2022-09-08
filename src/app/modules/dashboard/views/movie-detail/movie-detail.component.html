@@ -1,9 +1,8 @@
-<div class="container">
+<div class="container" *ngIf="movie">
   <div class="row">
       <div class="col-lg-8">
               <h2 class="display-2"> {{movie.genre.name}}<br><strong>{{movie.name}}</strong></h2>
               <p class="description">{{movie.synopsis}}</p>
-              <h4>Trailer</h4>
               <div class="videoListContainer" id="videoListContainer"></div>
       </div>
       <div class="col-lg-4 shadow-lg p-3 mb-5 bg-body rounded movieCard" >
@@ -33,9 +32,6 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="buyTicketsForm" (ngSubmit)="onSubmitBuyTickets()">
-
-
-
       <div class="form-control mb-2">
         <label class="me-2 mb-2"for="theaters">Funcion </label>
         <select class="form-select mb-2" formControlName="showControl" name="show" id="show" aria-label="Default select example">

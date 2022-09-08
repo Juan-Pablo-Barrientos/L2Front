@@ -63,9 +63,7 @@ export class HomeComponent implements OnInit {
       this.dataService.movies=[]
       this.dataService.getMovies(this.titleSearch ??= "",this.id_genre).subscribe((response: any) => {
       this.dataService.movies = response;
-    });
-    }
-  }
+    });}}
 
   cleanFilter(){
     this.id_genre=null

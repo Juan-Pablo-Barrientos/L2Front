@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { faEye} from '@fortawesome/free-solid-svg-icons';
 
 //Services
 import { DataService } from '@gdp/shared/services';
@@ -10,6 +11,7 @@ import { DataService } from '@gdp/shared/services';
   styleUrls: ['./contact-us-list.component.scss']
 })
 export class ContactUsListComponent implements OnInit {
+  faEye = faEye;
 
   contacts:any;
 

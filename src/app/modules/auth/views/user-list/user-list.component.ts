@@ -3,10 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {NgbModal, ModalDismissReasons, NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs';
+import { faTrash, faEye, faPencil, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 //Services
 import { DataService } from '@gdp/shared/services';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'gdp-user-list',
@@ -14,13 +16,16 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  faTrash = faTrash;
+  faPencil = faPencil;
+  faEye = faEye;
   closeResult = '';
   model: NgbDateStruct;
   users:any;
   editUserForm: any;
 
 
-  constructor(private modalService: NgbModal, private dataService: DataService, private router:Router) {
+  constructor(private modalService: NgbModal, private dataService: DataService, private router:Router, private toastr:ToastrService) {
 
    }
 
@@ -51,17 +56,17 @@ export class UserListComponent implements OnInit {
     console.log(request)
     this.dataService.editUser(request,this.editUserForm.controls.idControl.value).subscribe({
       next : ()=>{
-        alert("Exito");
+        this.toastr.success('El editado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshUserList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        alert("Exito");
+        this.toastr.success('El editado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshUserList();
       }else {
-        alert("Error al enviar el formulario")
+        this.toastr.error('Error al enviar el formulario', ':(',{positionClass:'toast-bottom-right'});
       }}
      })
   }
@@ -92,17 +97,17 @@ export class UserListComponent implements OnInit {
   deleteUser(idUser:number){
     this.dataService.delUser(idUser).subscribe({
       next : ()=>{
-        alert("Exito");
+        this.toastr.success('El borrado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshUserList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        alert("Exito");
+        this.toastr.success('El borrado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshUserList();
       }else {
-        alert("Error al enviar el formulario")
+        this.toastr.error('Error al enviar el formulario', ':(',{positionClass:'toast-bottom-right'});
       }}
      })
   }

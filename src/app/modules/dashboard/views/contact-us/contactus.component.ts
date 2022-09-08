@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule,ReactiveFormsModule,FormControlDire
 
 //Services
 import { DataService } from '@gdp/shared/services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contactus',
@@ -18,7 +19,7 @@ export class ContactusComponent {
   });
 
 
-  constructor(private dataService : DataService){
+  constructor(private dataService : DataService, private toastr:ToastrService){
 
 
   }
@@ -35,10 +36,10 @@ export class ContactusComponent {
     }
     this.dataService.addContact(request).subscribe((res:any) => {console.log(res)
       if (res.status==201){
-        alert("Exito");
+        this.toastr.success('Mensaje enviado :)', 'Exito',{positionClass:'toast-bottom-right'});
         this.contactForm.reset();
       }else{
-        alert("Fallo el envio del formulario")
+        this.toastr.error('Error al enviar el formulario', ':(',{positionClass:'toast-bottom-right'});
       }
     });
   }

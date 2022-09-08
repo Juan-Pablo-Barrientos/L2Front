@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 //Services
 import { AuthService } from '@gdp/auth/services';
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm: any;
 
 
-  constructor(private router: Router,private authService: AuthService, ) { }
+  constructor(private router: Router,private authService: AuthService,private toastr:ToastrService ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup ({
@@ -38,8 +39,10 @@ export class LoginComponent implements OnInit {
     )
     .subscribe(success => {
       if (this.authService.isLoggedIn()) {
+        this.toastr.success('Iniciado sesion con exito', 'Exito',{positionClass:'toast-bottom-right'})
         this.router.navigate(['/home']);
-      }else{alert("Nombre de usuario o contraseña incorrecta")}
+      }else{
+        this.toastr.error('No se ha encontrado ese usuario y/o contraseña', ':(',{positionClass:'toast-bottom-full-width'})}
     });
   }
 
