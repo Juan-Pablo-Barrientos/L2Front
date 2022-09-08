@@ -47,14 +47,13 @@ export class HomeComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.id_genre = params["id_genre"]
     })
-    if(this.dataService.movies.length==0){
-    this.dataService.movies=[]
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((res: any) => {
+      this.dataService.movies=[]
       res.forEach((res:any)=> {
         this.dataService.movies.push(res)
       });
     });
-  }
+
   }
 
   genreFilter(event:any){

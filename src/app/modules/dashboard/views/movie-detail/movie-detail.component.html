@@ -3,6 +3,8 @@
       <div class="col-lg-8">
               <h2 class="display-2"> {{movie.genre.name}}<br><strong>{{movie.name}}</strong></h2>
               <p class="description">{{movie.synopsis}}</p>
+              <h4>Trailer</h4>
+              <div class="videoListContainer" id="videoListContainer"></div>
       </div>
       <div class="col-lg-4 shadow-lg p-3 mb-5 bg-body rounded movieCard" >
           <div >
@@ -18,10 +20,9 @@
               </ul>
           </div>
       </div>
-      <button class="bg-dark rounded-pill text-white btn btn-lg mb-2" (click)="openBuyTickets(modalBuyTicket)">Entradas</button>
+      <button class="bg-dark rounded-pill text-white btn btn-lg mt-4 mb-2" (click)="openBuyTickets(modalBuyTicket)">Entradas</button>
   </div>
 </div>
-
 
 <!--Modal buyTicket-->
 
@@ -60,10 +61,6 @@
         <input formControlName="quantityControl" name="quantity" id="quantity" placeholder="Quantity" type="number"class="form-control" min="1" max="10" autocomplete="off" onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
         <label for="cantidad">Cantidad</label>
       </div>
-      <span class="lead form-control" >Precio:
-        <div *ngIf="this.movie.format_movie=='2D' ">$600</div>
-        <div *ngIf="this.movie.format_movie=='3D' ">$1200</div>
-       </span>
       <button type="button"(click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
 
       <button type="submit" [disabled]="!buyTicketsForm.valid" class="btn btn-primary float-end m-2">Comprar</button>

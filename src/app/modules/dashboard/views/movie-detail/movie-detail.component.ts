@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import jwt_decode from 'jwt-decode';
 import {Title} from "@angular/platform-browser";
-import { empty } from 'rxjs';
 
 //Services
 import { AuthService } from '@gdp/auth/services';
 import { DataService } from '@gdp/shared/services';
+
+declare const initGoogleApi:any;
+declare const getVideos:any;
 
 @Component({
   selector: 'gdp-movie-detail',
@@ -16,31 +17,35 @@ import { DataService } from '@gdp/shared/services';
   styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent implements OnInit {
-  movie:any;
+  movie:any={name:"pala"}
   buyTicketsForm:any;
   theaters:any;
   times:any;
   shows:any=[];
   loggedUser:any;
   ratingIMDB:any;
+  movieYear:any='';
 
   constructor(private dataService: DataService, private route: ActivatedRoute, private modalService: NgbModal, private authService:AuthService, private titleService:Title) {
-
-    this.dataService.getMovie(this.route.snapshot.params['id']).subscribe((res:any) => {
-      this.movie = res;
-      this.titleService.setTitle(this.movie.name);
-      this.dataService.getMovieRating(this.movie.name).subscribe((res:any)=>{
-        this.ratingIMDB=res.Ratings[0].Value
-        })
-    })
-
    }
 
   getBuyTicketsForm(){
     return this.buyTicketsForm.controls
   }
 
-  ngOnInit(): void {
+  ngOnInit():void {
+      this.dataService.getMovie(this.route.snapshot.params['id']).subscribe((res:any) => {
+      this.movie = res;
+      this.titleService.setTitle(this.movie.name);
+      this.dataService.getMovieRating(this.movie.name).subscribe((res:any)=>{
+        this.ratingIMDB=res.Ratings[0].Value
+        if(res.Year){
+        this.movieYear=res.Year
+        }
+        //getVideos(this.movie.name,this.movieYear);
+        })
+    })
+
       this.dataService.getTheaters().subscribe((res:any)=>
       this.theaters=res
        )
@@ -50,9 +55,7 @@ export class MovieDetailComponent implements OnInit {
 
         )
       }
-
-    }
-
+  }
 
 
   openBuyTickets(content: any,) {
