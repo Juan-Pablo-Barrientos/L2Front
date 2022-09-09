@@ -124,11 +124,11 @@ export class DirectorsListComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        this.toastr.error('Se ha borrado el director', 'Exito',{positionClass:'toast-bottom-right'})
+        this.toastr.success('Se ha borrado el director', 'Exito',{positionClass:'toast-bottom-right'})
         this.modalService.dismissAll();
         this.refreshDirectorList();
       }else {
-        this.toastr.error('Fallo el formulario', ':(',{positionClass:'toast-bottom-right'})
+       this.toastr.error('Fallo el formulario', ':(',{positionClass:'toast-bottom-right'})
       }}
      })
   }

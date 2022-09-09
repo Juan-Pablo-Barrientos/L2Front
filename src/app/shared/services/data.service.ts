@@ -35,6 +35,9 @@ export class DataService {
   addDirector(request: any): Observable<HttpResponse<ArrayBuffer>> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/directors', request,{ observe: 'response' });
   }
+  addGenre(request: any): Observable<HttpResponse<ArrayBuffer>> {
+    return this.http.post<ArrayBuffer>(this.baseUrl + '/genres', request,{ observe: 'response' });
+  }
   addShow(request: any): Observable<HttpResponse<ArrayBuffer>>  {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/shows', request,{ observe: 'response' });
   }
@@ -70,6 +73,9 @@ export class DataService {
   editDirector(request: any,idDirector:number): Observable<ArrayBuffer> {
     return this.http.put<ArrayBuffer>(this.baseUrl + '/directors/'+idDirector, request);
   }
+  editGenre(request: any,idGenre:number): Observable<ArrayBuffer> {
+    return this.http.put<ArrayBuffer>(this.baseUrl + '/genres/'+idGenre, request);
+  }
 
   addContactPost(request: any): Observable<ArrayBuffer> {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/contact', request);
@@ -102,6 +108,9 @@ export class DataService {
   getDirectors(): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/directors');
   }
+  getTicketsByDni(dniUser:string): Observable<Response> {
+    return this.http.get<Response>(this.baseUrl + '/tickets/user/'+dniUser);
+  }
   getUser(idUser:number): Observable<Response> {
     return this.http.get<Response>(this.baseUrl + '/users/'+idUser);
   }
@@ -110,7 +119,10 @@ export class DataService {
     return this.http.delete<Response>(this.baseUrl + '/users/'+idUser);
   }
   delDirector(idDirector:number): Observable<Response> {
-    return this.http.delete<Response>(this.baseUrl + '/users/'+idDirector);
+    return this.http.delete<Response>(this.baseUrl + '/directors/'+idDirector);
+  }
+  delGenre(idGenre:number): Observable<HttpResponse<Response>> {
+    return this.http.delete<Response>(this.baseUrl + '/genres/'+idGenre,{ observe: 'response' });
   }
   delMovie(idMovie:number): Observable<Response> {
     return this.http.delete<Response>(this.baseUrl + '/movies/'+idMovie);

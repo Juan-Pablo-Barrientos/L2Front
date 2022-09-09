@@ -33,9 +33,9 @@ export class AuthService {
   restoreLoggedUser(){
     if(this.getDecodedAccessToken(this.getJwtToken()!).id_user){
       this.loggedUserId = this.getDecodedAccessToken(this.getJwtToken()!).id_user
-      this.http.get<Response>(`${environment.apiUrl}/users/`+this.loggedUserId).subscribe((response:any)=>{
-        this.loggedUser=response
-    })} else{
+      this.http.get<Response>(`${environment.apiUrl}/users/` + this.loggedUserId).subscribe( (response: any) => {
+        this.loggedUser = response;
+      })} else{
       this.logout();
     }
   }

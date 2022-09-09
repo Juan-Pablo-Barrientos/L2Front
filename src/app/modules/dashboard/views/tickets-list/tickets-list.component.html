@@ -1,0 +1,72 @@
+<div class="container mt-5">
+  <div class="m-2"><h1 class="display-1 text-center">Listado de entradas</h1></div>
+  <hr class="bg-secondary border-2 border-top border-secondary">
+  <div class="form-floating mt-3">
+    <input type="text" name="movieSearch" id="searchByMovie" placeholder="Nombre" (keyup)="searchByMovie()" class="form-control"/>
+    <label for="name">Buscar por pelicula</label>
+  </div>
+  <table class="table align-middle mb-0 bg-white mt-5" id="ticketsList">
+    <thead class="bg-light">
+      <tr>
+        <th>Pelicula</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets">
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{ticket.shows.movies.name}}</p>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1" *ngIf="!ticket.status">Pendiente</p>
+              <p class="fw-bold mb-1" *ngIf="ticket.status">Canjeada</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <button type="button" (click)="openShow(modalShow)" class="btn btn-primary  btn-sm btn-rounded">
+            <fa-icon [icon]="faEye"></fa-icon>
+          </button>
+        </td>
+
+        <!--Modal show-->
+
+        <ng-template #modalShow let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modalShow">Entrada</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body lead">
+              <div class="mb-3">
+                <label for="">Dni: {{ticket.dni}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Email: {{ticket.email}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Cantidad: {{ticket.quantity}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Codigo: {{ticket.code}}</label>
+              </div>
+              <div class="mb-3">
+                <label for="">Funcion: {{ticket.shows.date_time}}</label>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cerrar</button>
+          </div>
+        </ng-template>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>

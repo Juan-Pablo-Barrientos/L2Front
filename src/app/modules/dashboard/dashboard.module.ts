@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 
 //Componentes
 import { AboutusComponent, ContactusComponent, FrequentQuestionsComponent, HomeComponent, MovieDetailComponent } from '@gdp/dashboard/views';
+import { TicketsListComponent } from './views/tickets-list/tickets-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { AboutusComponent, ContactusComponent, FrequentQuestionsComponent, HomeC
     AboutusComponent,
     ContactusComponent,
     FrequentQuestionsComponent,
-    MovieDetailComponent
+    MovieDetailComponent,
+    TicketsListComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +27,7 @@ import { AboutusComponent, ContactusComponent, FrequentQuestionsComponent, HomeC
     BrowserModule,
     NgbModule,
     RouterModule,
+    FontAwesomeModule
   ],
   exports:[
     HomeComponent,

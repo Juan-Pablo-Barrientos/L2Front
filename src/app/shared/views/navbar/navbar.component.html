@@ -7,39 +7,41 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/home'" routerLinkActive="text-white" (click)="clearSearch()" >Inicio</a>
+          <a class="nav-link" [routerLink]="'/home'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" (click)="clearSearch()" >Inicio</a>
         </li>
         <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
-          <a class="nav-link" [routerLink]="'/login'" routerLinkActive="text-white" >Iniciar sesion</a>
+          <a class="nav-link" [routerLink]="'/login'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" >Iniciar sesion</a>
         </li>
         <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
-          <a class="nav-link" [routerLink]="'/register'" routerLinkActive="text-white" >Registrarse</a>
+          <a class="nav-link" [routerLink]="'/register'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" >Registrarse</a>
         </li>
         <li class="nav-item dropdown" *ngIf='this.authService.isLoggedInAdmin() && this.authService.isLoggedIn()'>
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Panel de administrador
           </a>
           <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#" [routerLink]="'/movieList'" >Peliculas</a></li>
-            <li><a class="dropdown-item" href="#" [routerLink]="'/userList'" >Usuarios</a></li>
-            <li><a class="dropdown-item" href="#" [routerLink]="'/directorList'" >Directores</a></li>
-            <li><a class="dropdown-item" href="#" [routerLink]="'/contactUsList'" >Mensajes de contacto</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/movieList'" >Peliculas</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/userList'" >Usuarios</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/directorList'" >Directores</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/genreList'" >Generos</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/contactUsList'" >Mensajes de contacto</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown" *ngIf='this.authService.isLoggedIn() == true'>
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Usuario
           </a>
           <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" (click)="openShow(userPanelModal)" >Perfil</a></li>
-            <li><a class="dropdown-item" href="#" (click)="logOut()">Salir</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" (click)="openShow(userPanelModal)" >Perfil</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="#" [routerLink]="'/ticketsList'">Historial de entradas</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="#" (click)="logOut()">Salir</a></li>
           </ul>
         </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Buscar pelicula"  name="searchbar"
           id="searchbar" [(ngModel)]="title">
-        <button (click)="search()" class="btn btn-outline-success" type="submit">Buscar</button>
+        <button (click)="search()" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
     </div>
   </div>

@@ -11,6 +11,7 @@ import { AuthGuard, AdminGuard } from '@gdp/auth/guards';
 //Services
 import { AuthService } from '@gdp/auth/services';
 import { DirectorsListComponent } from './views/directors-list/directors-list.component';
+import { GenreListComponent } from './views/genre-list/genre-list.component';
 
 
 
@@ -21,7 +22,8 @@ import { DirectorsListComponent } from './views/directors-list/directors-list.co
     UserListComponent,
     MovieListComponent,
     ContactUsListComponent,
-    DirectorsListComponent
+    DirectorsListComponent,
+    GenreListComponent
   ],
   providers:[
     AuthGuard,
