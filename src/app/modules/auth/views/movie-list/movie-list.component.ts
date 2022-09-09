@@ -116,9 +116,7 @@ export class MovieListComponent implements OnInit {
       next : (res:any)=>{
         this.toastr.success('Se ha añadido la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
-        //this.refreshMovieList();
-        console.log(res.body+"añadida")
-        this.movies.unshift(res.body);
+        this.refreshMovieList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==201){

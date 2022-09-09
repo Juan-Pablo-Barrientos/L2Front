@@ -1,14 +1,13 @@
-<div class="text-center mt-3 ">
- <ngb-carousel *ngIf="this.dataService.movies!=null" #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
+<div class="text-center mt-5" class="containerForCarousel carouselMobile">
+
+ <ngb-carousel class="carouselImages" *ngIf="this.dataService.movies!=null"  #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
 
 
 
   <ng-template *ngFor="let movie of this.dataService.movies;let i = index" ngbSlide>
     <a [routerLink]="['/movieDetails/'+movie.id]">
-    <div class="picsum-img-wrapper">
-      <img [src]="movie.path_img" alt="Random first slide" class="mh-100 fitCarouselImg" >
-    </div>
-    <div>
+    <div >
+      <img [src]="movie.coverPathImg" alt="Banner image" class="fitImage" >
     </div>
   </a>
   </ng-template>

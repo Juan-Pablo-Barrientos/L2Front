@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark icon-navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark icon-navbar ">
   <div class="container-fluid">
-    <a class="navbar-brand text-center logo" href="#">CINEMALAND</a>
+    <a class="navbar-brand text-center logo" href="#"><fa-icon [icon]="faVideo"></fa-icon> CINEMALAND</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -63,7 +63,8 @@
         <label class="lead" for="Email">Email: {{this.authService.getLoggedUser().email}}</label>
       </div>
       <form>
-        <button (click)="openPasswordChange(changePasswordModal)"  class="float-end btn btn-primary m-2 lead"><fa-icon [icon]="faPencil"></fa-icon> Cambiar contraseña</button>
+        <button (click)="openPasswordChange(changePasswordModal)"  class="float-end btn btn-primary m-2 lead">
+          <fa-icon [icon]="faPencil"></fa-icon> Cambiar contraseña</button>
     </form>
   </div>
   <div class="modal-footer">

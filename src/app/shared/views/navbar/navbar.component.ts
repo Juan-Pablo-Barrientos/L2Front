@@ -4,7 +4,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import jwt_decode from 'jwt-decode';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faVideo } from '@fortawesome/free-solid-svg-icons';
 
 //Services
 import { AuthService } from '@gdp/auth/services';
@@ -20,6 +20,7 @@ declare const initGoogleApi:any;
 })
 export class NavbarComponent implements OnInit {
   faPencil=faPencil
+  faVideo=faVideo
   title: string = "";
   id_genre: any;
   passwordChangeForm:any
