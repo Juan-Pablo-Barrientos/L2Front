@@ -81,10 +81,7 @@
             </div>
             <div class="mb-3 fit-picture">
               <label for="">Banner</label>
-              <img [src]="movie.path_img_banner">
-            </div>
-            <div class="mb-3">
-              <label for="">Formato:  {{movie.format_movie}}</label>
+              <img [src]="'https://res.cloudinary.com/clawgames/image/upload/'+movie.path_img_banner">
             </div>
         </div>
         <div class="modal-footer">
@@ -196,15 +193,6 @@
           <input type="time" class="form-control" formControlName="hoursControl" name="hours" id="hours" min="00:00" max="03:00">
         </div>
 
-        <div class="form-check form-check-inline lead">
-          <input class="form-check-input" type="radio" formControlName="format" name="format" id="2D" value="2D">
-          <label class="form-check-label" for="2d">2D</label>
-        </div>
-        <div class="form-check form-check-inline lead">
-          <input class="form-check-input" type="radio" formControlName="format" name="format" id="3D" value="3D">
-          <label class="form-check-label" for="3d">3D</label>
-        </div>
-
         <div class="form-group">
           <label for="file">Poster</label>
           <input formControlName="file"id="file" name="file"type="file" class="form-control" (change)="onFileChange($event)">
@@ -293,7 +281,7 @@
       <div class="">
         <div class="lead fit-picture text-center">
           <label for="img" >Imagen actual de banner</label>
-          <img class="rounded"[src]="currentImageCoverPath" >
+          <img class="rounded"[src]="'https://res.cloudinary.com/clawgames/image/upload/'+currentImageCoverPath" >
         </div>
       </div>
 
