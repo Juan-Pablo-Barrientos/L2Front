@@ -27,6 +27,7 @@ export class MovieListComponent implements OnInit {
   directors:any;
   editMovieForm:any;
   currentImagePath:any;
+  currentImageCoverPath:any;
   addShowForm:any;
   theaters:any
   minDate:string;
@@ -68,6 +69,8 @@ export class MovieListComponent implements OnInit {
       hoursControl: new FormControl('',[Validators.required]),
       file: new FormControl('', [Validators.required]),
       fileSource: new FormControl('', [Validators.required]),
+      fileCover: new FormControl('', [Validators.required]),
+      fileCoverSource: new FormControl('', [Validators.required]),
     });
 
     this.dataService.getTheaters().subscribe((response:any)=>{
@@ -103,6 +106,7 @@ export class MovieListComponent implements OnInit {
   onSubmit(){
     const formData = new FormData()
     formData.append('myImage',this.createMovieForm.get('fileSource').value);
+    formData.append('myImage2',this.createMovieForm.get('fileCoverSource').value);
     formData.append('name',this.createMovieForm.controls['nameControl'].value);
     formData.append('synopsis',this.createMovieForm.controls['synopsisControl'].value );
     formData.append('id_director',this.createMovieForm.controls['directorControl'].value );
@@ -150,13 +154,13 @@ export class MovieListComponent implements OnInit {
   onSubmitEdit(){
     const formData = new FormData()
     formData.append('myImage',this.editMovieForm.get('fileSourceEdit').value);
+    formData.append('myImage2',this.editMovieForm.get('fileCoverSourceEdit').value);
     formData.append('name',this.editMovieForm.controls['nameEditControl'].value);
     formData.append('synopsis',this.editMovieForm.controls['synopsisEditControl'].value );
     formData.append('id_director',this.editMovieForm.controls['directorEditControl'].value );
     formData.append('id_genre',this.editMovieForm.controls['genreEditControl'].value );
     formData.append('duration',this.editMovieForm.controls['hoursEditControl'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
-
     this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe({
       next : ()=>{
         this.toastr.success('Se ha editado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
@@ -181,6 +185,7 @@ export class MovieListComponent implements OnInit {
   }
   openEdit(content: any,idMovie:number) {
   const movie = this.movies.find((movie: { id: number; }) =>movie.id===idMovie)
+  this.currentImageCoverPath=movie.path_img_banner;
   this.currentImagePath=movie.path_img;
   this.editMovieForm = new FormGroup({
     idEditControl:new FormControl({value:movie.id,disabled:true},[Validators.required,Validators.maxLength(50)]),
@@ -190,7 +195,9 @@ export class MovieListComponent implements OnInit {
     directorEditControl: new FormControl(movie.id_director,[Validators.required]),
     hoursEditControl: new FormControl(movie.duration,[Validators.required]),
     fileEdit: new FormControl(''),
-    fileSourceEdit: new FormControl('')
+    fileSourceEdit: new FormControl(''),
+    fileCoverEdit: new FormControl(''),
+    fileCoverSourceEdit: new FormControl('')
   })
   this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
   }
@@ -278,6 +285,39 @@ onSubmitAddShow(){
       const file = event.target.files[0];
       this.editMovieForm.patchValue({
         fileSourceEdit: file
+      })}
+     }
+  }
+  onFileCoverChange(event:any) {
+
+    if (event.target.files.length > 0) {
+      if(event.target.files[0].size > 4097152){
+      this.toastr.error('El archivo es muy grande' , ':(' , {positionClass:'toast-bottom-right'});
+      event.target.value = null;
+      event.target.files[0] = "";
+      this.createMovieForm.patchValue({
+        fileCoverSource: ""
+      })}
+   else{
+      const file = event.target.files[0];
+      this.createMovieForm.patchValue({
+        fileCoverSource: file
+      })}
+    }
+  }
+  onEditFileCoverChange(event:any) {
+    if(event.target.files.length > 0){
+    if(event.target.files[0].size > 4097152){
+      this.toastr.error('El archivo es muy grande' , ':(' , {positionClass:'toast-bottom-right'});
+      event.target.value = null;
+      event.target.files[0] = "";
+      this.editMovieForm.patchValue({
+        fileCoverSourceEdit: ""
+      })}
+     else{
+      const file = event.target.files[0];
+      this.editMovieForm.patchValue({
+        fileCoverSourceEdit: file
       })}
      }
   }
