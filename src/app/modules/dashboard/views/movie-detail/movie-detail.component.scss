@@ -23,6 +23,16 @@ figure {
     width: 100%; }
 .movieCard{
   margin-top: 1em;
-  width: 24em;
+  width: 22em;
+  height: 100%;
+}}
+@media only screen and (max-width: 350px) {
+figure {
+  width: 15em; }
+  figure img {
+    width: 100%; }
+.movieCard{
+  margin-top: 1em;
+  width: 17em;
   height: 100%;
 }}
