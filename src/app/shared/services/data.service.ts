@@ -42,7 +42,7 @@ export class DataService {
     return this.http.post<ArrayBuffer>(this.baseUrl + '/shows', request,{ observe: 'response' });
   }
   getMovieRating(movieName:string): Observable<ArrayBuffer> {
-    return this.http.get<ArrayBuffer>('http://www.omdbapi.com/?apikey=af770909&t='+movieName);
+    return this.http.get<ArrayBuffer>('https://www.omdbapi.com/?apikey=af770909&t='+movieName);
   }
 
   buyTicket(request: any): Observable<HttpResponse<ArrayBuffer>> {
