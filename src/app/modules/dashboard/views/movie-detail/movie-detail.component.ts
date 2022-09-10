@@ -116,7 +116,7 @@ export class MovieDetailComponent implements OnInit {
     res.forEach((show:any) => {
       if (show.id_movie==idMovie && show.tickets_availables>5)
       {
-        show.date_time=show.date_time.slice(0,10).concat(" ").concat(show.date_time.slice(11,16))
+        show.date_time=show.date_time.slice(0,4).concat(show.date_time.slice(7,10)).concat(show.date_time.slice(4,7)).concat(" ").concat(show.date_time.slice(11,16)).concat("Hs")
         this.shows.push(show)
       }
     });

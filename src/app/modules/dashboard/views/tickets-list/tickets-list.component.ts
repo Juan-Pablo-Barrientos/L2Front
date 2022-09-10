@@ -20,7 +20,12 @@ export class TicketsListComponent implements OnInit {
       this.dataService.getTicketsByDni(this.authService.getLoggedUser().dni).subscribe((response:any)=>{
         console.log(response)
         response.forEach((ticket:any) => {
-          ticket.shows.date_time=ticket.shows.date_time.slice(0,10).concat(" ").concat(ticket.shows.date_time.slice(11,16))
+          ticket.shows.date_time=ticket.shows.date_time.slice(0,4)
+          .concat(ticket.shows.date_time.slice(7,10))
+          .concat(ticket.shows.date_time.slice(4,7))
+          .concat(" ")
+          .concat(ticket.shows.date_time.slice(11,16))
+          .concat("Hs")
         })
         this.tickets=response
       })
@@ -28,7 +33,12 @@ export class TicketsListComponent implements OnInit {
       this.dataService.getTicketsByDni(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).userDni).subscribe((response:any)=>{
         console.log(response)
         response.forEach((ticket:any) => {
-          ticket.shows.date_time=ticket.shows.date_time.slice(0,10).concat(" ").concat(ticket.shows.date_time.slice(11,16))
+          ticket.shows.date_time=ticket.shows.date_time.slice(0,4)
+          .concat(ticket.shows.date_time.slice(7,10))
+          .concat(ticket.shows.date_time.slice(4,7))
+          .concat(" ")
+          .concat(ticket.shows.date_time.slice(11,16))
+          .concat("Hs")
         })
         this.tickets=response
       })

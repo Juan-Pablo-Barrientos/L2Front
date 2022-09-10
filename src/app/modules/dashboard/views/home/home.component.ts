@@ -70,8 +70,9 @@ export class HomeComponent implements OnInit {
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??='').subscribe((response: any) => {
     this.dataService.movies = response;
     this.radioStatus=false
+    document.getElementById("searchMovie")?.setAttribute('value','')
+
     });
   }
-
 
 }
