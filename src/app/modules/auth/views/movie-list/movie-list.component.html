@@ -109,7 +109,7 @@
               <label for="">Entradas disponibles: {{show.tickets_availables}}</label>
             </div>
             <div class="mb-3">
-              <label for="">Sala: {{show.id_theaters}}</label>
+              <label for="">Sala: {{show.theaters.name}}</label>
             </div>
             <hr class="bg-secondary border-2 border-top border-secondary">
           </div>
@@ -312,7 +312,7 @@
         <label class="me-2 mb-2"for="theaters">Sala </label>
         <select class="form-select mb-2" formControlName="theaterShowControl" name="theaters" (change)="onDateChange()" id="theaters" aria-label="Default select example">
           <option value='' selected>Seleccione Sala</option>
-          <option *ngFor="let theater of theaters" [value]="theater.id" >{{theater.id}}</option>
+          <option *ngFor="let theater of theaters" [value]="theater.id" >{{theater.name}}</option>
         </select>
       </div>
 
