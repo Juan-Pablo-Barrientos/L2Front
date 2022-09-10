@@ -161,6 +161,8 @@ export class MovieListComponent implements OnInit {
     formData.append('id_genre',this.editMovieForm.controls['genreEditControl'].value );
     formData.append('duration',this.editMovieForm.controls['hoursEditControl'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
+    console.log(formData.get("myImage"))
+    console.log(formData.get("myImage2"))
     this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe({
       next : ()=>{
         this.toastr.success('Se ha editado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
