@@ -1,8 +1,9 @@
-@media only screen and (min-width: 1100px) {
 figure {
-  width: 22em; }
+  width: 100%; }
   figure img {
     width: 100%; }
+@media only screen and (min-width: 1100px) {
+
 .movieCard{
   margin-top: 1em;
   width: 24em;
@@ -17,20 +18,12 @@ figure {
   padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
 @media only screen and (max-width: 1100px) {
-figure {
-  width: 20em; }
-  figure img {
-    width: 100%; }
 .movieCard{
   margin-top: 1em;
   width: 22em;
   height: 100%;
 }}
 @media only screen and (max-width: 350px) {
-figure {
-  width: 15em; }
-  figure img {
-    width: 100%; }
 .movieCard{
   margin-top: 1em;
   width: 17em;
