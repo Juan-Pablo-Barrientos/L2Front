@@ -52,14 +52,9 @@ export class MovieDetailComponent implements OnInit {
         if(res.Year){
         this.movieYear=res.Year
         }
-        console.log("getMovies")
         //getVideos(this.movie.name,this.movieYear);
         })}
     })
-
-      this.dataService.getTheaters().subscribe((res:any)=>
-      this.theaters=res
-       )
        if (this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).id_user){
         this.dataService.getUser(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).id_user).subscribe(
           (res:any) => this.loggedUser=res
@@ -121,13 +116,11 @@ export class MovieDetailComponent implements OnInit {
     res.forEach((show:any) => {
       if (show.id_movie==idMovie && show.tickets_availables>5)
       {
-        show.date_time=new Date(show.date_time)
-        show.date_time=show.date_time.toString()
-        show.date_time=show.date_time.slice(0,21)
+        show.date_time=show.date_time.slice(0,10).concat(" ").concat(show.date_time.slice(11,16))
         this.shows.push(show)
       }
     });
-    if(this.shows.length==0) {this.toastr.error('No hay mas funciones disponibles para ese formato', ':(',{positionClass:'toast-bottom-right'})}
+    if(this.shows.length==0) {this.toastr.error('No hay mas funciones disponibles', ':(',{positionClass:'toast-bottom-right'})}
     })
   }
 }

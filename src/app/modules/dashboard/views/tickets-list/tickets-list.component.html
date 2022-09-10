@@ -9,8 +9,9 @@
     <thead class="bg-light">
       <tr>
         <th>Pelicula</th>
+        <th>Fecha y hora</th>
         <th>Estado</th>
-        <th>Acciones</th>
+        <th>Examinar</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,13 @@
           <div class="d-flex align-items-center">
             <div class="ms-3">
               <p class="fw-bold mb-1">{{ticket.shows.movies.name}}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1" >{{ticket.shows.date_time}}</p>
             </div>
           </div>
         </td>

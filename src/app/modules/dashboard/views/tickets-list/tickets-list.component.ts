@@ -17,15 +17,20 @@ export class TicketsListComponent implements OnInit {
 
   ngOnInit()  {
     if(this.authService.getLoggedUser()){
-    this.dataService.getTicketsByDni(this.authService.getLoggedUser().dni).subscribe((response:any)=>{
-      this.tickets=response
-    })
-    }else{
-      this.authService.restoreLoggedUser()
-      console.log(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!))
-      this.dataService.getTicketsByDni(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).userDni).subscribe((response:any)=>{
+      this.dataService.getTicketsByDni(this.authService.getLoggedUser().dni).subscribe((response:any)=>{
+        console.log(response)
+        response.forEach((ticket:any) => {
+          ticket.shows.date_time=ticket.shows.date_time.slice(0,10).concat(" ").concat(ticket.shows.date_time.slice(11,16))
+        })
         this.tickets=response
-
+      })
+    }else{
+      this.dataService.getTicketsByDni(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).userDni).subscribe((response:any)=>{
+        console.log(response)
+        response.forEach((ticket:any) => {
+          ticket.shows.date_time=ticket.shows.date_time.slice(0,10).concat(" ").concat(ticket.shows.date_time.slice(11,16))
+        })
+        this.tickets=response
       })
 
     }
