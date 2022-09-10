@@ -106,6 +106,9 @@
               <label for="">Fecha y hora: {{show.date_time}}</label>
             </div>
             <div class="mb-3">
+              <label for="">Formato: {{show.format_movie}}</label>
+            </div>
+            <div class="mb-3">
               <label for="">Entradas disponibles: {{show.tickets_availables}}</label>
             </div>
             <div class="mb-3">
@@ -261,15 +264,6 @@
         <input type="time" class="form-control" formControlName="hoursEditControl" name="hours" id="hours" min="00:00" max="03:00">
       </div>
 
-      <label class="lead me-2">Formato</label>
-      <div class="form-check form-check-inline lead">
-        <input class="form-check-input" type="radio" formControlName="format" name="format" id="2D" value="2D">
-        <label class="form-check-label" for="2d">2D</label>
-      </div>
-      <div class="form-check form-check-inline lead">
-        <input class="form-check-input" type="radio" formControlName="format" name="format" id="3D" value="3D">
-        <label class="form-check-label" for="3d">3D</label>
-      </div>
       <div class="">
         <div class="lead fit-picture text-center">
           <label for="img" >Imagen actual</label>
@@ -314,6 +308,16 @@
           <option value='' selected>Seleccione Sala</option>
           <option *ngFor="let theater of theaters" [value]="theater.id" >{{theater.name}}</option>
         </select>
+      </div>
+
+      <label class="lead me-2">Formato</label>
+      <div class="form-check form-check-inline lead">
+        <input class="form-check-input" type="radio" formControlName="format" name="format" id="2D" value="2D">
+        <label class="form-check-label" for="2d">2D</label>
+      </div>
+      <div class="form-check form-check-inline lead">
+        <input class="form-check-input" type="radio" formControlName="format" name="format" id="3D" value="3D">
+        <label class="form-check-label" for="3d">3D</label>
       </div>
 
       <div class="form-control mb-2">

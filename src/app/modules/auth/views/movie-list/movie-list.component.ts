@@ -68,7 +68,6 @@ export class MovieListComponent implements OnInit {
       hoursControl: new FormControl('',[Validators.required]),
       file: new FormControl('', [Validators.required]),
       fileSource: new FormControl('', [Validators.required]),
-      format: new FormControl('', [Validators.required])
     });
 
     this.dataService.getTheaters().subscribe((response:any)=>{
@@ -109,7 +108,6 @@ export class MovieListComponent implements OnInit {
     formData.append('id_director',this.createMovieForm.controls['directorControl'].value );
     formData.append('id_genre',this.createMovieForm.controls['genreControl'].value );
     formData.append('duration',this.createMovieForm.controls['hoursControl'].value );
-    formData.append('format_movie',this.createMovieForm.controls['format'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
     this.dataService.addMovie(formData).subscribe({
@@ -157,7 +155,6 @@ export class MovieListComponent implements OnInit {
     formData.append('id_director',this.editMovieForm.controls['directorEditControl'].value );
     formData.append('id_genre',this.editMovieForm.controls['genreEditControl'].value );
     formData.append('duration',this.editMovieForm.controls['hoursEditControl'].value );
-    formData.append('format_movie',this.editMovieForm.controls['format'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
     this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe({
@@ -193,8 +190,7 @@ export class MovieListComponent implements OnInit {
     directorEditControl: new FormControl(movie.id_director,[Validators.required]),
     hoursEditControl: new FormControl(movie.duration,[Validators.required]),
     fileEdit: new FormControl(''),
-    fileSourceEdit: new FormControl(''),
-    format: new FormControl(movie.format_movie, [Validators.required])
+    fileSourceEdit: new FormControl('')
   })
   this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
   }
@@ -216,7 +212,8 @@ export class MovieListComponent implements OnInit {
     idMovieControl:new FormControl({value:idMovie,disabled:true},[Validators.required,Validators.maxLength(50)]),
     theaterShowControl: new FormControl('',[Validators.required]),
     dayShowControl: new FormControl('',[Validators.required]),
-    timeShowControl: new FormControl('',[Validators.required])
+    timeShowControl: new FormControl('',[Validators.required]),
+    format: new FormControl('', [Validators.required])
   })
   this.resetAddShow();
 }
@@ -229,8 +226,8 @@ onSubmitAddShow(){
     tickets_availables : 200,
     id_movie : this.addShowForm.controls.idMovieControl.value,
     id_theaters : this.addShowForm.controls.theaterShowControl.value,
+    format_movie : this.addShowForm.controls.format.value,
   }
-  console.log(request.date_time)
   this.dataService.addShow(request).subscribe({
     next : ()=>{
       this.toastr.success('Se ha añadido la funcion', 'Exito',{positionClass:'toast-bottom-right'});
