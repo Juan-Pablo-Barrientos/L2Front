@@ -28,9 +28,9 @@ export class NavbarComponent implements OnInit {
   constructor(private modalService: NgbModal, public authService:AuthService, public dataService:DataService , private router:Router, private toastr:ToastrService) { }
 
   search() {
-    this.dataService.movies=[]
     this.dataService.getMovies(this.title,this.id_genre??='').subscribe((response: any) => {
       this.dataService.movies = response;
+      this.dataService.movies.search=1;
       this.router.navigate(['/home']);
     });
   }
