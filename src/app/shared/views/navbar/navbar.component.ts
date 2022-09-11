@@ -21,7 +21,7 @@ declare const initGoogleApi:any;
 export class NavbarComponent implements OnInit {
   faPencil=faPencil
   faVideo=faVideo
-  title:any;
+  title:any='';
   id_genre: any;
   passwordChangeForm:any
 
@@ -31,7 +31,8 @@ export class NavbarComponent implements OnInit {
     this.dataService.getMovies(this.title,this.id_genre??='').subscribe((response: any) => {
       this.dataService.movies = response;
       this.dataService.movies.search=1;
-        this.dataService.getMovies(this.title??='',this.id_genre??='').subscribe((res: any) => {
+        this.dataService.getMovies('',this.id_genre??='').subscribe((res: any) => {
+        this.dataService.mostViewedMovies=[]
         res.forEach((res:any)=> {
           this.dataService.mostViewedMovies.push(res)
         });
