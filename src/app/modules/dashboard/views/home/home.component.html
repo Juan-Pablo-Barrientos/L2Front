@@ -1,10 +1,11 @@
 <div class="text-center mt-5" class="containerForCarousel carouselMobile">
 
- <ngb-carousel class="carouselImages" *ngIf="this.dataService.movies!=null"  #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
+ <ngb-carousel class="carouselImages" *ngIf="mostViewedMovies!=null"  #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
 
 
 
-  <ng-template *ngFor="let movie of this.dataService.movies;let i = index" ngbSlide>
+  <ng-template class="box" *ngFor="let movie of mostViewedMovies.slice(0, 3); let i=index" ngbSlide>
+    <div class="ribbon ribbon-top-left"><span>Mas vistas</span></div>
     <a [routerLink]="['/movieDetails/'+movie.id]">
     <div >
       <img [src]="'https://res.cloudinary.com/clawgames/image/upload/'+movie.path_img_banner" alt="Banner image" class="fitImage" >

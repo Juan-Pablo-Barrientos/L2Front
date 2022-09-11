@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   id_genre:any;
   public imagesCinema: any = [];
   radioStatus: boolean;
+  mostViewedMovies:any=[];
 
   togglePaused() {
     if (this.paused) {
@@ -53,10 +54,31 @@ export class HomeComponent implements OnInit {
       res.forEach((res:any)=> {
         this.dataService.movies.push(res)
       });
+      this.mostViewedMovies=JSON.parse(JSON.stringify(this.dataService.movies));
+      this.mostViewedMovies.forEach((mostViewedMovie:any) => {
+        mostViewedMovie.ticketsBought=0
+        mostViewedMovie.shows.forEach((showsFromMovie:any) => {
+          mostViewedMovie.ticketsBought+=(200-showsFromMovie.tickets_availables)
+        });
+      });
+      this.mostViewedMovies.sort(this.GetSortOrder('ticketsBought'))
+      console.log(this.mostViewedMovies)
+      console.log(this.mostViewedMovies.ticketsBought+"aca")
     });
    }
    this.dataService.movies.search=0
   }
+
+  GetSortOrder(prop:any) {
+    return function(a:any, b:any) {
+        if (a[prop] > b[prop]) {
+            return -1;
+        } else if (a[prop] < b[prop]) {
+            return 1;
+        }
+        return 0;
+    }
+}
 
   genreFilter(event:any){
     {
