@@ -136,7 +136,6 @@ export class MovieListComponent implements OnInit {
       next : ()=>{
         this.toastr.success('Se ha borrado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
-        this.dataService.movies=[]
         this.refreshMovieList();
       },
       error: (error: HttpErrorResponse) => {

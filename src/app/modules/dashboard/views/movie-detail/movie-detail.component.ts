@@ -64,8 +64,8 @@ export class MovieDetailComponent implements OnInit {
   }
 
 
-  openBuyTickets(content: any,) {
-    this.getShows()
+  openBuyTickets(content: any) {
+    this.getShows(content)
     this.buyTicketsForm=new FormGroup({
       showControl: new FormControl('',[Validators.required,]),
       theaterControl: new FormControl('',[Validators.required,]),
@@ -80,7 +80,6 @@ export class MovieDetailComponent implements OnInit {
       this.buyTicketsForm.controls.dniControl.disable()
     }
     this.buyTicketsForm.controls.theaterControl.disable()
-    this.modalService.open(content, {ariaLabelledBy: 'modalBuyTicket'}).result
   }
 
   onSubmitBuyTickets(){
@@ -109,7 +108,7 @@ export class MovieDetailComponent implements OnInit {
     this.buyTicketsForm.controls['showControl'].setValue('')
   }
 
-  getShows(){
+  getShows(content: any){
     this.shows=[]
     let idMovie=this.route.snapshot.params['id']
     this.dataService.getShows().subscribe((res:any)=>{
@@ -120,7 +119,8 @@ export class MovieDetailComponent implements OnInit {
         this.shows.push(show)
       }
     });
-    if(this.shows.length==0) {this.toastr.error('No hay mas funciones disponibles', ':(',{positionClass:'toast-bottom-right'})}
+    if(this.shows.length==0) {this.toastr.error('No hay mas funciones disponibles', ':(',{positionClass:'toast-bottom-right'})}else{
+    this.modalService.open(content, {ariaLabelledBy: 'modalBuyTicket'}).result}
     })
   }
 }
