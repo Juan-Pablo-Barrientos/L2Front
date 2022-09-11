@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   id_genre:any;
   public imagesCinema: any = [];
   radioStatus: boolean;
-  mostViewedMovies:any=[];
 
   togglePaused() {
     if (this.paused) {
@@ -48,22 +47,21 @@ export class HomeComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.id_genre = params["id_genre"]
     })
-    if(!this.dataService.movies.search){
+    console.log(this.dataService.movies.search)
+    if(this.dataService.movies.search ===false || this.dataService.movies.search ===undefined){
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((res: any) => {
       this.dataService.movies=[]
       res.forEach((res:any)=> {
         this.dataService.movies.push(res)
       });
-      this.mostViewedMovies=JSON.parse(JSON.stringify(this.dataService.movies));
-      this.mostViewedMovies.forEach((mostViewedMovie:any) => {
+      this.dataService.mostViewedMovies=JSON.parse(JSON.stringify(this.dataService.movies));
+      this.dataService.mostViewedMovies.forEach((mostViewedMovie:any) => {
         mostViewedMovie.ticketsBought=0
         mostViewedMovie.shows.forEach((showsFromMovie:any) => {
           mostViewedMovie.ticketsBought+=(200-showsFromMovie.tickets_availables)
         });
       });
-      this.mostViewedMovies.sort(this.GetSortOrder('ticketsBought'))
-      console.log(this.mostViewedMovies)
-      console.log(this.mostViewedMovies.ticketsBought+"aca")
+      this.dataService.mostViewedMovies.sort(this.GetSortOrder('ticketsBought'))
     });
    }
    this.dataService.movies.search=0

@@ -11,7 +11,7 @@ export class DataService {
   private baseUrl = environment.apiUrl;
   movies: any=[];
   constructor(private http: HttpClient) {}
-
+  mostViewedMovies:any=[];
 
   userExists(request:any): Observable<Response> {
     return this.http.post<Response>(this.baseUrl + '/users/exist', request)
@@ -22,6 +22,7 @@ export class DataService {
   }
 
   getMovies(title: string,id_genre:number): Observable<Response> {
+    console.log(this.mostViewedMovies)
     let params = new HttpParams()
     params = params.append('title',title)
     params = params.append('id_genre',id_genre)

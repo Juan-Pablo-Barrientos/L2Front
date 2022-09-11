@@ -1,10 +1,10 @@
 <div class="text-center mt-5" class="containerForCarousel carouselMobile">
 
- <ngb-carousel class="carouselImages" *ngIf="mostViewedMovies!=null"  #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
+ <ngb-carousel class="carouselImages" *ngIf="this.dataService.mostViewedMovies"  #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
 
 
 
-  <ng-template class="box" *ngFor="let movie of mostViewedMovies.slice(0, 3); let i=index" ngbSlide>
+  <ng-template class="box" *ngFor="let movie of this.dataService.mostViewedMovies.slice(0, 3); let i=index" ngbSlide>
     <div class="ribbon ribbon-top-left"><span>Mas vistas</span></div>
     <a [routerLink]="['/movieDetails/'+movie.id]">
     <div >
@@ -20,11 +20,9 @@
 <ngb-accordion #acc="ngbAccordion">
   <ngb-panel class="lead"title="Generos">
     <ng-template ngbPanelContent>
-      <div *ngFor="let genre of genres" class="lead">
-        <div>
-          <input type="radio" class="me-2" [id]="genre.name" name="genre" [value]="genre.id" [checked]="radioStatus" (change)="genreFilter($event)">
-          <label [for]="genre.name">{{genre.name}}</label>
-        </div>
+      <div *ngFor="let genre of genres" class="lead form-check form-check-inline">
+          <input type="radio" class="me-2 form-check-input" [id]="genre.name" name="genre" [value]="genre.id" [checked]="radioStatus" (change)="genreFilter($event)">
+          <label class="form-check-label"[for]="genre.name">{{genre.name}}</label>
       </div>
       <button type="button" class="btn btn-secondary m-2" (click)="cleanFilter()">Limpiar filtros</button>
     </ng-template>

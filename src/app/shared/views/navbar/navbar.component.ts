@@ -21,7 +21,7 @@ declare const initGoogleApi:any;
 export class NavbarComponent implements OnInit {
   faPencil=faPencil
   faVideo=faVideo
-  title: string = "";
+  title:any;
   id_genre: any;
   passwordChangeForm:any
 
@@ -31,9 +31,33 @@ export class NavbarComponent implements OnInit {
     this.dataService.getMovies(this.title,this.id_genre??='').subscribe((response: any) => {
       this.dataService.movies = response;
       this.dataService.movies.search=1;
+        this.dataService.getMovies(this.title??='',this.id_genre??='').subscribe((res: any) => {
+        res.forEach((res:any)=> {
+          this.dataService.mostViewedMovies.push(res)
+        });
+        this.dataService.mostViewedMovies.forEach((mostViewedMovie:any) => {
+        mostViewedMovie.ticketsBought=0
+        mostViewedMovie.shows.forEach((showsFromMovie:any) => {
+        mostViewedMovie.ticketsBought+=(200-showsFromMovie.tickets_availables)
+        });
+      });
+      this.dataService.mostViewedMovies.sort(this.GetSortOrder('ticketsBought'))
       this.router.navigate(['/home']);
+    })
+
     });
   }
+
+  GetSortOrder(prop:any) {
+    return function(a:any, b:any) {
+        if (a[prop] > b[prop]) {
+            return -1;
+        } else if (a[prop] < b[prop]) {
+            return 1;
+        }
+        return 0;
+    }
+}
 
   ngOnInit(): void {
 
