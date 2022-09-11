@@ -91,7 +91,6 @@ export class MovieDetailComponent implements OnInit {
       email : this.buyTicketsForm.controls.emailControl.value,
       quantity : this.buyTicketsForm.controls.quantityControl.value
     }
-    console.log(request)
     this.dataService.buyTicket(request).subscribe(response => {
       if (response.status==201){
         this.toastr.success('Se le ha enviado un email con el codigo', 'Exito',{positionClass:'toast-bottom-right'});

@@ -79,7 +79,6 @@ export class MovieListComponent implements OnInit {
 
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((response:any)=>{
       this.movies=response;
-      console.log(this.movies)
     })
 
     this.dataService.getGenres().subscribe((response:any)=>{
@@ -160,8 +159,6 @@ export class MovieListComponent implements OnInit {
     formData.append('id_genre',this.editMovieForm.controls['genreEditControl'].value );
     formData.append('duration',this.editMovieForm.controls['hoursEditControl'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
-    console.log(formData.get("myImage"))
-    console.log(formData.get("myImage2"))
     this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe({
       next : ()=>{
         this.toastr.success('Se ha editado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
@@ -228,7 +225,6 @@ export class MovieListComponent implements OnInit {
 
 onSubmitAddShow(){
   const date_time= this.addShowForm.controls.dayShowControl.value.concat(" ").concat(this.addShowForm.controls.timeShowControl.value).concat(":00")
-  console.log(date_time)
   let request = {
     date_time : date_time,
     tickets_availables : 200,
@@ -334,7 +330,6 @@ onSubmitAddShow(){
       }
       this.dataService.getShowsByDayAndTheaters(request).subscribe((response:any)=>{
       this.timesIncoming=response;
-      console.log(response)
       this.times=[
         {
           time:"17:00"
@@ -348,7 +343,6 @@ onSubmitAddShow(){
       ]
       this.timesIncoming.forEach((timeIncoming:any,j:any) => {
         this.times.forEach((time:any,i:any)  => {
-          console.log(timeIncoming)
           let timeIncomingAux = timeIncoming
           if(timeIncomingAux.date_time.length >8){
           timeIncomingAux.date_time=timeIncomingAux.date_time.slice(11,16)

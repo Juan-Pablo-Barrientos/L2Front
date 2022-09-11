@@ -22,7 +22,6 @@ export class AuthGuard implements CanLoad, CanActivate {
 
   canLoad() {
     if (this.authService.isLoggedInAdmin()) {
-      console.log(this.authService.isLoggedInAdmin);
       return true;
     }
     return false;

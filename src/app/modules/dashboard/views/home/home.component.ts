@@ -53,13 +53,11 @@ export class HomeComponent implements OnInit {
         this.dataService.movies.push(res)
       });
     });
-
   }
 
   genreFilter(event:any){
     {
       this.id_genre=event.target.value
-      console.log(event.target.value)
       this.dataService.movies=[]
       this.dataService.getMovies(this.titleSearch ??= "",this.id_genre).subscribe((response: any) => {
       this.dataService.movies = response;

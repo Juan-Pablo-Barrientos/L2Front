@@ -76,7 +76,6 @@ export class GenreListComponent implements OnInit {
      id : this.editGenreForm.controls.idControl.value,
      name : this.editGenreForm.controls.nameControl.value,
    }
-   console.log(request)
    this.dataService.editGenre(request,this.editGenreForm.controls.idControl.value).subscribe({
      next : ()=>{
        this.toastr.success('Se ha editado el genero', 'Exito',{positionClass:'toast-bottom-right'})

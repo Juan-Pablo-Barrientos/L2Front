@@ -25,7 +25,6 @@ export class DataService {
     let params = new HttpParams()
     params = params.append('title',title)
     params = params.append('id_genre',id_genre)
-    console.log(params.keys())
     return this.http.get<Response>(this.baseUrl + '/movies', { params: params });
   }
 
@@ -99,7 +98,6 @@ export class DataService {
     return this.http.post<Response>(this.baseUrl + '/shows/showsdate',request);
   }
   getMovie(idMovie: number): Observable<Response> {
-    console.log(idMovie)
     return this.http.get<Response>(this.baseUrl+'/movies/'+idMovie)
   }
   getGenres(): Observable<Response> {

@@ -53,7 +53,6 @@ export class UserListComponent implements OnInit {
       dni : this.editUserForm.controls.dniControl.value,
       rol: this.editUserForm.controls.role.value==="Admin" ? 1 : 0,
     }
-    console.log(request)
     this.dataService.editUser(request,this.editUserForm.controls.idControl.value).subscribe({
       next : ()=>{
         this.toastr.success('El editado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});

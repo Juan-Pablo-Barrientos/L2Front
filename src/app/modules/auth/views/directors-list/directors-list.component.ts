@@ -79,7 +79,6 @@ export class DirectorsListComponent implements OnInit {
       name : this.editDirectorForm.controls.nameControl.value,
       lastname : this.editDirectorForm.controls.lastnameControl.value,
     }
-    console.log(request)
     this.dataService.editDirector(request,this.editDirectorForm.controls.idControl.value).subscribe({
       next : ()=>{
         this.toastr.success('Se ha editado el director', 'Exito',{positionClass:'toast-bottom-right'})

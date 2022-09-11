@@ -18,7 +18,6 @@ export class TicketsListComponent implements OnInit {
   ngOnInit()  {
     if(this.authService.getLoggedUser()){
       this.dataService.getTicketsByDni(this.authService.getLoggedUser().dni).subscribe((response:any)=>{
-        console.log(response)
         response.forEach((ticket:any) => {
           ticket.shows.date_time=ticket.shows.date_time.slice(0,4)
           .concat(ticket.shows.date_time.slice(7,10))
@@ -31,7 +30,6 @@ export class TicketsListComponent implements OnInit {
       })
     }else{
       this.dataService.getTicketsByDni(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).userDni).subscribe((response:any)=>{
-        console.log(response)
         response.forEach((ticket:any) => {
           ticket.shows.date_time=ticket.shows.date_time.slice(0,4)
           .concat(ticket.shows.date_time.slice(7,10))

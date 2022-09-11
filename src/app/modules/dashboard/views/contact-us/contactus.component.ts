@@ -34,7 +34,7 @@ export class ContactusComponent {
       email : this.contactForm.controls.emailControl.value,
       textarea : this.contactForm.controls.commentControl.value,
     }
-    this.dataService.addContact(request).subscribe((res:any) => {console.log(res)
+    this.dataService.addContact(request).subscribe((res:any) => {
       if (res.status==201){
         this.toastr.success('Mensaje enviado :)', 'Exito',{positionClass:'toast-bottom-right'});
         this.contactForm.reset();

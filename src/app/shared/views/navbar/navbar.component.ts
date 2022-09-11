@@ -79,7 +79,6 @@ export class NavbarComponent implements OnInit {
     this.passwordChangeForm.reset()
     this.dataService.editUserPassword(request).subscribe({
       error: (error: HttpErrorResponse) => {
-        console.log(error)
         if (error.status==200){
           this.toastr.success('La contraseña ha sido cambiada', 'Exito',{positionClass:'toast-bottom-right'});
         }else if (error.status==400){

@@ -47,7 +47,6 @@ export class RegisterComponent {
       phoneNumber : this.signUpForm.controls.phoneControl.value,
     }
     this.dataService.addUser(request).subscribe(async (res:any) => {
-      console.log(res);
       if (res.status==201){
         this.toastr.success('El registro fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
         this.router.navigate(['/login']);
