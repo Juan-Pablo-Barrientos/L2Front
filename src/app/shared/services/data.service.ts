@@ -22,7 +22,6 @@ export class DataService {
   }
 
   getMovies(title: string,id_genre:number): Observable<Response> {
-    console.log(this.mostViewedMovies)
     let params = new HttpParams()
     params = params.append('title',title)
     params = params.append('id_genre',id_genre)

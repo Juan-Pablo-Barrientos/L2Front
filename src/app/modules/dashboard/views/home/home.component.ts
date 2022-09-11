@@ -47,7 +47,6 @@ export class HomeComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.id_genre = params["id_genre"]
     })
-    console.log(this.dataService.movies.search)
     if(this.dataService.movies.search ===false || this.dataService.movies.search ===undefined){
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((res: any) => {
       this.dataService.movies=[]

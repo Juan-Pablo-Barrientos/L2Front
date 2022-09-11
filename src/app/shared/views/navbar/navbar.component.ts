@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   passwordChangeForm:any
 
   constructor(private modalService: NgbModal, public authService:AuthService, public dataService:DataService , private router:Router, private toastr:ToastrService) { }
-
+  //This search would be better on the front end but this project required a search to the back end
   search() {
     this.dataService.getMovies(this.title,this.id_genre??='').subscribe((response: any) => {
       this.dataService.movies = response;
