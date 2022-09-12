@@ -49,9 +49,10 @@ export class MovieDetailComponent implements OnInit {
       if(this.movie){
       this.dataService.getMovieOriginalName(res.name,res.year).subscribe((result:any)=>{
         this.movie.translatedName=result.results[0].title
+        this.movie.rating=result.results[0].vote_average
+        console.log(this.movie.rating)
         if(result.results[0].release_date){
         this.movie.year=result.results[0].release_date.slice(0,4)
-        console.log(result.results[0].release_date.slice(0,4))
         }
         getVideos(this.movie.name,this.movie.year)
       })
