@@ -84,13 +84,13 @@
 
   <div class="form-floating mb-2">
     <input formControlName="phoneControl" name="phone" id="phone" placeholder="Telefono" type="tel" class="form-control"  onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
-    <label for="phone">Telefono</label>
+    <label for="phone">Teléfono</label>
   </div>
   <div *ngIf="getFormControl().controls['phoneControl'].errors?.['required']&& getFormControl().controls['phoneControl'].touched">
-      El campo telefono es requerido.
+      El campo teléfono es requerido.
   </div>
   <div *ngIf="getFormControl().controls['phoneControl'].errors?.['maxlength']&& getFormControl().controls['phoneControl'].touched">
-      El telefono debe tener menos de 50 caracteres
+      El teléfono debe tener menos de 50 caracteres
   </div>
 
   <div class="form-floating mb-2">
@@ -106,6 +106,5 @@
 
   <button type="button"(click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
   <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
-  {{signUpForm.valid}}
 </form>
 

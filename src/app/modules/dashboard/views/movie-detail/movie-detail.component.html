@@ -33,9 +33,9 @@
   <div class="modal-body">
     <form [formGroup]="buyTicketsForm" (ngSubmit)="onSubmitBuyTickets()">
       <div class="form-control mb-2">
-        <label class="me-2 mb-2"for="theaters">Funcion </label>
+        <label class="me-2 mb-2"for="theaters">Función </label>
         <select class="form-select mb-2" formControlName="showControl" name="show" id="show" aria-label="Default select example">
-          <option value='' selected>Seleccione Funcion</option>
+          <option value='' selected>Seleccione Función</option>
           <option *ngFor="let show of shows" [value]="show.id" >{{show.date_time}} Formato {{show.format_movie}}
             <div class="form-floating mb-2">
             <input hidden formControlName="theaterControl" [value]="show.id_theaters" name="theaterId" id="theaterId" placeholder="theater" type="text"class="form-control"/>

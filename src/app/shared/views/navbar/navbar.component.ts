@@ -105,9 +105,9 @@ export class NavbarComponent implements OnInit {
     this.dataService.editUserPassword(request).subscribe({
       error: (error: HttpErrorResponse) => {
         if (error.status==200){
-          this.toastr.success('La contraseña ha sido cambiada', 'Exito',{positionClass:'toast-bottom-right'});
+          this.toastr.success('La contraseña ha sido cambiada', 'Éxito',{positionClass:'toast-bottom-right'});
         }else if (error.status==400){
-          this.toastr.error('La contraseña no coincide', ':(',{positionClass:'toast-bottom-right'});
+          this.toastr.error('La contraseña no coincide', '🥺',{positionClass:'toast-bottom-right'});
         }}
     });
   }

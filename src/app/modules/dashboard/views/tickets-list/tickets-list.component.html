@@ -3,12 +3,12 @@
   <hr class="bg-secondary border-2 border-top border-secondary">
   <div class="form-floating mt-3">
     <input type="text" name="movieSearch" id="searchByMovie" placeholder="Nombre" (keyup)="searchByMovie()" class="form-control"/>
-    <label for="name">Buscar por pelicula</label>
+    <label for="name">Buscar por película</label>
   </div>
   <table class="table align-middle mb-0 bg-white mt-5" id="ticketsList">
     <thead class="bg-light">
       <tr>
-        <th>Pelicula</th>
+        <th>Película</th>
         <th>Fecha y hora</th>
         <th>Estado</th>
         <th>Examinar</th>
@@ -63,10 +63,10 @@
                 <label for="">Cantidad: {{ticket.quantity}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Codigo: {{ticket.code}}</label>
+                <label for="">Código: {{ticket.code}}</label>
               </div>
               <div class="mb-3">
-                <label for="">Funcion: {{ticket.shows.date_time}}</label>
+                <label for="">Función: {{ticket.shows.date_time}}</label>
               </div>
           </div>
           <div class="modal-footer">

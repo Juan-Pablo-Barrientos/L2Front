@@ -5,9 +5,9 @@
 
 
   <ng-template class="box" *ngFor="let movie of this.dataService.mostViewedMovies.slice(0, 3); let i=index" ngbSlide>
-    <div class="ribbon ribbon-top-left"><span>Mas vistas</span></div>
+    <div class="ribbon ribbon-top-left"><span>Más vistas</span></div>
     <a [routerLink]="['/movieDetails/'+movie.id]">
-    <div >
+    <div>
       <img [src]="'https://res.cloudinary.com/clawgames/image/upload/'+movie.path_img_banner" alt="Banner image" class="fitImage" >
     </div>
   </a>
@@ -18,7 +18,7 @@
 <hr class="bg-secondary border-2 border-top border-secondary">
 
 <ngb-accordion #acc="ngbAccordion">
-  <ngb-panel class="lead"title="Generos">
+  <ngb-panel class="lead"title="Géneros">
     <ng-template ngbPanelContent>
       <form [formGroup]="radioForm">
         <div *ngFor="let genre of genres" class="lead form-check form-check-inline">

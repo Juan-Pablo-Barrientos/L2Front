@@ -48,13 +48,12 @@ export class RegisterComponent {
     }
     this.dataService.addUser(request).subscribe(async (res:any) => {
       if (res.status==201){
-        this.toastr.success('El registro fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('El registro fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
         this.router.navigate(['/login']);
       }else{
-        this.toastr.error('Ha ocurrido un error ', ':(',{positionClass:'toast-bottom-right'});
+        this.toastr.error('Fallo el registro', '🥺',{positionClass:'toast-bottom-right'});
       }
     });
-
   }
 
   reset() {

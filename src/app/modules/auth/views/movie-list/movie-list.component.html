@@ -1,9 +1,9 @@
 <div class="container mt-5">
-  <div class="m-2"><h1 class="display-1 text-center">Listado de peliculas</h1></div>
+  <div class="m-2"><h1 class="display-1 text-center">Listado de películas</h1></div>
   <hr class="bg-secondary border-2 border-top border-secondary">
   <div class="text-center">
     <button type="button" (click)="openCreate(modalCreate)" class="btn-success btn btn-lg mt-2">
-      Nueva pelicula
+      Nueva película
     </button>
   </div>
   <div class="form-floating mt-3">
@@ -54,7 +54,7 @@
 
       <ng-template #modalShow let-modal>
         <div class="modal-header">
-          <h4 class="modal-title" id="modalShow">Pelicula: {{movie.name}}</h4>
+          <h4 class="modal-title" id="modalShow">Película: {{movie.name}}</h4>
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body lead">
@@ -68,10 +68,10 @@
               <label for="">Sinopsis: {{movie.synopsis}}</label>
             </div>
             <div class="mb-3">
-              <label for="">Duracion: {{movie.duration}}</label>
+              <label for="">Duración: {{movie.duration}}</label>
             </div>
             <div class="mb-3">
-              <label for="">Genero:  {{movie.genre.name}}</label>
+              <label for="">Género:  {{movie.genre.name}}</label>
             </div>
             <div class="mb-3">
               <label for="">Director:  {{movie.director.name}} {{movie.director.lastname}}</label>
@@ -95,14 +95,14 @@
 
       <ng-template #modalSeeShows let-modal>
         <div class="modal-header">
-          <h4 class="modal-title" id="modalShow">Pelicula: {{movie.name}}</h4>
+          <h4 class="modal-title" id="modalShow">Película: {{movie.name}}</h4>
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body lead">
-          <div *ngIf="shows.length==0"><div class="m-2"><h1 class="display-5 text-center">No hay funciones para esta pelicula</h1></div></div>
+          <div *ngIf="shows.length==0"><div class="m-2"><h1 class="display-5 text-center">No hay funciones para esta película</h1></div></div>
           <div *ngFor="let show of shows">
             <div class="mb-3">
-              <label for="">Id de funcion: {{show.id}}</label>
+              <label for="">Id de función: {{show.id}}</label>
             </div>
             <div class="mb-3">
               <label for="">Fecha y hora: {{show.date_time}}</label>
@@ -129,13 +129,13 @@
 
       <ng-template #modalDelete let-modal>
         <div class="modal-header">
-          <h4 class="modal-title" id="modalDelete">Borrar pelicula</h4>
+          <h4 class="modal-title" id="modalDelete">Borrar película</h4>
           <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body lead">
           <form>
             <div class="mb-3">
-              <label for="dateOfBirth">Esta seguro de que quiere borrar la pelicula {{movie.name}}</label>
+              <label for="dateOfBirth">Esta seguro de que quiere borrar la película {{movie.name}}</label>
             </div>
           </form>
         </div>
@@ -157,7 +157,7 @@
 
   <ng-template #modalCreate let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modalCreate">Crear pelicula</h4>
+      <h4 class="modal-title" id="modalCreate">Crear película</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
@@ -174,9 +174,9 @@
         </div>
 
         <div class="form-control mb-2">
-          <label class="me-2 mb-2"for="genre">Genero </label>
+          <label class="me-2 mb-2"for="genre">Género </label>
           <select class="form-select mb-2" formControlName="genreControl" name="genre" id="genre" aria-label="Default select example">
-            <option value='' selected>Seleccione genero</option>
+            <option value='' selected>Seleccione género</option>
             <option *ngFor="let genre of genres" [value]="genre.id" >{{genre.name}}</option>
           </select>
         </div>
@@ -190,7 +190,7 @@
         </div>
 
         <div class="form-control mb-2">
-          <label class="me-2 mb-2"for="duration">Duracion </label>
+          <label class="me-2 mb-2"for="duration">Duración </label>
           <input type="time" class="form-control" formControlName="hoursControl" name="hours" id="hours" min="00:00" max="03:00">
         </div>
 
@@ -198,7 +198,7 @@
           <label for="file">Poster</label>
           <input formControlName="file"id="file" name="file"type="file" class="form-control" (change)="onFileChange($event)">
           <div *ngIf="getCreateMovieForm['file'].touched && getCreateMovieForm.file.invalid" class="alert alert-danger">
-              <div *ngIf="getCreateMovieForm['file'].errors['required']">File is required.</div>
+              <div *ngIf="getCreateMovieForm['file'].errors['required']">Archivo requerido</div>
           </div>
         </div>
 
@@ -206,13 +206,13 @@
           <label for="fileCover">Banner</label>
           <input formControlName="fileCover"id="fileCover" name="fileCover"type="file" class="form-control" (change)="onFileCoverChange($event)">
           <div *ngIf="getCreateMovieForm['fileCover'].touched && getCreateMovieForm.file.invalid" class="alert alert-danger">
-              <div *ngIf="getCreateMovieForm['fileCover'].errors['required']">File is required.</div>
+              <div *ngIf="getCreateMovieForm['fileCover'].errors['required']">Archivo requerido</div>
           </div>
         </div>
         <button type="button"(click)="resetCreate()"  class="btn btn-secondary m-2">Limpiar campos</button>
 
         <button type="submit" [disabled]="!createMovieForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
-      </form>{{createMovieForm.valid}}
+      </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
@@ -230,7 +230,7 @@
     <form [formGroup]="editMovieForm" (ngSubmit)="onSubmitEdit()" action="/movies/" enctype="multipart/form-data" method="POST">
 
       <div class="form-floating mb-2">
-        <input type="text" value="" class="form-control" formControlName="idEditControl" name="id" id="id" placeholder="Id de la pelicula">
+        <input type="text" value="" class="form-control" formControlName="idEditControl" name="id" id="id" placeholder="Id de la película">
         <label for="id">Id</label>
       </div>
 
@@ -245,9 +245,9 @@
       </div>
 
       <div class="form-control mb-2">
-        <label class="me-2 mb-2"for="genre">Genero </label>
+        <label class="me-2 mb-2"for="genre">Género </label>
         <select class="form-select mb-2" formControlName="genreEditControl" name="genre" id="genre" aria-label="Default select example">
-          <option value='' selected>Seleccione genero</option>
+          <option value='' selected>Seleccione género</option>
           <option *ngFor="let genre of genres" [value]="genre.id" >{{genre.name}}</option>
         </select>
       </div>
@@ -261,13 +261,13 @@
       </div>
 
       <div class="form-control mb-2">
-        <label class="me-2 mb-2"for="duration">Duracion</label>
+        <label class="me-2 mb-2"for="duration">Duración</label>
         <input type="time" class="form-control" formControlName="hoursEditControl" name="hours" id="hours" min="00:00" max="03:00">
       </div>
 
       <div class="">
         <div class="lead fit-picture text-center">
-          <label for="img" >Imagen actual de poster</label>
+          <label for="img" >Imagen actual de| poster</label>
           <img class="rounded"[src]="currentImagePath" >
         </div>
       </div>
@@ -275,7 +275,7 @@
         <label for="fileEdit">Nueva imagen de poster</label>
         <input formControlName="fileEdit"id="fileEdit" name="fileEdit" type="file" class="form-control" (change)="onEditFileChange($event)">
         <div *ngIf="getEditMovieForm['fileEdit'].touched && getEditMovieForm.fileEdit.invalid" class="alert alert-danger">
-            <div *ngIf="getEditMovieForm['fileEdit'].errors['required']">File is required.</div>
+            <div *ngIf="getEditMovieForm['fileEdit'].errors['required']">Archivo requerido</div>
         </div>
       </div>
 
@@ -310,7 +310,7 @@
     <form [formGroup]="addShowForm" (ngSubmit)="onSubmitAddShow()">
 
       <div class="form-floating mb-2">
-        <input type="text" value="" class="form-control" formControlName="idMovieControl" name="id" id="id" placeholder="Id de la pelicula">
+        <input type="text" value="" class="form-control" formControlName="idMovieControl" name="id" id="id" placeholder="Id de la película">
         <label for="id">Id</label>
       </div>
 

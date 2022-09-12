@@ -36,10 +36,10 @@ export class ContactusComponent {
     }
     this.dataService.addContact(request).subscribe((res:any) => {
       if (res.status==201){
-        this.toastr.success('Mensaje enviado :)', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Mensaje enviado :)', 'Éxito',{positionClass:'toast-bottom-right'});
         this.contactForm.reset();
       }else{
-        this.toastr.error('Error al enviar el formulario', ':(',{positionClass:'toast-bottom-right'});
+        this.toastr.error('Error al enviar el formulario', '🥺',{positionClass:'toast-bottom-right'});
       }
     });
   }

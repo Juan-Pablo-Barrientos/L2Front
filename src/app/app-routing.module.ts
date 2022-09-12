@@ -41,7 +41,7 @@ const routes: Routes = [
   {
     path:'frequentQuestions',
     component:FrequentQuestionsComponent,
-    title: 'preguntasFrecuentes'
+    title: 'Preguntas frecuentes'
   },
   {
     path:'ticketsList',
@@ -74,14 +74,14 @@ const routes: Routes = [
     component:GenreListComponent,
     canActivate:[AdminGuard],
     canLoad:[AdminGuard],
-    title: 'Lista de generos'
+    title: 'Lista de géneros'
   },
   {
     path:'movieList',
     component:MovieListComponent,
     canActivate:[AdminGuard],
     canLoad:[AdminGuard],
-    title: 'Lista de peliculas'
+    title: 'Lista de películas'
   },
   {
     path: 'movieDetails/:id',

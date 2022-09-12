@@ -14,7 +14,7 @@
     <thead class="bg-light">
       <tr>
         <th>Nombre</th>
-        <th>Acciones</th>
+        <th>Acciónes</th>
       </tr>
     </thead>
     <tbody>
@@ -30,7 +30,6 @@
           </div>
         </td>
         <td>
-
           <button type="button" (click)="openShow(modalShow)" class="btn btn-primary btn-sm btn-rounded m-1">
             <fa-icon [icon]="faEye"></fa-icon>
           </button>
@@ -77,7 +76,7 @@
           <div class="modal-body lead">
             <form>
               <div class="mb-3">
-                <label for="dateOfBirth">Esta seguro de que quiere borrar al director {{director.name}} {{director.lastname}}</label>
+                <label for="dateOfBirth">Está seguro de que quiere borrar al director {{director.name}} {{director.lastname}}</label>
               </div>
             </form>
           </div>
@@ -114,7 +113,7 @@
 
         <div class="form-floating mb-2">
           <input type="text" formControlName="lastnameControl" name="lastname" id="lastname" placeholder="Apellido" class="form-control"/>
-          <label for="name">Apellido</label>
+          <label for="name">Apéllido</label>
         </div>
 
           <button type="submit" [disabled]="!editDirectorForm.valid" class="btn btn-primary float-end m-2">Enviar</button>

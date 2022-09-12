@@ -120,17 +120,17 @@ export class MovieListComponent implements OnInit {
 
     this.dataService.addMovie(formData).subscribe({
       next : (res:any)=>{
-        this.toastr.success('Se ha añadido la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Se ha añadido la película', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==201){
-        this.toastr.success('Se ha añadido la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Se ha añadido la película', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       }else {
-        this.toastr.error('Error al enviar el formulario' , ':(' , {positionClass:'toast-bottom-right'});
+        this.toastr.error('Error al crear la película' , '🥺' , {positionClass:'toast-bottom-right'});
       }}
      });
   }
@@ -138,17 +138,17 @@ export class MovieListComponent implements OnInit {
   deleteMovie(idMovie:number){
     this.dataService.delMovie(idMovie).subscribe({
       next : ()=>{
-        this.toastr.success('Se ha borrado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Se ha borrado la película', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        this.toastr.success('Se ha borrado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Se ha borrado la película', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       }else {
-        this.toastr.error('Error al enviar el formulario' , ':(' , {positionClass:'toast-bottom-right'});
+        this.toastr.error('Error al borrar película' , '🥺' , {positionClass:'toast-bottom-right'});
       }}
      })
   }
@@ -166,17 +166,17 @@ export class MovieListComponent implements OnInit {
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
     this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe({
       next : ()=>{
-        this.toastr.success('Se ha editado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Se ha editado la película', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        this.toastr.success('Se ha editado la pelicula', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Se ha editado la película', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshMovieList();
       }else {
-        this.toastr.error('Error al enviar el formulario' , ':(' , {positionClass:'toast-bottom-right'});
+        this.toastr.error('Error al editar la película' , '🥺' , {positionClass:'toast-bottom-right'});
       }}
      });
   }
@@ -239,18 +239,18 @@ onSubmitAddShow(){
   }
   this.dataService.addShow(request).subscribe({
     next : ()=>{
-      this.toastr.success('Se ha añadido la funcion', 'Exito',{positionClass:'toast-bottom-right'});
+      this.toastr.success('Se ha añadido la función', 'Éxito',{positionClass:'toast-bottom-right'});
       this.modalService.dismissAll();
       this.refreshMovieList();
       this.addShowForm.reset()
     },
     error: (error: HttpErrorResponse) => {
     if (error.status==200){
-      this.toastr.success('Se ha añadido la funcion', 'Exito',{positionClass:'toast-bottom-right'});
+      this.toastr.success('Se ha añadido la función', 'Éxito',{positionClass:'toast-bottom-right'});
       this.modalService.dismissAll();
       this.refreshMovieList();
     }else {
-      this.toastr.error('Error al enviar el formulario' , ':(' , {positionClass:'toast-bottom-right'});
+      this.toastr.error('Error al añadir función' , '🥺' , {positionClass:'toast-bottom-right'});
     }}
    });
 
@@ -261,7 +261,7 @@ onSubmitAddShow(){
 
     if (event.target.files.length > 0) {
       if(event.target.files[0].size > 4097152){
-      this.toastr.error('El archivo es muy grande' , ':(' , {positionClass:'toast-bottom-right'});
+      this.toastr.error('El archivo es muy grande' , '🥺' , {positionClass:'toast-bottom-right'});
       event.target.value = null;
       event.target.files[0] = "";
       this.createMovieForm.patchValue({
@@ -277,7 +277,7 @@ onSubmitAddShow(){
   onEditFileChange(event:any) {
     if(event.target.files.length > 0){
     if(event.target.files[0].size > 4097152){
-      this.toastr.error('El archivo es muy grande' , ':(' , {positionClass:'toast-bottom-right'});
+      this.toastr.error('El archivo es muy grande' , '🥺' , {positionClass:'toast-bottom-right'});
       event.target.value = null;
       event.target.files[0] = "";
       this.editMovieForm.patchValue({
@@ -294,7 +294,7 @@ onSubmitAddShow(){
 
     if (event.target.files.length > 0) {
       if(event.target.files[0].size > 4097152){
-      this.toastr.error('El archivo es muy grande' , ':(' , {positionClass:'toast-bottom-right'});
+      this.toastr.error('El archivo es muy grande' , '🥺' , {positionClass:'toast-bottom-right'});
       event.target.value = null;
       event.target.files[0] = "";
       this.createMovieForm.patchValue({
@@ -310,7 +310,7 @@ onSubmitAddShow(){
   onEditFileCoverChange(event:any) {
     if(event.target.files.length > 0){
     if(event.target.files[0].size > 4097152){
-      this.toastr.error('El archivo es muy grande' , ':(' , {positionClass:'toast-bottom-right'});
+      this.toastr.error('El archivo es muy grande' , '🥺' , {positionClass:'toast-bottom-right'});
       event.target.value = null;
       event.target.files[0] = "";
       this.editMovieForm.patchValue({
@@ -359,7 +359,7 @@ onSubmitAddShow(){
         });
       })
       if(this.times.length==0) {
-        this.toastr.error('No hay mas funciones para ese dia' , ':(' , {positionClass:'toast-bottom-right'});
+        this.toastr.error('No hay más funciones para ese dia' , '🥺' , {positionClass:'toast-bottom-right'});
       }})
     }
   }

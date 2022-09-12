@@ -49,17 +49,17 @@ export class DirectorsListComponent implements OnInit {
     }
     this.dataService.addDirector(request).subscribe({
       next : (res)=>{
-        this.toastr.success('Se ha creado el director', 'Exito',{positionClass:'toast-bottom-right'})
+        this.toastr.success('Se ha creado el director', 'Éxito',{positionClass:'toast-bottom-right'})
         this.modalService.dismissAll();
         this.directors.unshift(res.body);
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==201){
-        this.toastr.success('Se ha creado el director', 'Exito',{positionClass:'toast-bottom-right'})
+        this.toastr.success('Se ha creado el director', 'Éxito',{positionClass:'toast-bottom-right'})
         this.modalService.dismissAll();
         this.refreshDirectorList();
       }else {
-        this.toastr.error('Fallo el formulario', ':(',{positionClass:'toast-bottom-right'})
+        this.toastr.error('Error al crear el director', '🥺',{positionClass:'toast-bottom-right'})
       }}
      });
   }
@@ -81,17 +81,17 @@ export class DirectorsListComponent implements OnInit {
     }
     this.dataService.editDirector(request,this.editDirectorForm.controls.idControl.value).subscribe({
       next : ()=>{
-        this.toastr.success('Se ha editado el director', 'Exito',{positionClass:'toast-bottom-right'})
+        this.toastr.success('Se ha editado el director', 'Éxito',{positionClass:'toast-bottom-right'})
         this.modalService.dismissAll();
         this.refreshDirectorList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        this.toastr.success('Se ha editado el director', 'Exito',{positionClass:'toast-bottom-right'})
+        this.toastr.success('Se ha editado el director', 'Éxito',{positionClass:'toast-bottom-right'})
         this.modalService.dismissAll();
         this.refreshDirectorList();
       }else {
-        this.toastr.error('Fallo el formulario', ':(',{positionClass:'toast-bottom-right'})
+        this.toastr.error('Error al editar el director', '🥺',{positionClass:'toast-bottom-right'})
       }}
      })
   }
@@ -117,17 +117,17 @@ export class DirectorsListComponent implements OnInit {
   deleteDirector(idDirector:number){
     this.dataService.delDirector(idDirector).subscribe({
       next : ()=>{
-        this.toastr.success('Se ha borrado el director', 'Exito',{positionClass:'toast-bottom-right'})
+        this.toastr.success('Se ha borrado el director', 'Éxito',{positionClass:'toast-bottom-right'})
         this.modalService.dismissAll();
         this.refreshDirectorList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        this.toastr.success('Se ha borrado el director', 'Exito',{positionClass:'toast-bottom-right'})
+        this.toastr.success('Se ha borrado el director', 'Éxito',{positionClass:'toast-bottom-right'})
         this.modalService.dismissAll();
         this.refreshDirectorList();
       }else {
-       this.toastr.error('Fallo el formulario', ':(',{positionClass:'toast-bottom-right'})
+       this.toastr.error('Error al borrar el director', '🥺',{positionClass:'toast-bottom-right'})
       }}
      })
   }

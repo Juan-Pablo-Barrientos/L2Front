@@ -10,7 +10,7 @@
           <a class="nav-link" [routerLink]="'/home'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" (click)="clearSearch()" >Inicio</a>
         </li>
         <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
-          <a class="nav-link" [routerLink]="'/login'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" >Iniciar sesion</a>
+          <a class="nav-link" [routerLink]="'/login'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" >Iniciar sesión</a>
         </li>
         <li class="nav-item" *ngIf='this.authService.isLoggedIn() == false'>
           <a class="nav-link" [routerLink]="'/register'" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLinkActive="text-white" >Registrarse</a>
@@ -20,10 +20,10 @@
             Panel de administrador
           </a>
           <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/movieList'" >Peliculas</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/movieList'" >Películas</a></li>
             <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/userList'" >Usuarios</a></li>
             <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/directorList'" >Directores</a></li>
-            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/genreList'" >Generos</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/genreList'" >Géneros</a></li>
             <li><a class="dropdown-item" href="#" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" [routerLink]="'/contactUsList'" >Mensajes de contacto</a></li>
           </ul>
         </li>
@@ -39,7 +39,7 @@
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar pelicula"  name="searchbar"
+        <input class="form-control me-2" type="search" placeholder="Buscar película"  name="searchbar"
           id="searchbar" [(ngModel)]="title">
         <button (click)="search()" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="btn btn-outline-success" type="submit">Buscar</button>
       </form>

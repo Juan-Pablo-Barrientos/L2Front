@@ -55,17 +55,17 @@ export class UserListComponent implements OnInit {
     }
     this.dataService.editUser(request,this.editUserForm.controls.idControl.value).subscribe({
       next : ()=>{
-        this.toastr.success('El editado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('El editado de usuario fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshUserList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        this.toastr.success('El editado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('El editado de usuario fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshUserList();
       }else {
-        this.toastr.error('Error al enviar el formulario', ':(',{positionClass:'toast-bottom-right'});
+        this.toastr.error('Error al editar usuario', '🥺',{positionClass:'toast-bottom-right'});
       }}
      })
   }
@@ -96,17 +96,17 @@ export class UserListComponent implements OnInit {
   deleteUser(idUser:number){
     this.dataService.delUser(idUser).subscribe({
       next : ()=>{
-        this.toastr.success('El borrado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('El borrado de usuario fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshUserList();
       },
       error: (error: HttpErrorResponse) => {
       if (error.status==200){
-        this.toastr.success('El borrado de usuario fue exitoso', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('El borrado de usuario fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
         this.refreshUserList();
       }else {
-        this.toastr.error('Error al enviar el formulario', ':(',{positionClass:'toast-bottom-right'});
+        this.toastr.error('Error al borrar el usuario', '🥺',{positionClass:'toast-bottom-right'});
       }}
      })
   }

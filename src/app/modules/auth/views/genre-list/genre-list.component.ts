@@ -47,17 +47,17 @@ export class GenreListComponent implements OnInit {
    }
    this.dataService.addGenre(request).subscribe({
      next : (res)=>{
-       this.toastr.success('Se ha creado el genero', 'Exito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha creado el género', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
        this.genres.unshift(res.body);
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==201){
-       this.toastr.success('Se ha creado el genero', 'Exito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha creado el género', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
        this.refreshGenreList();
      }else {
-       this.toastr.error('Fallo el formulario', ':(',{positionClass:'toast-bottom-right'})
+       this.toastr.error('Fallo el formulario', '🥺',{positionClass:'toast-bottom-right'})
      }}
     });
  }
@@ -78,17 +78,17 @@ export class GenreListComponent implements OnInit {
    }
    this.dataService.editGenre(request,this.editGenreForm.controls.idControl.value).subscribe({
      next : ()=>{
-       this.toastr.success('Se ha editado el genero', 'Exito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha editado el género', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
        this.refreshGenreList();
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==200){
-       this.toastr.success('Se ha editado el genero', 'Exito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha editado el género', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
        this.refreshGenreList();
      }else {
-       this.toastr.error('Fallo el formulario', ':(',{positionClass:'toast-bottom-right'})
+       this.toastr.error('Error al editar el director', '🥺',{positionClass:'toast-bottom-right'})
      }}
     })
  }
@@ -113,20 +113,20 @@ export class GenreListComponent implements OnInit {
  deleteGenre(idGenre:number){
    this.dataService.delGenre(idGenre).subscribe({
      next : ()=>{
-       this.toastr.success('Se ha borrado el genero', 'Exito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha borrado el género', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
        this.refreshGenreList();
      },
      error: (error: HttpErrorResponse) => {
      if (error.status==200){
-       this.toastr.success('Se ha borrado el genero', 'Exito',{positionClass:'toast-bottom-right'})
+       this.toastr.success('Se ha borrado el género', 'Éxito',{positionClass:'toast-bottom-right'})
        this.modalService.dismissAll();
        this.refreshGenreList();
      }else {
-      this.toastr.success('Se ha borrado el genero', 'Exito',{positionClass:'toast-bottom-right'})
+      this.toastr.success('Se ha borrado el género', 'Éxito',{positionClass:'toast-bottom-right'})
       this.modalService.dismissAll();
       this.refreshGenreList();
-       //this.toastr.error('Fallo el formulario', ':(',{positionClass:'toast-bottom-right'})
+       //this.toastr.error('Fallo el formulario', '🥺',{positionClass:'toast-bottom-right'})
      }}
     })
  }

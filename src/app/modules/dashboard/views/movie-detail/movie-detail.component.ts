@@ -93,10 +93,10 @@ export class MovieDetailComponent implements OnInit {
     }
     this.dataService.buyTicket(request).subscribe(response => {
       if (response.status==201){
-        this.toastr.success('Se le ha enviado un email con el codigo', 'Exito',{positionClass:'toast-bottom-right'});
+        this.toastr.success('Se le ha enviado un email con el código', 'Éxito',{positionClass:'toast-bottom-right'});
         this.modalService.dismissAll();
       }else{
-        this.toastr.error('Fallo el envio del formulario', ':(',{positionClass:'toast-bottom-right'});
+        this.toastr.error('No se ha podido reservar la entrada', '🥺',{positionClass:'toast-bottom-right'});
       }
     });
   }
@@ -118,7 +118,7 @@ export class MovieDetailComponent implements OnInit {
         this.shows.push(show)
       }
     });
-    if(this.shows.length==0) {this.toastr.error('No hay mas funciones disponibles', ':(',{positionClass:'toast-bottom-right'})}else{
+    if(this.shows.length==0) {this.toastr.error('No hay mas funciones disponibles', '🥺',{positionClass:'toast-bottom-right'})}else{
     this.modalService.open(content, {ariaLabelledBy: 'modalBuyTicket'}).result}
     })
   }
