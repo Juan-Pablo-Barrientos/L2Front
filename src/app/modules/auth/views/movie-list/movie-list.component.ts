@@ -55,6 +55,12 @@ export class MovieListComponent implements OnInit {
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((response:any)=>{
       this.movies=response;
       this.dataService.movies=[]
+      this.movies.forEach((mostViewedMovie:any) => {
+        mostViewedMovie.ticketsBought=0
+        mostViewedMovie.shows.forEach((showsFromMovie:any) => {
+          mostViewedMovie.ticketsBought+=(200-showsFromMovie.tickets_availables)
+        });
+      });
     })
   }
 
@@ -77,9 +83,7 @@ export class MovieListComponent implements OnInit {
       this.theaters=response;
     })
 
-    this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((response:any)=>{
-      this.movies=response;
-    })
+    this.refreshMovieList()
 
     this.dataService.getGenres().subscribe((response:any)=>{
       this.genres=response;
