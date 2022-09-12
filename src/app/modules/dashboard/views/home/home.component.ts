@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
@@ -25,7 +25,9 @@ export class HomeComponent implements OnInit {
   titleSearch:any;
   id_genre:any;
   public imagesCinema: any = [];
-  radioStatus: boolean;
+  radioStatus: any;
+  radio:any;
+  radioForm:any;
 
   togglePaused() {
     if (this.paused) {
@@ -40,9 +42,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.radioForm = new FormGroup({
+      genre: new FormControl('')
+    })
+
     this.dataService.getGenres().subscribe((res:any)=>{
       this.genres=res;
     })
+
 
     this.route.queryParams.subscribe(params => {
       this.id_genre = params["id_genre"]
@@ -77,21 +84,20 @@ export class HomeComponent implements OnInit {
     }
 }
 
-  genreFilter(event:any){
+  genreFilter(){
     {
-      this.id_genre=event.target.value
       this.dataService.movies=[]
-      this.dataService.getMovies(this.titleSearch ??= "",this.id_genre).subscribe((response: any) => {
+      if(this.radioForm.controls['genre'].value){
+      this.dataService.getMovies(this.titleSearch ??= "",this.radioForm.controls['genre'].value).subscribe((response: any) => {
       this.dataService.movies = response;
-    });}}
+    });}}}
 
   cleanFilter(){
-    this.id_genre=null
+    this.id_genre=""
+    this.radioForm.reset()
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??='').subscribe((response: any) => {
     this.dataService.movies = response;
-    this.radioStatus=false
     document.getElementById("searchMovie")?.setAttribute('value','')
-
     });
   }
 
