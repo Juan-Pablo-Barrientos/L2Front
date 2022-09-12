@@ -97,6 +97,7 @@ export class MovieListComponent implements OnInit {
     this.createMovieForm.controls['directorControl'].setValue('')
   }
   resetAddShow() {
+    this.addShowForm.reset();
     this.addShowForm.controls['theaterShowControl'].setValue('')
     this.addShowForm.controls['dayShowControl'].setValue('')
     this.addShowForm.controls['timeShowControl'].setValue('')

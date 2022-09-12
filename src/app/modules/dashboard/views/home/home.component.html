@@ -20,10 +20,12 @@
 <ngb-accordion #acc="ngbAccordion">
   <ngb-panel class="lead"title="Generos">
     <ng-template ngbPanelContent>
-      <div *ngFor="let genre of genres" class="lead form-check form-check-inline">
-          <input type="radio" class="me-2 form-check-input" [id]="genre.name" name="genre" [value]="genre.id" [checked]="radioStatus" (change)="genreFilter($event)">
-          <label class="form-check-label"[for]="genre.name">{{genre.name}}</label>
-      </div>
+      <form [formGroup]="radioForm">
+        <div *ngFor="let genre of genres" class="lead form-check form-check-inline">
+            <input type="radio" class="me-2 form-check-input" formControlName="genre" [id]="genre.name" name="genre" [value]="genre.id"  (ngModelChange)="genreFilter()">
+            <label class="form-check-label"[for]="genre.name">{{genre.name}}</label>
+        </div>
+      </form>
       <button type="button" class="btn btn-secondary m-2" (click)="cleanFilter()">Limpiar filtros</button>
     </ng-template>
   </ngb-panel>
