@@ -49,7 +49,7 @@ export class MovieDetailComponent implements OnInit {
       if(this.movie){
       this.dataService.getMovieRating(res.name,res.year).subscribe((result:any)=>{
         this.movie.rating=result.results[0].vote_average
-        getVideos(this.movie.name,this.movie.year)
+        //getVideos(this.movie.name,this.movie.year)
       })
       }})
        if (this.authService.getDecodedAccessToken(this.authService.getJwtToken()!).id_user){
