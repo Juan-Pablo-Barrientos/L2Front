@@ -84,7 +84,7 @@ export class MovieDetailComponent implements OnInit {
       id_show : this.buyTicketsForm.controls.showControl.value,
       dni : this.buyTicketsForm.controls.dniControl.value,
       status: false,
-      code: "123ABC",
+      code: this.getRandomInt(999999),
       email : this.buyTicketsForm.controls.emailControl.value,
       quantity : this.buyTicketsForm.controls.quantityControl.value
     }
@@ -98,6 +98,9 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
+  getRandomInt(max:number) {
+    return Math.floor(Math.random() * max);
+  }
 
   reset() {
     this.buyTicketsForm.reset();
