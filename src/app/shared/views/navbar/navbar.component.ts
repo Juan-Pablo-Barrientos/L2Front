@@ -30,6 +30,11 @@ export class NavbarComponent implements OnInit {
   search() {
     this.dataService.getMovies(this.title,this.id_genre??='').subscribe((response: any) => {
       this.dataService.movies = response;
+      this.dataService.movies.forEach((element:any) => {
+        this.dataService.getMovieOriginalName(element.name,element.year).subscribe((result:any)=>{
+          element.translatedName=result.results[0].title
+        })
+      });
       this.dataService.movies.search=1;
         this.dataService.getMovies('',this.id_genre??='').subscribe((res: any) => {
         this.dataService.mostViewedMovies=[]

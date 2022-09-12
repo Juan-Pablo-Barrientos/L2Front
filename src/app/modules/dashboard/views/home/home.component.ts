@@ -58,6 +58,9 @@ export class HomeComponent implements OnInit {
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((res: any) => {
       this.dataService.movies=[]
       res.forEach((res:any)=> {
+        this.dataService.getMovieOriginalName(res.name,res.year).subscribe((result:any)=>{
+          res.translatedName=result.results[0].title
+        })
         this.dataService.movies.push(res)
       });
       this.dataService.mostViewedMovies=JSON.parse(JSON.stringify(this.dataService.movies));

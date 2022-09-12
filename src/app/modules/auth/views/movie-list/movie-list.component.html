@@ -76,6 +76,9 @@
             <div class="mb-3">
               <label for="">Director:  {{movie.director.name}} {{movie.director.lastname}}</label>
             </div>
+            <div class="mb-3">
+              <label for="">Año:  {{movie.year}}</label>
+            </div>
             <div class="mb-3 fit-picture">
               <label for="">Poster</label>
               <img [src]="movie.path_img">
@@ -168,6 +171,14 @@
           <label for="name">Nombre</label>
         </div>
 
+        <div class="form-control mb-2">
+          <label class="me-2 mb-2"for="year">Año </label>
+          <select class="form-select mb-2" formControlName="yearControl" name="year" id="year" aria-label="Default select example">
+          <option value='' selected>Seleccione año</option>
+          <option *ngFor="let year of years" [value]="year" >{{year}}</option>
+          </select>
+        </div>
+
         <div class="form-floating mb-2">
           <textarea type="text" formControlName="synopsisControl" name="synopsis" id="synopsis" placeholder="Sinopsis" class="form-control"></textarea>
           <label for="synopsis">Sinopsis</label>
@@ -239,8 +250,16 @@
         <label for="name">Nombre</label>
       </div>
 
+      <div class="form-control mb-2">
+        <label class="me-2 mb-2"for="year">Año </label>
+        <select class="form-select mb-2" formControlName="yearEditControl" name="year" id="year" aria-label="Default select example">
+        <option value='' selected>Seleccione año</option>
+        <option *ngFor="let year of years" [value]="year" >{{year}}</option>
+        </select>
+      </div>
+
       <div class="form-floating mb-2">
-        <textarea type="text" formControlName="synopsisEditControl" name="synopsis" id="synopsis" placeholder="Sinopsis" class="form-control"></textarea>
+        <textarea type="text" formControlName="synopsisEditControl" name="synopsis" id="synopsis" placeholder="Sinopsis" class="form-control" rows="5" cols="23"></textarea>
         <label for="synopsis">Sinopsis</label>
       </div>
 

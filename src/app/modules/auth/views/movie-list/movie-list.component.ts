@@ -38,8 +38,16 @@ export class MovieListComponent implements OnInit {
   id_genre:any;
   timesIncoming: any;
   shows:any;
+  selectedYear: number;
+  years: number[] = [];
 
-  constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService, private toastr:ToastrService) { }
+  constructor(private modalService: NgbModal ,private dataService:DataService, private authService:AuthService, private toastr:ToastrService) {
+
+    this.selectedYear = new Date().getFullYear();
+    for (let year = this.selectedYear; year >= 1950; year--) {
+    this.years.push(year);
+    }
+   }
 
   get getCreateMovieForm(){
     return this.createMovieForm.controls;
@@ -77,6 +85,7 @@ export class MovieListComponent implements OnInit {
       fileSource: new FormControl('', [Validators.required]),
       fileCover: new FormControl('', [Validators.required]),
       fileCoverSource: new FormControl('', [Validators.required]),
+      yearControl: new FormControl('', [Validators.required]),
     });
 
     this.dataService.getTheaters().subscribe((response:any)=>{
@@ -99,6 +108,7 @@ export class MovieListComponent implements OnInit {
     this.createMovieForm.controls['genreControl'].setValue('')
     this.createMovieForm.controls['hoursControl'].setValue('')
     this.createMovieForm.controls['directorControl'].setValue('')
+    this.createMovieForm.controls['yearControl'].setValue('')
   }
   resetAddShow() {
     this.addShowForm.reset();
@@ -116,6 +126,7 @@ export class MovieListComponent implements OnInit {
     formData.append('id_director',this.createMovieForm.controls['directorControl'].value );
     formData.append('id_genre',this.createMovieForm.controls['genreControl'].value );
     formData.append('duration',this.createMovieForm.controls['hoursControl'].value );
+    formData.append('year',this.createMovieForm.controls['yearControl'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
 
     this.dataService.addMovie(formData).subscribe({
@@ -155,6 +166,7 @@ export class MovieListComponent implements OnInit {
 
 
   onSubmitEdit(){
+
     const formData = new FormData()
     formData.append('myImage',this.editMovieForm.get('fileSourceEdit').value);
     formData.append('myImage2',this.editMovieForm.get('fileCoverSourceEdit').value);
@@ -163,6 +175,7 @@ export class MovieListComponent implements OnInit {
     formData.append('id_director',this.editMovieForm.controls['directorEditControl'].value );
     formData.append('id_genre',this.editMovieForm.controls['genreEditControl'].value );
     formData.append('duration',this.editMovieForm.controls['hoursEditControl'].value );
+    formData.append('year',this.editMovieForm.controls['yearEditControl'].value );
     formData.append('id_usr',(this.authService.getDecodedAccessToken(this.authService.getJwtToken()!)).id_user );
     this.dataService.editMovie(formData,this.editMovieForm.get('idEditControl').value).subscribe({
       next : ()=>{
@@ -200,7 +213,8 @@ export class MovieListComponent implements OnInit {
     fileEdit: new FormControl(''),
     fileSourceEdit: new FormControl(''),
     fileCoverEdit: new FormControl(''),
-    fileCoverSourceEdit: new FormControl('')
+    fileCoverSourceEdit: new FormControl(''),
+    yearEditControl: new FormControl(movie.year, [Validators.required]),
   })
   this.modalService.open(content, {ariaLabelledBy: 'modalEdit'}).result
   }
