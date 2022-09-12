@@ -1,1 +1,137 @@
+<div class="container mt-5">
+  <div class="m-2">
+    <h1 class="display-1 text-center">Presentación</h1>
+  </div>
+  <hr class="bg-secondary border-2 border-top border-secondary" />
+  <ngb-accordion class="m-5" #acc="ngbAccordion">
+    <ngb-panel title="Integrantes" >
+      <ng-template ngbPanelContent >
+      <div class="row">
+        <p class="lead col text-center" >Marquesa, Damian  <a class="btn btn-outline-light btn-floating m-1 bg-primary" href="#" role="button">
+          <fa-icon [icon]="faLinkedin" size="2x"></fa-icon>
+          </a>
+          <a class="btn btn-outline-light btn-floating m-1 bg-primary" href="https://github.com/Damian-DDEV" role="button">
+          <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+          </a>
+        </p>
+         <p class="lead col text-center">Barrientos, Juan Pablo
+          <a class="btn btn-outline-light btn-floating m-1 bg-primary" href="https://www.linkedin.com/in/juan-barrientos-b4a4b5238/" role="button">
+          <fa-icon [icon]="faLinkedin" size="2x"></fa-icon>
+          </a>
+          <a class="btn btn-outline-light btn-floating m-1 bg-primary" href="https://github.com/Juan-Pablo-Barrientos/" role="button">
+          <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+          </a>
+        </p>
+      </div>
+      </ng-template>
+    </ngb-panel>
 
+    <ngb-panel title="Proyecto">
+      <ng-template ngbPanelContent >
+        <h4 class="display-5 text-center ">
+          <a class="navbar-brand text-center logo" href="#"><fa-icon [icon]="faVideo"></fa-icon> CINEMALAND</a>
+        </h4>
+        <p class="lead">
+          Es una aplicación web para administrar un cine y reservar entradas en un cine. El publico que se busca captar con esta aplicación son los clientes del cine como también facilitar el manejo del cine. Aunque el cliente no necesita registrarse, en el caso de que se registre contara con funcionalidades extra como por ejemplo historial de entradas.
+        </p>
+        <p class="lead">Funcionalidades</p>
+        <ul class="lead">
+          <li>Administrador
+            <ul class="lead">
+              <li>Ver, crear, modificar y borrar películas, funciones, directores, géneros, usuarios y mensajes. </li>
+            </ul>
+          </li>
+          <li>Cliente no registrado.
+            <ul class="lead">
+              <li>Reservar entradas. </li>
+              <li>Buscar películas por nombre o genero.</li>
+            </ul>
+          </li>
+          <li>Cliente registrado
+            <ul class="lead">
+              <li>Reservar entradas. </li>
+              <li>Buscar películas por nombre o genero.</li>
+              <li>Ver historial de entradas.</li>
+              <li>Autocompletado de datos al reservar.</li>
+              <li>Cambiar la contraseña.</li>
+            </ul>
+          </li>
+        </ul>
+      </ng-template>
+    </ngb-panel>
+
+    <ngb-panel title="Tecnologías">
+      <ng-template ngbPanelContent>
+      <div class="row border-bottom">
+        <div class="col border-end">
+          <p class="lead text-center" >Repositorio Frontend
+            <a class="btn btn-outline-light btn-floating m-1 bg-primary" href="https://github.com/Juan-Pablo-Barrientos/L2Front" role="button">
+            <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+            </a>
+          </p>
+          <p class="lead text-start">Frontend realizado en TypeScript con Angular<a class="btn btn-outline-light btn-floating m-1 bg-danger" href="https://angular.io/" role="button">
+            <fa-icon [icon]="faAngular" size="2x"></fa-icon></a></p>
+          <ul class="lead">
+            <li>Subido en <a href="https://vercel.com/">Vercel</a>
+            </li>
+            <li>Framework
+              <ul class="lead mt-1">
+                <li>Angular 14</li>
+              </ul>
+            </li>
+          </ul>
+          <ul   class="lead">
+            <li>Dependencias
+              <ul class="lead">
+                <li>Bootstrap y ng-bootstrap</li>
+                <li>Rxjs</li>
+              </ul>
+            </li>
+            <li>Api externas utilizadas
+              <ul class="lead">
+                <li>YouTube Data API de Google <a class="btn btn-outline-light btn-floating m-1 bg-danger" href="https://developers.google.com/youtube/v3" role="button">
+                  <fa-icon [icon]="faYoutube" ></fa-icon></a>
+                </li>
+                <li>Movie Database API para puntuaciones<a class="btn btn-outline-light btn-floating m-1 bg-dark" href="https://developers.themoviedb.org/3/getting-started/introduction" role="button">
+                  <fa-icon [icon]="faVideo" ></fa-icon></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <p class="lead text-center"><a class="btn btn-outline-light btn-floating m-1 bg-primary" href="https://github.com/Juan-Pablo-Barrientos/labitla2da-backend/tree/deploy" role="button">
+            <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+            </a>
+            Repositorio Backend
+          </p>
+          <p class="lead text-end"><a class="btn btn-outline-light btn-floating m-1 bg-success" href="https://nodejs.org/en/" role="button">
+            <fa-icon [icon]="faNodeJs" size="2x"></fa-icon></a>Backend realizado en Javascript con Node.js</p>
+
+          <ul  dir='rtl' class="lead">
+            <li>Subido en <a href="https://www.heroku.com/">Heroku</a>
+            <li>Framework
+              <ul class="lead mt-1">
+                <li>Express</li>
+              </ul>
+            </li>
+          </ul>
+          <ul  dir='rtl' class="lead">
+            <li>Dependencias
+              <ul class="lead">
+                <li>JWT</li>
+                <li>Bcrypt</li>
+                <li>Imágenes subidas a cloudinary</li>
+                <li>Base de datos MySQL subida en <a href="https://www.cleardb.com/">ClearDB</a><a class="btn btn-outline-light btn-floating m-1 bg-primary" href="https://www.mysql.com/" role="button">
+                  <fa-icon [icon]="faDatabase" ></fa-icon></a>
+                </li>
+                <li>Sequelize</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

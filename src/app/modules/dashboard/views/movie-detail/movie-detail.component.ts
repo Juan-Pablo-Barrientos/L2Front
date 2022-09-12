@@ -47,12 +47,8 @@ export class MovieDetailComponent implements OnInit {
       this.movie = res;
       this.titleService.setTitle(this.movie.name);
       if(this.movie){
-      this.dataService.getMovieOriginalName(res.name,res.year).subscribe((result:any)=>{
+      this.dataService.getMovieRating(res.name,res.year).subscribe((result:any)=>{
         this.movie.rating=result.results[0].vote_average
-        console.log(this.movie.rating)
-        if(result.results[0].release_date){
-        this.movie.year=result.results[0].release_date.slice(0,4)
-        }
         getVideos(this.movie.name,this.movie.year)
       })
       }})

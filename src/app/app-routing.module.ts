@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Componentes
 import { LoginComponent, MovieListComponent, RegisterComponent, UserListComponent, ContactUsListComponent, DirectorsListComponent, GenreListComponent} from '@gdp/auth/views';
-import { HomeComponent,FrequentQuestionsComponent,ContactusComponent,AboutusComponent, MovieDetailComponent, TicketsListComponent } from '@gdp/dashboard/views';
+import { HomeComponent,FrequentQuestionsComponent,ContactusComponent,AboutusComponent, MovieDetailComponent, TicketsListComponent, PresentationComponent } from '@gdp/dashboard/views';
 //Guards
 import { AdminGuard } from '@gdp/auth/guards';
 
@@ -47,6 +47,11 @@ const routes: Routes = [
     path:'ticketsList',
     component:TicketsListComponent,
     title: 'Lista de entradas'
+  },
+  {
+    path:'presentation',
+    component:PresentationComponent,
+    title: 'Presentación'
   },
   {
     path:'userList',

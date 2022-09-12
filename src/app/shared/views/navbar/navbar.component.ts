@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
     this.dataService.getMovies(this.title,this.id_genre??='').subscribe((response: any) => {
       this.dataService.movies = response;
       this.dataService.movies.forEach((element:any) => {
-        this.dataService.getMovieOriginalName(element.name,element.year).subscribe((result:any)=>{
+        this.dataService.getMovieRating(element.name,element.year).subscribe((result:any)=>{
           element.translatedName=result.results[0].title
         })
       });
