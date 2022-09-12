@@ -239,7 +239,6 @@ export class MovieListComponent implements OnInit {
     timeShowControl: new FormControl('',[Validators.required]),
     format: new FormControl('', [Validators.required])
   })
-  this.resetAddShow();
 }
 
 onSubmitAddShow(){
