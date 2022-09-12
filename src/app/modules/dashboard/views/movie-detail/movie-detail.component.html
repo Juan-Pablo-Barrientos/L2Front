@@ -1,7 +1,7 @@
 <div class="container mt-5" *ngIf="movie">
   <div class="row">
       <div class="col-lg-8">
-              <h2 class="display-2"> {{movie.genre.name}}<br><strong>{{movie.translatedName}}</strong></h2>
+              <h2 class="display-2"> {{movie.genre.name}}<br><strong>{{movie.name}}</strong></h2>
               <p class="description">{{movie.synopsis}}</p>
               <div class="videoListContainer" id="videoListContainer"></div>
       </div>
@@ -11,7 +11,7 @@
                   <img class="" [src]="movie.path_img" alt="Image">
                 </figure>
               <ul>
-                  <li><strong>Título:</strong> {{movie.translatedName}}</li>
+                  <li><strong>Título:</strong> {{movie.name}}</li>
                   <li><strong>Género:</strong> {{movie.genre.name}}</li>
                   <li><strong>Director:</strong> {{movie.director.name}} {{movie.director.lastname}}</li>
                   <li><strong>Duración:</strong> {{movie.duration}}</li>

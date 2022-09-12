@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AboutusComponent, ContactusComponent, FrequentQuestionsComponent, HomeComponent, MovieDetailComponent } from '@gdp/dashboard/views';
 import { TicketsListComponent } from './views/tickets-list/tickets-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PresentationComponent } from './views/presentation/presentation.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ContactusComponent,
     FrequentQuestionsComponent,
     MovieDetailComponent,
-    TicketsListComponent
+    TicketsListComponent,
+    PresentationComponent
   ],
   imports: [
     CommonModule,
