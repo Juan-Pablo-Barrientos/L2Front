@@ -207,7 +207,7 @@
 
         <div class="form-group">
           <label for="file">Poster</label>
-          <input formControlName="file"id="file" name="file"type="file" class="form-control" (change)="onFileChange($event)">
+          <input accept=".jpg,.jpeg,.png" formControlName="file"id="file" name="file"type="file" class="form-control" (change)="onFileChange($event)">
           <div *ngIf="getCreateMovieForm['file'].touched && getCreateMovieForm.file.invalid" class="alert alert-danger">
               <div *ngIf="getCreateMovieForm['file'].errors['required']">Archivo requerido</div>
           </div>
@@ -215,7 +215,7 @@
 
         <div class="form-group">
           <label for="fileCover">Banner</label>
-          <input formControlName="fileCover"id="fileCover" name="fileCover"type="file" class="form-control" (change)="onFileCoverChange($event)">
+          <input accept=".jpg,.jpeg,.png" formControlName="fileCover"id="fileCover" name="fileCover"type="file" class="form-control" (change)="onFileCoverChange($event)">
           <div *ngIf="getCreateMovieForm['fileCover'].touched && getCreateMovieForm.file.invalid" class="alert alert-danger">
               <div *ngIf="getCreateMovieForm['fileCover'].errors['required']">Archivo requerido</div>
           </div>
@@ -292,7 +292,7 @@
       </div>
       <div class="form-group lead">
         <label for="fileEdit">Nueva imagen de poster</label>
-        <input formControlName="fileEdit"id="fileEdit" name="fileEdit" type="file" class="form-control" (change)="onEditFileChange($event)">
+        <input accept=".jpg,.jpeg,.png" formControlName="fileEdit"id="fileEdit" name="fileEdit" type="file" class="form-control" (change)="onEditFileChange($event)">
         <div *ngIf="getEditMovieForm['fileEdit'].touched && getEditMovieForm.fileEdit.invalid" class="alert alert-danger">
             <div *ngIf="getEditMovieForm['fileEdit'].errors['required']">Archivo requerido</div>
         </div>
@@ -307,7 +307,7 @@
 
       <div class="form-group">
         <label for="fileCoverEdit">Nueva imagen de banner</label>
-        <input formControlName="fileCoverEdit"id="fileCoverEdit" name="fileCoverEdit"type="file" class="form-control" (change)="onEditFileCoverChange($event)">
+        <input accept=".jpg,.jpeg,.png" formControlName="fileCoverEdit"id="fileCoverEdit" name="fileCoverEdit"type="file" class="form-control" (change)="onEditFileCoverChange($event)">
       </div>
 
       <button type="submit" [disabled]="!editMovieForm.valid" class="btn btn-primary float-end m-2">Guardar</button>
