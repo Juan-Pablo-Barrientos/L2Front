@@ -1,25 +1,29 @@
 <div class="container mt-5" *ngIf="movie">
   <div class="row">
-      <div class="col-lg-8">
-              <h2 class="display-2"> {{movie.genre.name}}<br><strong>{{movie.name}}</strong></h2>
-              <p class="description">{{movie.synopsis}}</p>
-              <div class="videoListContainer" id="videoListContainer"></div>
+    <div class="col-lg-8">
+      <h2 class="display-2"><strong>{{movie.name}}</strong></h2>
+      <p class="display-5 muted">{{movie.genre.name}}</p>
+      <p class="description">{{movie.synopsis}}</p>
+      <div class="videoListContainer" id="videoListContainer">
       </div>
-      <div class="col-lg-4 shadow-lg p-3 mb-5 bg-body rounded movieCard" >
-          <div >
-              <figure class="fit-picture ">
-                  <img class="" [src]="movie.path_img" alt="Image">
-                </figure>
-              <ul>
-                  <li><strong>Título:</strong> {{movie.name}}</li>
-                  <li><strong>Género:</strong> {{movie.genre.name}}</li>
-                  <li><strong>Director:</strong> {{movie.director.name}} {{movie.director.lastname}}</li>
-                  <li><strong>Duración:</strong> {{movie.duration}}</li>
-                  <li><strong>Rating:</strong> {{movie.rating}}</li>
-              </ul>
-          </div>
+    </div>
+    <div class="col-lg-4 shadow-lg p-3 mb-5 bg-body rounded movieCard" >
+      <div >
+          <figure class="fit-picture ">
+            <img class="" [src]="movie.path_img" alt="Image">
+          </figure>
+        <ul>
+            <li><strong>Título:</strong> {{movie.name}}</li>
+            <li><strong>Género:</strong> {{movie.genre.name}}</li>
+            <li><strong>Director:</strong> {{movie.director.name}} {{movie.director.lastname}}</li>
+            <li><strong>Duración:</strong> {{movie.duration}}</li>
+            <li><strong>Rating:</strong> {{movie.rating}}</li>
+            <div class="row me-2">
+             <button class="bg-primary rounded-pill text-white btn btn-lg mt-2 mb-2" (click)="openBuyTickets(modalBuyTicket)">Entradas</button>
+            </div>
+          </ul>
       </div>
-      <button class="bg-dark rounded-pill text-white btn btn-lg mt-4 mb-2" (click)="openBuyTickets(modalBuyTicket)">Entradas</button>
+    </div>
   </div>
 </div>
 
