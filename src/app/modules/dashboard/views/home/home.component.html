@@ -1,14 +1,14 @@
 <div class="text-center mt-5" class="containerForCarousel carouselMobile">
 
- <ngb-carousel class="carouselImages" *ngIf="this.dataService.mostViewedMovies"  #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
+ <ngb-carousel class="carouselImages" *ngIf="imagesCinema"  #carousel [interval]="5000" [showNavigationArrows]="true" [pauseOnHover]="pauseOnHover">
 
 
 
-  <ng-template class="box" *ngFor="let movie of this.dataService.mostViewedMovies.slice(0, 3); let i=index" ngbSlide>
+  <ng-template class="box" *ngFor="let movie of imagesCinema.slice(0, 3); let i=index" ngbSlide>
     <div class="ribbon ribbon-top-left"><span>Más vistas</span></div>
     <a [routerLink]="['/movieDetails/'+movie.id]">
     <div>
-      <img [src]="'https://res.cloudinary.com/clawgames/image/upload/'+movie.path_img_banner" alt="Banner image" class="fitImage" >
+      <img [src]="movie.path_img_banner" alt="Banner image" class="fitImage" >
     </div>
   </a>
   </ng-template>
@@ -32,10 +32,10 @@
 </ngb-accordion>
 <div class="container mt-3 mb-3">
   <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div id="movieList"*ngFor="let movie of this.dataService.movies;let i = index">
+  <div id="movieList"*ngFor="let movie of imagesCinema">
       <div class="col">
         <a [routerLink]="['/movieDetails/'+movie.id]">
-          <div class="card  ">
+          <div class="card">
             <img [src]="movie.path_img" class="card-img-top mh-100 fitCardImg">
             <div class="card-body">
               <h5 class="card-title text-center">{{movie.name}}</h5>

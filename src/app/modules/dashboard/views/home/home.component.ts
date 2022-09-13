@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   radio:any;
   radioForm:any;
 
+
   togglePaused() {
     if (this.paused) {
       this.carousel.cycle();
@@ -56,7 +57,7 @@ export class HomeComponent implements OnInit {
     })
     if(this.dataService.movies.search ===false || this.dataService.movies.search ===undefined){
     this.dataService.getMovies(this.titleSearch ??= "",this.id_genre ??= "").subscribe((res: any) => {
-      this.dataService.movies=[]
+      this.imagesCinema = res;
       res.forEach((res:any)=> {
         this.dataService.movies.push(res)
       });
