@@ -17,19 +17,20 @@ export class RegisterComponent {
 
   signUpForm: any;
   usernameControl:any;
+  errors:any[]=[]
 
   ngOnInit(): void {
 
   this.signUpForm = new FormGroup({
-    usernameControl:new FormControl('',{validators: [Validators.required,Validators.minLength(8),Validators.maxLength(26)]}),
+    usernameControl:new FormControl('',{validators: [Validators.required,Validators.maxLength(26)]}),
     nameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     surnameControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     passwordControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
-    passwordConfirmControl:new FormControl('',[Validators.maxLength(50),Validators.required]),
-    emailControl:new FormControl('',/*{validators:[Validators.required,Validators.maxLength(50)], asyncValidators: this.validateEmail.bind(this), updateOn: 'blur'}*/),
+    passwordConfirmControl:new FormControl('',[Validators.maxLength(50),Validators.required,this.checkPasswords]),
+    emailControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     phoneControl:new FormControl('',[Validators.required,Validators.maxLength(50)]),
     dniControl:new FormControl('',[Validators.required,Validators.maxLength(10)]),
-  },{validators: [this.checkPasswords]})
+  },{validators: []})
   }
 
   constructor(private dataService : DataService, private router:Router, private toastr:ToastrService) {
@@ -46,6 +47,11 @@ export class RegisterComponent {
       rol: 0,
       phoneNumber : this.signUpForm.controls.phoneControl.value,
     }
+    this.getFormValidationErrors()
+    if (this.errors.length!==0){
+        this.toastr.error('Falta completar campos o los ha insertado mal', '🥺',{positionClass:'toast-top-center'})
+        this.signUpForm.markAllAsTouched();
+    }else{
     this.dataService.addUser(request).subscribe(async (res:any) => {
       if (res.status==201){
         this.toastr.success('El registro fue exitoso', 'Éxito',{positionClass:'toast-bottom-right'});
@@ -53,16 +59,16 @@ export class RegisterComponent {
       }else{
         this.toastr.error('Fallo el registro', '🥺',{positionClass:'toast-bottom-right'});
       }
-    });
+    })};
   }
 
   reset() {
     this.signUpForm.reset();
   }
 
-  checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => {
-    let pass = group.get('passwordControl')?.value;
-    let confirmPass = group.get('passwordConfirmControl')?.value
+  checkPasswords: ValidatorFn = ():  ValidationErrors | null => {
+    let pass = this.signUpForm?.controls.passwordControl.value;
+    let confirmPass = this.signUpForm?.controls.passwordConfirmControl.value
     return pass === confirmPass ? null : { 'notSame': true }
   }
 
@@ -98,6 +104,18 @@ export class RegisterComponent {
 
   getFormControl() {
     return this.signUpForm;
-}
+  }
+
+  getFormValidationErrors() {
+    this.errors=[]
+    Object.keys(this.signUpForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.signUpForm.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+         this.errors.push('Error');
+        });
+      }
+    });
+  }
 
 }

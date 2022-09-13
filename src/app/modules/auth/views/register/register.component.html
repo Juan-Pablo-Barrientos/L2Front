@@ -7,16 +7,16 @@
       <input type="text" class="form-control" formControlName="usernameControl" name="username" id="username" placeholder="Nombre de usuario" (blur)="onUsernameBlur($event)">
       <label for="username">Nombre de usuario</label>
     </div>
-    <div *ngIf="getFormControl().controls['usernameControl'].errors?.['required']&& getFormControl().controls['usernameControl'].touched">
+    <div class="mb-2" *ngIf="getFormControl().controls['usernameControl'].errors?.['required']&& getFormControl().controls['usernameControl'].touched">
         El campo nombre de usuario es requerido.
     </div>
-    <div *ngIf="getFormControl().controls['usernameControl'].errors?.['minlength']&& getFormControl().controls['usernameControl'].touched">
+    <div class="mb-2" *ngIf="getFormControl().controls['usernameControl'].errors?.['minlength']&& getFormControl().controls['usernameControl'].touched">
         El nombre de usuario debe tener al menos 8 caracteres
     </div>
-    <div *ngIf="getFormControl().controls['usernameControl'].errors?.['maxlength']&& getFormControl().controls['usernameControl'].touched">
+    <div class="mb-2" *ngIf="getFormControl().controls['usernameControl'].errors?.['maxlength']&& getFormControl().controls['usernameControl'].touched">
         El nombre de usuario debe tener menos de 26 caracteres
     </div>
-    <div *ngIf="getFormControl().controls['usernameControl'].errors?.['usernameExist']&& getFormControl().controls['usernameControl'].touched">
+    <div class="mb-2" *ngIf="getFormControl().controls['usernameControl'].errors?.['usernameExist']&& getFormControl().controls['usernameControl'].touched">
         Este nombre de usuario ya existe
     </div>
 
@@ -24,10 +24,10 @@
     <input type="text" formControlName="nameControl" name="name" id="name" placeholder="Nombre" class="form-control"/>
     <label for="name">Nombre</label>
   </div>
-  <div *ngIf="getFormControl().controls['nameControl'].errors?.['required']&& getFormControl().controls['nameControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['nameControl'].errors?.['required']&& getFormControl().controls['nameControl'].touched">
       El campo nombre es requerido.
   </div>
-  <div *ngIf="getFormControl().controls['nameControl'].errors?.['maxlength']&& getFormControl().controls['nameControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['nameControl'].errors?.['maxlength']&& getFormControl().controls['nameControl'].touched">
       El nombre debe tener menos de 50 caracteres
   </div>
 
@@ -35,10 +35,10 @@
     <input type="text" formControlName="surnameControl" name="surname" id="surname" placeholder="Apellido" class="form-control"/>
     <label for="surname">Apellido</label>
   </div>
-  <div *ngIf="getFormControl().controls['surnameControl'].errors?.['required']&& getFormControl().controls['surnameControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['surnameControl'].errors?.['required']&& getFormControl().controls['surnameControl'].touched">
       El campo apellido es requerido.
   </div>
-  <div *ngIf="getFormControl().controls['surnameControl'].errors?.['maxlength']&& getFormControl().controls['surnameControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['surnameControl'].errors?.['maxlength']&& getFormControl().controls['surnameControl'].touched">
       El Apellido debe tener menos de 50 caracteres
   </div>
 
@@ -46,10 +46,10 @@
     <input type="text"  formControlName="passwordControl" name="password" id="password" placeholder="Contraseña"  type="password"class="form-control"/>
     <label for="password">Contraseña</label>
   </div>
-  <div *ngIf="getFormControl().controls['passwordControl'].errors?.['required']&& getFormControl().controls['passwordControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['passwordControl'].errors?.['required']&& getFormControl().controls['passwordControl'].touched">
       El campo contraseña es requerido.
   </div>
-  <div *ngIf="getFormControl().controls['passwordControl'].errors?.['maxlength']&& getFormControl().controls['passwordControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['passwordControl'].errors?.['maxlength']&& getFormControl().controls['passwordControl'].touched">
       La contraseña debe tener menos de 50 caracteres
   </div>
 
@@ -57,39 +57,39 @@
     <input type="text" formControlName="passwordConfirmControl" name="confirmPassword" id="confirmPassword" placeholder="Confirmar contraseña" type="password"class="form-control" />
     <label for="confirmPassword">Confirmar contraseña</label>
   </div>
-  <div *ngIf="getFormControl().controls['passwordConfirmControl'].errors?.['required']&& getFormControl().controls['passwordConfirmControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['passwordConfirmControl'].errors?.['required']&& getFormControl().controls['passwordConfirmControl'].touched">
       El campo confirmar contraseña es requerido.
   </div>
-  <div *ngIf="getFormControl().controls['passwordConfirmControl'].errors?.['maxlength']&& getFormControl().controls['passwordConfirmControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['passwordConfirmControl'].errors?.['maxlength']&& getFormControl().controls['passwordConfirmControl'].touched">
       La contraseña debe tener menos de 50 caracteres
   </div>
-  <div *ngIf="signUpForm.hasError('notSame')"><p class="text-danger">Contraseñas no coinciden</p></div>
+  <div *ngIf="getFormControl().controls['passwordConfirmControl'].errors?.['notSame']"><p class="text-danger">Contraseñas no coinciden</p></div>
 
   <div class="form-floating mb-2">
-    <input type="text"  formControlName="emailControl" name="email" id="email"  type="email" placeholder="Email" class="form-control" (blur)="onEmailBlur($event)"/>
+    <input type="text"  [email]="true" formControlName="emailControl" name="email" id="email"  type="email" placeholder="Email" class="form-control" (blur)="onEmailBlur($event)"/>
     <label for="email">Email</label>
   </div>
-  <div *ngIf="getFormControl().controls['emailControl'].errors?.['required']&& getFormControl().controls['emailControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['emailControl'].errors?.['required']&& getFormControl().controls['emailControl'].touched">
       El campo email es requerido.
   </div>
-  <div *ngIf="getFormControl().controls['emailControl'].errors?.['maxlength']&& getFormControl().controls['emailControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['emailControl'].errors?.['maxlength']&& getFormControl().controls['emailControl'].touched">
       El debe tener menos de 50 caracteres
   </div>
-  <div *ngIf="getFormControl().controls['emailControl'].errors?.['email']&& getFormControl().controls['emailControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['emailControl'].errors?.['email']&& getFormControl().controls['emailControl'].touched">
       El cambo email debe ser un email :)
   </div>
-  <div *ngIf="getFormControl().controls['emailControl'].errors?.['emailExist']&& getFormControl().controls['emailControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['emailControl'].errors?.['emailExist']&& getFormControl().controls['emailControl'].touched">
       Este email ya existe
   </div>
 
   <div class="form-floating mb-2">
-    <input formControlName="phoneControl" name="phone" id="phone" placeholder="Telefono" type="tel" class="form-control"  onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
+    <input formControlName="phoneControl" name="phone" id="phone" placeholder="Teléfono" type="tel" class="form-control"  onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
     <label for="phone">Teléfono</label>
   </div>
-  <div *ngIf="getFormControl().controls['phoneControl'].errors?.['required']&& getFormControl().controls['phoneControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['phoneControl'].errors?.['required']&& getFormControl().controls['phoneControl'].touched">
       El campo teléfono es requerido.
   </div>
-  <div *ngIf="getFormControl().controls['phoneControl'].errors?.['maxlength']&& getFormControl().controls['phoneControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['phoneControl'].errors?.['maxlength']&& getFormControl().controls['phoneControl'].touched">
       El teléfono debe tener menos de 50 caracteres
   </div>
 
@@ -97,14 +97,14 @@
     <input formControlName="dniControl" name="dni" id="dni" placeholder="Dni" type="text"class="form-control" onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
     <label for="phone">DNI</label>
   </div>
-  <div *ngIf="getFormControl().controls['dniControl'].errors?.['required']&& getFormControl().controls['dniControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['dniControl'].errors?.['required']&& getFormControl().controls['dniControl'].touched">
       El campo DNI es requerido.
   </div>
-  <div *ngIf="getFormControl().controls['dniControl'].errors?.['maxlength']&& getFormControl().controls['dniControl'].touched">
+  <div class="mb-2" *ngIf="getFormControl().controls['dniControl'].errors?.['maxlength']&& getFormControl().controls['dniControl'].touched">
       El dni debe tener menos de 10 caracteres
   </div>
 
   <button type="button"(click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
-  <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary float-end m-2">Enviar</button>
+  <button type="submit" class="btn btn-primary float-end m-2">Enviar</button>
 </form>
 
