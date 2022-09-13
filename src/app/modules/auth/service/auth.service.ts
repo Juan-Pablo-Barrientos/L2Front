@@ -50,6 +50,7 @@ export class AuthService {
 
   logout() {
     this.doLogoutUser();
+    this.router.navigate(['/home']);
   }
   isLoggedIn() {
     return !!this.getJwtToken();
