@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
         }
         return 0;
     }
-}
+  }
 
   genreFilter(){
     {

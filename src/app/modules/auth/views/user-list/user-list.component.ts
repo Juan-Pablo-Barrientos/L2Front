@@ -32,6 +32,7 @@ export class UserListComponent implements OnInit {
    refreshUserList(){
     this.dataService.getUsers().subscribe((response:any)=>{
       this.users=response;
+      this.users.sort(this.GetSortOrder('rol'))
     })
   }
 
@@ -39,6 +40,7 @@ export class UserListComponent implements OnInit {
 
     this.dataService.getUsers().subscribe((response:any)=>{
       this.users=response;
+      this.users.sort(this.GetSortOrder('rol'))
     })
 
   }
@@ -127,6 +129,16 @@ export class UserListComponent implements OnInit {
           tr[i].style.display = "none";
         }
       }
+    }
+  }
+  GetSortOrder(prop:any) {
+    return function(a:any, b:any) {
+        if (a[prop] > b[prop]) {
+            return -1;
+        } else if (a[prop] < b[prop]) {
+            return 1;
+        }
+        return 0;
     }
   }
 
