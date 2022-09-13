@@ -21,6 +21,10 @@
             <div class="row me-2">
              <button class="bg-primary rounded-pill text-white btn btn-lg mt-2 mb-2" (click)="openBuyTickets(modalBuyTicket)">Entradas</button>
             </div>
+            <div class="row me-2">
+              <div class="col"><button class="bg-secondary rounded-pill text-white btn-lg float-start">2D:$800</button></div>
+              <div class="col"><button class="bg-success rounded-pill text-white btn-lg float-end">3D:$1200</button></div>
+             </div>
           </ul>
       </div>
     </div>
@@ -61,6 +65,7 @@
         <input formControlName="quantityControl" name="quantity" id="quantity" placeholder="Quantity" type="number"class="form-control" min="1" max="10" autocomplete="off" onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"/>
         <label for="cantidad">Cantidad</label>
       </div>
+
       <button type="button"(click)="reset()"  class="btn btn-secondary m-2">Limpiar campos</button>
 
       <button type="submit" [disabled]="!buyTicketsForm.valid" class="btn btn-primary float-end m-2">Reservar</button>
